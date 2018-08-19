@@ -1,4 +1,5 @@
 import axios from 'axios';
+import api from '../api';
 
 export const types = {
   FETCH_HOME_CONTENT: 'FETCH_HOME_CONTENT',
@@ -10,14 +11,14 @@ export const types = {
 export const initialState = {
   fetching: false,
   fetched: false,
-  users: [],
-  error: null
+  error: null,
+  users: []
 };
 
 export const actions = {
-  fetchHomeContent: (apiUrl) => ({
+  fetchHomeContent: () => ({
     type: types.FETCH_HOME_CONTENT,
-    payload: axios.get(apiUrl)
+    payload: axios.get(api.home.content)
   }),
   getUserData: () => ({
     type: 'CLICK_BUTTON',
@@ -36,6 +37,14 @@ const homeReducer = (state = initialState, action) => {
     default:
       return state;
   }
-}
+};
 
 export default homeReducer;
+
+// selectors samples
+/* import { filter, find, sortBy } from 'your-favorite-library';
+
+export const getProduct = (state) => state.product.products;
+export const getProductById = (state, id) => find(state.product.products, id);
+export const getProductSortedByName = (state) => sortBy(state.product.products, 'name');
+export const getExpiredProducts = (state) => filter(state.product.products, { isExpired: true }); */
