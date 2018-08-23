@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from '../../../../../AppData/Local/Microsoft/TypeScript/3.0/node_modules/redux';
@@ -22,20 +22,32 @@ class ConnectedHeader extends Component {
     return (
       <div id="header">
         <div id="header-wrapper" className="clear">
-          <div id="header-left">
+          <div id="header-top">
             <Link to="/" id="logo">
               <img src={logo} width="150" alt="React Logo" />
             </Link>
           </div>
-          <div id="header-right">
+          <div id="header-bottom">
             <div id="desktop-menu-wrapper">
               <ul>
-                <li className="desktop-menu"><Link to="/">Home</Link></li>
-                <li className="desktop-menu"><Link to="/about">Entertainment</Link></li>
-                <li className="desktop-menu"><Link to="/topics">Live Style</Link></li>
-                <li className="desktop-menu"><Link to="/">Techno</Link></li>
-                <li className="desktop-menu"><Link to="/about">About You</Link></li>
-                <li className="desktop-menu"><Link to="/topics">Ideas</Link></li>
+                <li className="desktop-menu">
+                  <NavLink to="/" exact activeClassName="selected">HOME</NavLink>
+                </li>
+                <li className="desktop-menu">
+                  <NavLink to="/about" exact activeClassName="selected">ENTERTAINMENT</NavLink>
+                </li>
+                <li className="desktop-menu">
+                  <NavLink to="/topics" exact activeClassName="selected">LIVE STYLE</NavLink>
+                </li>
+                <li className="desktop-menu">
+                  <NavLink to="/techno" exact activeClassName="selected">TECHNO</NavLink>
+                </li>
+                <li className="desktop-menu">
+                  <NavLink to="/about-you" exact activeClassName="selected">ABOUT YOU</NavLink>
+                </li>
+                <li className="desktop-menu">
+                  <NavLink to="/ideas" exact activeClassName="selected">IDEAS</NavLink>
+                </li>
               </ul>
             </div>
           </div>
@@ -62,6 +74,6 @@ const mapDispatchToProps = (dispatch) => ({
   ...bindActionCreators(headerActions, dispatch)
 });
 
-const Header = connect(mapStateToProps, mapDispatchToProps)(ConnectedHeader);
+const Header = withRouter(connect(mapStateToProps, mapDispatchToProps)(ConnectedHeader));
 
 export default Header;
