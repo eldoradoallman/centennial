@@ -16,7 +16,7 @@ class ConnectedHome extends Component {
     console.log(this.props);
 
     return (
-      <div>
+      <div id="home-content">
         <h2>Home</h2>
         {
           users[0] &&
