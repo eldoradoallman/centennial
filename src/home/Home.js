@@ -16,8 +16,8 @@ class ConnectedHome extends Component {
     console.log(this.props);
 
     return (
-      <div id="home-content" class="page-content-wrapper">
-        <div class="page-content">
+      <div id="home-content" className="page-content-wrapper">
+        <div className="page-content">
           {
             users[0] &&
             users.map((user, index) => (

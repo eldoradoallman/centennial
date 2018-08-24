@@ -16,11 +16,57 @@
 #logo {
   display: block;
   width: 150px;
-  margin: 20px auto 30px;
+  margin: 20px auto 26px;
 }
 
 #header-bottom {
   text-align: center;
+}
+
+#toggle-sidebar-menu {
+  position: absolute;
+  top: 68px;
+  left: 40px;
+  width: 30px;
+  height: 40px;
+  cursor: pointer;
+}
+
+#toggle-sidebar-menu:before, #toggle-sidebar-menu:after {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0;
+  width: 30px;
+  transition: all 200ms ease-in-out;
+}
+
+#toggle-sidebar-menu:before {
+  top: 11px;
+  height: 2px;
+  background: #000;
+}
+
+#toggle-sidebar-menu:after {
+  top: 19px;
+  height: 6px;
+  border-top: 2px solid #000;
+  border-bottom: 2px solid #000;
+}
+
+#toggle-sidebar-menu.open:before, #toggle-sidebar-menu.open:after {
+  top: 20px;
+  height: 2px;
+  background: #000;
+}
+
+#toggle-sidebar-menu.open:before {
+  transform: rotate(-45deg);
+}
+
+#toggle-sidebar-menu.open:after {
+  border: none;
+  transform: rotate(45deg);
 }
 
 .desktop-menu {
@@ -33,9 +79,35 @@
   padding-bottom: 20px;
   font-size: 12px;
   letter-spacing: 2.5px;
+  transition: color 200ms ease-in-out;
+}
+
+.desktop-menu a:hover {
+  color: #000;
 }
 
 .desktop-menu a.selected {
+  color: #000;
   font-weight: 500;
   border-bottom: 2px solid #000;
+}
+
+#sidebar-menu-wrapper {
+  position: fixed;
+  top: 118px;
+  bottom: 0px;
+  width: 300px;
+  padding: 20px 40px;
+  background-color: #fff;
+  border-right: 1px solid #f1f1f1;
+  transform: translate3d(-300px,0,0);
+  transition: transform 200ms ease-in-out;
+}
+
+#sidebar-menu-wrapper.open {
+  transform: translateZ(0);
+}
+
+.sidebar-menu {
+  margin: 10px 0px;
 }
