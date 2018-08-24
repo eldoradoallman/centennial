@@ -16,15 +16,16 @@ class ConnectedHome extends Component {
     console.log(this.props);
 
     return (
-      <div id="home-content">
-        <h2>Home</h2>
-        {
-          users[0] &&
-          users.map((user, index) => (
-            <p key={index}>{user.name}</p>
-          ))
-        }
-        <button onClick={getUserData}>CLICK ME</button>
+      <div id="home-content" class="page-content-wrapper">
+        <div class="page-content">
+          {
+            users[0] &&
+            users.map((user, index) => (
+              <p key={index}>{user.name}</p>
+            ))
+          }
+          <button onClick={getUserData}>CLICK ME</button>
+        </div>
       </div>
     );
   }

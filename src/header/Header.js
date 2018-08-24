@@ -6,7 +6,7 @@ import { bindActionCreators } from '../../../../../AppData/Local/Microsoft/TypeS
 import { actions as headerActions } from './HeaderDucks';
 
 import './Header.css';
-import logo from '../logo.svg';
+import logo from '../assets/img/logo.jpg';
 
 class ConnectedHeader extends Component {
   componentDidMount() {

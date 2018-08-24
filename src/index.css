@@ -8,7 +8,8 @@ dl,h1,h2,h3,h4,h5,h6,ol,ul{margin-top:0;margin-bottom:0}button,iframe,img{border
 body, #root {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 400;
 }
 
 .clear::after {
@@ -20,4 +21,14 @@ body, #root {
 img {
   max-width: 100%;
   vertical-align: top;
+}
+
+.page-content-wrapper {
+  max-width: 1000px;
+  margin: auto;
+  padding-top: 118px;
+}
+
+.page-content {
+  padding: 30px 0px;
 }
