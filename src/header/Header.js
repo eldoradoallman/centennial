@@ -1,19 +1,18 @@
 import React, { Component } from 'react';
-import { Link, NavLink, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-import { bindActionCreators } from '../../../../../AppData/Local/Microsoft/TypeScript/3.0/node_modules/redux';
+
 import { actions as headerActions } from './HeaderDucks';
+import HeaderComponent from './HeaderComponent';
 import { actions as sidebarMenuActions } from '../sidebarmenu/SidebarMenuDucks';
+import SidebarMenu from '../sidebarmenu/SidebarMenu';
 
 import './Header.css';
 import logo from '../assets/img/logo.jpg';
 
 class ConnectedHeader extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     if (this.props.users.length === 0) {
       this.props.fetchHeaderContent();
@@ -30,62 +29,12 @@ class ConnectedHeader extends Component {
 
     return (
       <React.Fragment>
-        <div id="header">
-          <div id="header-wrapper" className="clear">
-            <div id="header-top">
-              <Link to="/" id="logo">
-                <img src={logo} width="150" alt="React Logo" />
-              </Link>
-            </div>
-            <div id="header-bottom">
-              <div id="toggle-sidebar-menu" className={isSidebarOpen ? 'open' : ''} onClick={this.toggleSidebarMenu.bind(this)}></div>
-              <div id="desktop-menu-wrapper">
-                <ul>
-                  <li className="desktop-menu">
-                    <NavLink to="/" exact activeClassName="selected">HOME</NavLink>
-                  </li>
-                  <li className="desktop-menu">
-                    <NavLink to="/about" exact activeClassName="selected">ENTERTAINMENT</NavLink>
-                  </li>
-                  <li className="desktop-menu">
-                    <NavLink to="/topics" activeClassName="selected">LIVE STYLE</NavLink>
-                  </li>
-                  <li className="desktop-menu">
-                    <NavLink to="/techno" exact activeClassName="selected">TECHNO</NavLink>
-                  </li>
-                  <li className="desktop-menu">
-                    <NavLink to="/about-you" exact activeClassName="selected">ABOUT YOU</NavLink>
-                  </li>
-                  <li className="desktop-menu">
-                    <NavLink to="/ideas" exact activeClassName="selected">IDEAS</NavLink>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div id="sidebar-menu-wrapper" className={isSidebarOpen ? 'open' : ''}>
-          <ul>
-            <li className="sidebar-menu">
-              <NavLink to="/" exact activeClassName="selected">HOME</NavLink>
-            </li>
-            <li className="sidebar-menu">
-              <NavLink to="/about" exact activeClassName="selected">ENTERTAINMENT</NavLink>
-            </li>
-            <li className="sidebar-menu">
-              <NavLink to="/topics" activeClassName="selected">LIVE STYLE</NavLink>
-            </li>
-            <li className="sidebar-menu">
-              <NavLink to="/techno" exact activeClassName="selected">TECHNO</NavLink>
-            </li>
-            <li className="sidebar-menu">
-              <NavLink to="/about-you" exact activeClassName="selected">ABOUT YOU</NavLink>
-            </li>
-            <li className="sidebar-menu">
-              <NavLink to="/ideas" exact activeClassName="selected">IDEAS</NavLink>
-            </li>
-          </ul>
-        </div>
+        <HeaderComponent 
+          logo={logo} 
+          isSidebarOpen={isSidebarOpen} 
+          toggleSidebarMenu={this.toggleSidebarMenu.bind(this)} 
+        />
+        <SidebarMenu />
       </React.Fragment>
     );
   }

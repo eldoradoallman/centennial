@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-import { bindActionCreators } from '../../../../../AppData/Local/Microsoft/TypeScript/3.0/node_modules/redux';
+
 import { actions as homeActions } from './HomeDucks';
 import { actions as sidebarMenuActions } from '../sidebarmenu/SidebarMenuDucks';
 
@@ -15,7 +16,6 @@ class ConnectedHome extends Component {
   componentWillUnmount() {
     if (this.props.isSidebarOpen) {
       this.props.closeSidebarMenu();
-      console.log('pressed');
     }
   }
   

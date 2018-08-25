@@ -19,9 +19,8 @@ export const actions = {
     type: types.CHANGE_NAME,
     payload: name
   }),
-  changeAge: (age) => ({
-    type: types.CHANGE_AGE,
-    payload: 35
+  changeAge: () => ({
+    type: types.CHANGE_AGE
   })
 };
 
@@ -30,7 +29,7 @@ const aboutReducer = (state = initialState, action) => {
     case types.CHANGE_NAME:
       return { ...state, name: action.payload };
     case types.CHANGE_AGE:
-      return { ...state, age: action.payload };
+      return { ...state, age: state.age + 1 };
     default:
       return state;
   }
