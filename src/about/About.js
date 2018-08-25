@@ -14,11 +14,13 @@ class ConnectedAbout extends Component {
     console.log(this.props);
 
     return (
-      <div>
-        <h2>About</h2>
-        <p>name: <b>{name}</b></p>
-        <p>age: <b>{age}</b></p>
-        <button onClick={changeAge}>CLICK ME</button>
+      <div id="entertainment-content" className="page-content-wrapper">
+        <div className="page-content">
+          <h2>About</h2>
+          <p>name: <b>{name}</b></p>
+          <p>age: <b>{age}</b></p>
+          <button onClick={changeAge}>CLICK ME</button>
+        </div>
       </div>
     );
   }

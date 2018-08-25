@@ -2,38 +2,34 @@ import axios from 'axios';
 import api from '../api';
 
 export const types = {
-  FETCH_HOME_CONTENT: 'FETCH_HOME_CONTENT',
-  FETCH_HOME_CONTENT_PENDING: 'FETCH_HOME_CONTENT_PENDING',
-  FETCH_HOME_CONTENT_REJECTED: 'FETCH_HOME_CONTENT_REJECTED',
-  FETCH_HOME_CONTENT_FULFILLED: 'FETCH_HOME_CONTENT_FULFILLED'
+  FETCH_HEADER_CONTENT: 'FETCH_HEADER_CONTENT',
+  FETCH_HEADER_CONTENT_PENDING: 'FETCH_HEADER_CONTENT_PENDING',
+  FETCH_HEADER_CONTENT_REJECTED: 'FETCH_HEADER_CONTENT_REJECTED',
+  FETCH_HEADER_CONTENT_FULFILLED: 'FETCH_HEADER_CONTENT_FULFILLED'
 };
 
 export const initialState = {
-  fetching: false,
-  fetched: false,
-  error: null,
+  headerFetching: false,
+  headerFetched: false,
+  headerError: null,
   users: []
 };
 
 export const actions = {
   fetchHeaderContent: () => ({
-    type: types.FETCH_HOME_CONTENT,
-    payload: axios.get(api.home.content)
-  }),
-  getUserData: () => ({
-    type: 'CLICK_BUTTON',
-    payload: console.log('the button has been clicked')
+    type: types.FETCH_HEADER_CONTENT,
+    payload: axios.get(api.header.content)
   })
 };
 
 const headerReducer = (state = initialState, action) => {
   switch (action.type) {
-    case types.FETCH_HOME_CONTENT_PENDING:
-      return { ...state, fetching: true };
-    case types.FETCH_HOME_CONTENT_REJECTED:
-      return { ...state, fetching: false, error: action.payload };
-    case types.FETCH_HOME_CONTENT_FULFILLED:
-      return { ...state, fetching: false, fetched: true, users: action.payload.data };
+    case types.FETCH_HEADER_CONTENT_PENDING:
+      return { ...state, headerFetching: true };
+    case types.FETCH_HEADER_CONTENT_REJECTED:
+      return { ...state, headerFetching: false, headerError: action.payload };
+    case types.FETCH_HEADER_CONTENT_FULFILLED:
+      return { ...state, headerFetching: false, headerFetched: true, users: action.payload.data };
     default:
       return state;
   }

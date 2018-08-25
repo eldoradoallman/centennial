@@ -9,9 +9,9 @@ export const types = {
 };
 
 export const initialState = {
-  fetching: false,
-  fetched: false,
-  error: null,
+  homeFetching: false,
+  homeFetched: false,
+  homeError: null,
   users: []
 };
 
@@ -29,11 +29,11 @@ export const actions = {
 const homeReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.FETCH_HOME_CONTENT_PENDING:
-      return { ...state, fetching: true };
+      return { ...state, homeFetching: true };
     case types.FETCH_HOME_CONTENT_REJECTED:
-      return { ...state, fetching: false, error: action.payload };
+      return { ...state, homeFetching: false, homeError: action.payload };
     case types.FETCH_HOME_CONTENT_FULFILLED:
-      return { ...state, fetching: false, fetched: true, users: action.payload.data };
+      return { ...state, homeFetching: false, homeFetched: true, users: action.payload.data };
     default:
       return state;
   }

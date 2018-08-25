@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from '../../../../../AppData/Local/Microsoft/TypeScript/3.0/node_modules/redux';
 import { actions as headerActions } from './HeaderDucks';
+import { actions as sidebarMenuActions } from '../sidebarmenu/SidebarMenuDucks';
 
 import './Header.css';
 import logo from '../assets/img/logo.jpg';
@@ -11,9 +12,6 @@ import logo from '../assets/img/logo.jpg';
 class ConnectedHeader extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      isSidebarOpen: false
-    };
   }
 
   componentDidMount() {
@@ -23,12 +21,11 @@ class ConnectedHeader extends Component {
   }
 
   toggleSidebarMenu() {
-    this.setState({ isSidebarOpen: !this.state.isSidebarOpen });
+    this.props.toggleSidebarMenu();
   }
   
   render() {
-    const { isSidebarOpen } = this.state;
-    const { users, getUserData } = this.props;
+    const { isSidebarOpen, fetching, fetched, error } = this.props;
     console.log(this.props);
 
     return (
@@ -51,7 +48,7 @@ class ConnectedHeader extends Component {
                     <NavLink to="/about" exact activeClassName="selected">ENTERTAINMENT</NavLink>
                   </li>
                   <li className="desktop-menu">
-                    <NavLink to="/topics" exact activeClassName="selected">LIVE STYLE</NavLink>
+                    <NavLink to="/topics" activeClassName="selected">LIVE STYLE</NavLink>
                   </li>
                   <li className="desktop-menu">
                     <NavLink to="/techno" exact activeClassName="selected">TECHNO</NavLink>
@@ -76,7 +73,7 @@ class ConnectedHeader extends Component {
               <NavLink to="/about" exact activeClassName="selected">ENTERTAINMENT</NavLink>
             </li>
             <li className="sidebar-menu">
-              <NavLink to="/topics" exact activeClassName="selected">LIVE STYLE</NavLink>
+              <NavLink to="/topics" activeClassName="selected">LIVE STYLE</NavLink>
             </li>
             <li className="sidebar-menu">
               <NavLink to="/techno" exact activeClassName="selected">TECHNO</NavLink>
@@ -95,20 +92,26 @@ class ConnectedHeader extends Component {
 }
 
 ConnectedHeader.propTypes = {
-  fetching: PropTypes.bool.isRequired,
-  fetched: PropTypes.bool.isRequired,
-  error: PropTypes.object,
+  headerFetching: PropTypes.bool.isRequired,
+  headerFetched: PropTypes.bool.isRequired,
+  headerError: PropTypes.object,
   users: PropTypes.array.isRequired,
   fetchHeaderContent: PropTypes.func.isRequired,
-  getUserData: PropTypes.func.isRequired
+  isSidebarOpen: PropTypes.bool.isRequired,
+  toggleSidebarMenu: PropTypes.func.isRequired,
+  closeSidebarMenu: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
-  ...state.header
+  ...state.header,
+  ...state.sidebarMenu
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  ...bindActionCreators(headerActions, dispatch)
+  ...bindActionCreators({
+    ...headerActions,
+    ...sidebarMenuActions
+  }, dispatch)
 });
 
 const Header = withRouter(connect(mapStateToProps, mapDispatchToProps)(ConnectedHeader));
