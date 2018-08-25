@@ -1,0 +1,124 @@
+.main-col-featured-news {
+  float: left;
+}
+
+.secondary-col-featured-news {
+  float: right;
+}
+
+.featured-news-box {
+  position: relative;
+}
+
+.featured-news-image {
+  display: block;
+}
+
+.featured-news-summary {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  bottom: 20px;
+  left: 20px;
+  padding-right: 200px;
+}
+
+.main-summary {
+  top: initial;
+  right: 12.5%;
+  bottom: -69px;
+  left: 12.5%;
+  width: 75%;
+  padding: 20px;
+  border: 1px solid #ececec;
+  background-color: rgba(255,255,255,0.85);
+  box-shadow: 0px 5px 15px 0px rgba(0,0,0,0.05);
+}
+
+.featured-news-summary * {
+  color: #fff;
+}
+
+.title-featured-news {
+  max-width: 50%;
+  color: #000;
+  background-color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.main-summary .title-featured-news {
+  max-width: 100%;
+  color: #fff;
+  background-color: #000;
+  font-size: 18px;
+}
+
+.info-writer-box {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+}
+
+.main-summary .info-writer-box {
+  position: relative;
+}
+
+.featured-news-summary p {
+  color: #bdbdbd;
+  font-size: 11px;
+}
+
+.featured-news-summary p a {
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.featured-news-summary p a:hover {
+  text-decoration: underline;
+}
+
+.main-summary p {
+  color: #737373;
+}
+
+.main-summary p a {
+  color: #000;
+}
+
+.writer {
+  margin-top: 15px;
+}
+
+.topic {
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+  padding: 1px 5px;
+  font-size: 11px;
+  font-weight: 700;
+  border-radius: 2px;
+  transition: box-shadow 200ms ease-in-out;
+}
+
+.main-summary .topic {
+  right: 20px;
+  bottom: 19px;
+}
+
+.topic:hover {
+  box-shadow: 0px 1px 4px 0px rgba(0,0,0,0.25);
+}
+
+.pop-culture-topic {
+  background-color: #00aec3;
+}
+
+.beauty-topic {
+  background-color: #ff90e4;
+}
+
+.entertainment {
+  background-color: #0099e0;
+}

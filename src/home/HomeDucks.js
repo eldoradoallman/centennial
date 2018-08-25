@@ -1,6 +1,8 @@
 import axios from 'axios';
 import api from '../api';
 
+import jsonData from './DummyData';
+
 export const types = {
   FETCH_HOME_CONTENT: 'FETCH_HOME_CONTENT',
   FETCH_HOME_CONTENT_PENDING: 'FETCH_HOME_CONTENT_PENDING',
@@ -18,7 +20,8 @@ export const initialState = {
 export const actions = {
   fetchHomeContent: () => ({
     type: types.FETCH_HOME_CONTENT,
-    payload: axios.get(api.home.content)
+    /* payload: axios.get(api.home.content) */
+    payload: jsonData
   }),
   getUserData: () => ({
     type: 'CLICK_BUTTON',
@@ -28,6 +31,8 @@ export const actions = {
 
 const homeReducer = (state = initialState, action) => {
   switch (action.type) {
+    case types.FETCH_HOME_CONTENT:
+      return { ...state, homeFetching: false, homeFetched: true, users: action.payload };
     case types.FETCH_HOME_CONTENT_PENDING:
       return { ...state, homeFetching: true };
     case types.FETCH_HOME_CONTENT_REJECTED:

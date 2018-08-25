@@ -25,10 +25,10 @@
 
 #toggle-sidebar-menu {
   position: absolute;
-  top: 68px;
+  top: 78px;
   left: 40px;
-  width: 30px;
-  height: 40px;
+  width: 20px;
+  height: 20px;
   cursor: pointer;
 }
 
@@ -37,25 +37,25 @@
   display: block;
   position: absolute;
   left: 0;
-  width: 30px;
+  width: 20px;
   transition: all 200ms ease-in-out;
 }
 
 #toggle-sidebar-menu:before {
-  top: 11px;
+  top: 4px;
   height: 2px;
   background: #000;
 }
 
 #toggle-sidebar-menu:after {
-  top: 19px;
-  height: 6px;
+  top: 9px;
+  height: 3px;
   border-top: 2px solid #000;
   border-bottom: 2px solid #000;
 }
 
 #toggle-sidebar-menu.open:before, #toggle-sidebar-menu.open:after {
-  top: 20px;
+  top: 10px;
   height: 2px;
   background: #000;
 }
@@ -94,6 +94,7 @@
 
 #sidebar-menu-wrapper {
   position: fixed;
+  z-index: 1;
   top: 118px;
   bottom: 0px;
   width: 300px;
