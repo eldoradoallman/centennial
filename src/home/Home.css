@@ -40,7 +40,7 @@
 .main-summary {
   top: initial;
   right: 12.5%;
-  bottom: -69px;
+  bottom: -60px;
   left: 12.5%;
   width: 75%;
   padding: 15px;
@@ -151,4 +151,82 @@
 
 br {
   clear: both;
+}
+
+.view-all-wrapper {
+  text-align: center;
+}
+
+.view-all-wrapper span {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+#home-va-wrapper {
+  margin: 0px 10px;
+  padding: 10px 0px 20px;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+.view-all span {
+  transition: color 200ms ease-in-out;
+}
+
+.view-all:hover span {
+  color: #000;
+}
+
+.view-all-link {
+  margin: 0px 20px;
+  font-size: 12px;
+  letter-spacing: 2.5px;
+}
+
+.arrow-left, .arrow-right {
+  position: relative;
+  width: 10px;
+  height: 20px;
+}
+
+.arrow-left::before, .arrow-left::after, .arrow-right::before, .arrow-right::after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 0px;
+  width: 6px;
+  height: 1px;
+  background-color: #808080;
+  transition: background-color 200ms ease-in-out;
+}
+
+.view-all:hover *::before, .view-all:hover *::after {
+  background-color: #000;
+}
+
+.arrow-left::before, .arrow-right::before {
+  top: 7px;
+  transform: rotate(45deg);
+}
+
+.arrow-left::after, .arrow-right::after {
+  top: 11px;
+  transform: rotate(-45deg);
+}
+
+.arrow-right::before {
+  transform: rotate(-45deg);
+}
+
+.arrow-right::after {
+  transform: rotate(45deg);
+}
+
+.horz-ads {
+  padding: 30px 10px;
+}
+
+.horz-ads {
+  display: block;
+  max-width: 800px;
+  margin: auto;
 }

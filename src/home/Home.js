@@ -74,15 +74,25 @@ class ConnectedHome extends Component {
             }
             {
               homeFetched &&
-              <Link to="/featured-news" className="view-all">
-                <span className="arrow-left"></span>
-                <span className="arrow-left"></span>
-                <span className="arrow-left"></span>
-                <span>SEE ALL FEATURED NEWS</span>
-                <span className="arrow-right"></span>
-                <span className="arrow-right"></span>
-                <span className="arrow-right"></span>
-              </Link>
+              <div id="home-va-wrapper" className="view-all-wrapper">
+                <Link to="/featured-news" className="view-all">
+                  <span className="arrow-left"></span>
+                  <span className="arrow-left"></span>
+                  <span className="arrow-left"></span>
+                  <span className="view-all-link">SEE ALL FEATURED NEWS</span>
+                  <span className="arrow-right"></span>
+                  <span className="arrow-right"></span>
+                  <span className="arrow-right"></span>
+                </Link>
+              </div>
+            }
+            {
+              homeFetched &&
+              <div className="horz-ads">
+                <a href="#" target="_blank" rel="noopener">
+                  <img src="https://steffen-laurens.com/centennial/img/google-ads.jpg" />
+                </a>
+              </div>
             }
           </div>
           <button onClick={getUserData}>CLICK ME</button>
