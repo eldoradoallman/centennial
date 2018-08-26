@@ -14,13 +14,27 @@
   display: block;
 }
 
+.featured-news-image::after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  box-shadow: inset 120px 0px 300px -10px rgba(0,0,0,0.75);
+}
+
+.main-col-featured-news .featured-news-image::after {
+  box-shadow: none;
+}
+
 .featured-news-summary {
   position: absolute;
-  top: 20px;
-  right: 20px;
-  bottom: 20px;
-  left: 20px;
-  padding-right: 200px;
+  top: 15px;
+  right: 15px;
+  bottom: 15px;
+  left: 15px;
 }
 
 .main-summary {
@@ -29,10 +43,14 @@
   bottom: -69px;
   left: 12.5%;
   width: 75%;
-  padding: 20px;
+  padding: 15px;
   border: 1px solid #ececec;
   background-color: rgba(255,255,255,0.85);
   box-shadow: 0px 5px 15px 0px rgba(0,0,0,0.05);
+}
+
+.secondary-summary {
+  padding-right: 200px;
 }
 
 .featured-news-summary * {
@@ -95,16 +113,16 @@
   position: absolute;
   right: 0px;
   bottom: 0px;
-  padding: 1px 5px;
-  font-size: 11px;
+  padding: 0px 4px;
+  font-size: 10px;
   font-weight: 700;
   border-radius: 2px;
   transition: box-shadow 200ms ease-in-out;
 }
 
 .main-summary .topic {
-  right: 20px;
-  bottom: 19px;
+  right: 15px;
+  bottom: 14px;
 }
 
 .topic:hover {
@@ -121,4 +139,16 @@
 
 .entertainment {
   background-color: #0099e0;
+}
+
+.techno {
+  background-color: #ff8a00;
+}
+
+.games {
+  background-color: #ff3b3b;
+}
+
+br {
+  clear: both;
 }
