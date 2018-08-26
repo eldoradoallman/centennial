@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 
 import { actions as homeActions } from './HomeDucks';
 import { actions as sidebarMenuActions } from '../sidebarmenu/SidebarMenuDucks';
+import ScrollToTopOnMount from '../ScrollToTopOnMount';
 
 import './Home.css';
 
@@ -28,13 +29,14 @@ class ConnectedHome extends Component {
 
     return (
       <div id="home-content" className="page-content-wrapper">
+        <ScrollToTopOnMount />
         <div className="page-content">
           <div id="featured-news-wrapper">
             {
               homeFetched &&
               users.map((user, index) => (
-                <React.Fragment>
-                  <div key={user.id} className={
+                <React.Fragment key={user.id}>
+                  <div className={
                     index === 0 ? 'col-50 main-col-featured-news' : 
                     index === 1 || index === 2 ? 'col-50 secondary-col-featured-news' :
                     index > 2 ? 'col-25 col-featured-news' : 'col-featured-news'
@@ -89,8 +91,8 @@ class ConnectedHome extends Component {
             {
               homeFetched &&
               <div className="horz-ads">
-                <a href="#" target="_blank" rel="noopener">
-                  <img src="https://steffen-laurens.com/centennial/img/google-ads.jpg" />
+                <a href="https://steffen-laurens.com/" target="_blank" rel="noopener noreferrer">
+                  <img src="https://steffen-laurens.com/centennial/img/google-ads.jpg" alt="Google Ads" />
                 </a>
               </div>
             }
