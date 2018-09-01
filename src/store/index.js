@@ -6,6 +6,7 @@ import logger from 'redux-logger';
 import sidebarMenuReducer from '../sidebarmenu/SidebarMenuDucks';
 import headerReducer from '../header/HeaderDucks';
 import homeReducer from '../home/HomeDucks';
+import latestNewsReducer from '../home/latestnews/LatestNewsDucks';
 import aboutReducer from '../about/AboutDucks';
 import topicsReducer from '../topics/TopicsDucks';
 
@@ -13,6 +14,7 @@ const appReducer = combineReducers({
   sidebarMenu: sidebarMenuReducer,
   header: headerReducer,
   home: homeReducer,
+  latestNews: latestNewsReducer,
   about: aboutReducer,
   topics: topicsReducer
 });

@@ -28,8 +28,6 @@ export const actions = {
 
 const homeReducer = (state = initialState, action) => {
   switch (action.type) {
-    case types.FETCH_HOME_CONTENT:
-      return { ...state, homeFetching: false, homeFetched: true, users: action.payload };
     case types.FETCH_HOME_CONTENT_PENDING:
       return { ...state, homeFetching: true };
     case types.FETCH_HOME_CONTENT_REJECTED:
