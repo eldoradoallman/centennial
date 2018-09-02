@@ -56,3 +56,21 @@ img {
 .col-100 {
   width: 100%;
 }
+
+.main-button {
+  display: inline-block;
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+  padding: 5px 10px;
+  border: 1px solid #f1f1f1;
+  border-radius: 3px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 200ms ease-in-out;
+}
+
+.main-button:hover {
+  color: #000;
+  border: 1px solid #808080;
+}

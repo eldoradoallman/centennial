@@ -250,3 +250,18 @@ br {
   max-width: 800px;
   margin: auto;
 }
+
+#all-topics-news-wrapper {
+  position: relative;
+}
+
+#popular-news-wrapper {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 370px;
+}
+
+.sticky {
+  padding-top: 130px;
+}

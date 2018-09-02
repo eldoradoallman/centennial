@@ -1,0 +1,32 @@
+#popular-news-wrapper .category-news-wrapper {
+  margin-bottom: 15px;
+}
+
+#popular-news-wrapper .latest-news-box {
+  min-height: auto;
+  margin: 5px 0px;
+}
+
+.latest-news-image.popular {
+  width: 80px;
+}
+
+.latest-news-summary.popular {
+  padding-left: 100px;
+}
+
+.popular .title-latest-news {
+  font-size: 14px;
+}
+
+#popular-news-wrapper .latest-info-writer-box {
+  margin-top: 10px;
+}
+
+#popular-news-wrapper .latest-info-writer-box.common p {
+  font-size: 11px;
+}
+
+#popular-news-wrapper .latest-info-writer-box.common p a {
+  font-size: 12px;
+}

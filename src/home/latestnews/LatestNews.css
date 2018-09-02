@@ -33,6 +33,10 @@
   margin-right: 0px;
 }
 
+.margin-top {
+  margin-top: 20px;
+}
+
 .latest-news-box {
   position: relative;
   min-height: 150px;
@@ -92,7 +96,7 @@
 }
 
 .article-summary {
-  margin: 5px 0px 10px;
+  margin: 10px 0px;
 }
 
 .secondary-col-featured-news .latest-info-writer-box {
@@ -108,7 +112,7 @@
 
 .latest-info-writer-box.common p {
   color: #808080;
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .latest-info-writer-box p a {
@@ -119,27 +123,9 @@
 
 .latest-info-writer-box.common p a {
   color: #000;
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .latest-info-writer-box p a:hover {
   text-decoration: underline;
-}
-
-.bookmark-button {
-  display: inline-block;
-  position: absolute;
-  right: 0px;
-  bottom: 0px;
-  padding: 5px 10px;
-  border: 1px solid #f1f1f1;
-  border-radius: 3px;
-  font-size: 12px;
-  cursor: pointer;
-  transition: all 200ms ease-in-out;
-}
-
-.bookmark-button:hover {
-  color: #000;
-  border: 1px solid #000;
 }

@@ -1,7 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Sticky from 'react-sticky-el';
 
 import LatestNews from './latestnews/LatestNews';
+import PopularNews from './popularnews/PopularNews';
 
 const HomeComponent = ({
   homeFetching,
@@ -87,7 +89,9 @@ const HomeComponent = ({
           <LatestNews />
         </div>
         <div id="popular-news-wrapper">
-
+          <Sticky topOffset={-130}>
+            <PopularNews />
+          </Sticky>
         </div>
       </div>
       <button onClick={getUserData}>CLICK ME</button>
