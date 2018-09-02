@@ -1,0 +1,145 @@
+.latest-news-wrapper {
+  padding-right: 400px;
+}
+
+.category-news-wrapper {
+  position: relative;
+  margin-bottom: 10px;
+  padding: 10px 10px 20px;
+}
+
+.category-news-wrapper::before {
+  content: '';
+  display: block;
+  position: absolute;
+  right: 10px;
+  bottom: 0px;
+  left: 10px;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+.category-news {
+  font-size: 18px;
+  color: #000;
+  float: left;
+}
+
+.view-all-category {
+  margin-top: 4px;
+  float: right;
+}
+
+.view-all-category .view-all-link {
+  margin-right: 0px;
+}
+
+.latest-news-box {
+  position: relative;
+  min-height: 150px;
+  margin: 10px 0px;
+}
+
+.latest-news-image {
+  display: block;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 150px;
+}
+
+.latest-news-summary {
+  padding-left: 170px;
+}
+
+.latest-news-summary.full {
+  padding-left: 0px;
+}
+
+.title-latest-news {
+  font-size: 18px;
+  font-weight: 700;
+  color: #000;
+}
+
+.title-featured-news.alt-title {
+  max-width: 50%;
+}
+
+.main-summary.latest-news-summary {
+  position: relative;
+  top: 0px;
+  right: 5%;
+  bottom: -60px;
+  left: 5%;
+  width: 90%;
+  margin-top: -85px;
+  border: 1px solid #ececec;
+  background-color: rgba(255,255,255,0.85);
+  box-shadow: 0px 5px 15px 0px rgba(0,0,0,0.05);
+}
+
+.title-featured-news.alt-title span {
+  font-size: 18px;
+}
+
+.main-summary .title-featured-news.alt-title span {
+  font-size: 14px;
+}
+
+.latest-news-wrapper .secondary-col-featured-news {
+  margin-bottom: 20px;
+  float: none;
+}
+
+.article-summary {
+  margin: 5px 0px 10px;
+}
+
+.secondary-col-featured-news .latest-info-writer-box {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+}
+
+.latest-info-writer-box p {
+  color: #bdbdbd;
+  font-size: 11px;
+}
+
+.latest-info-writer-box.common p {
+  color: #808080;
+  font-size: 14px;
+}
+
+.latest-info-writer-box p a {
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.latest-info-writer-box.common p a {
+  color: #000;
+  font-size: 14px;
+}
+
+.latest-info-writer-box p a:hover {
+  text-decoration: underline;
+}
+
+.bookmark-button {
+  display: inline-block;
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+  padding: 5px 10px;
+  border: 1px solid #f1f1f1;
+  border-radius: 3px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 200ms ease-in-out;
+}
+
+.bookmark-button:hover {
+  color: #000;
+  border: 1px solid #000;
+}

@@ -35,7 +35,7 @@ img {
   padding: 20px 0px;
 }
 
-.col-25, .col-50 {
+.col-25, .col-33, .col-50, .col-100 {
   display: inline-block;
   vertical-align: top;
   padding: 10px;
@@ -45,6 +45,14 @@ img {
   width: 25%;
 }
 
+.col-33 {
+  width: 33.33333%;
+}
+
 .col-50 {
   width: 50%;
+}
+
+.col-100 {
+  width: 100%;
 }

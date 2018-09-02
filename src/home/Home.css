@@ -131,6 +131,7 @@
   padding: 0px 4px;
   font-size: 10px;
   font-weight: 700;
+  color: #fff;
   border-radius: 2px;
   transition: box-shadow 200ms ease-in-out;
 }
@@ -162,6 +163,10 @@
 
 .games {
   background-color: #ff3b3b;
+}
+
+.movies {
+  background-color: #00b14a;
 }
 
 br {
