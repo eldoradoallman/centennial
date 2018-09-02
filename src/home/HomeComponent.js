@@ -89,7 +89,7 @@ const HomeComponent = ({
           <LatestNews />
         </div>
         <div id="popular-news-wrapper">
-          <Sticky topOffset={-130}>
+          <Sticky topOffset={-85}>
             <PopularNews />
           </Sticky>
         </div>

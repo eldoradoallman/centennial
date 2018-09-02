@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
+import Headroom from 'react-headroom';
 
 import { actions as headerActions } from './HeaderDucks';
 import HeaderComponent from './HeaderComponent';
@@ -29,12 +30,14 @@ class ConnectedHeader extends Component {
 
     return (
       <React.Fragment>
+      <Headroom>
         <HeaderComponent 
           logo={logo} 
           isSidebarOpen={isSidebarOpen} 
           toggleSidebarMenu={this.toggleSidebarMenu.bind(this)} 
         />
         <SidebarMenu />
+  </Headroom>
       </React.Fragment>
     );
   }

@@ -1,3 +1,7 @@
+.headroom {
+  transform: none !important;
+}
+
 #header {
   position: fixed;
   z-index: 1;
@@ -7,6 +11,11 @@
   height: 118px;
   background-color: #fff;
   border-bottom: 1px solid #f1f1f1;
+  transition: all 200ms ease-in-out;
+}
+
+.headroom--unpinned #header {
+  transform: translateY(-58px);
 }
 
 #header-wrapper {
@@ -94,15 +103,19 @@
 
 #sidebar-menu-wrapper {
   position: fixed;
-  z-index: 1;
-  top: 118px;
+  z-index: 0;
+  top: 0px;
   bottom: 0px;
   width: 300px;
-  padding: 20px 40px;
+  padding: 138px 40px 20px;
   background-color: #fff;
   border-right: 1px solid #f1f1f1;
   transform: translate3d(-300px,0,0);
-  transition: transform 200ms ease-in-out;
+  transition: all 200ms ease-in-out;
+}
+
+.headroom--unpinned #sidebar-menu-wrapper {
+  padding-top: 80px;
 }
 
 #sidebar-menu-wrapper.open {
