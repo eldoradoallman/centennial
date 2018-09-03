@@ -30,14 +30,14 @@ class ConnectedHeader extends Component {
 
     return (
       <React.Fragment>
-      <Headroom>
-        <HeaderComponent 
-          logo={logo} 
-          isSidebarOpen={isSidebarOpen} 
-          toggleSidebarMenu={this.toggleSidebarMenu.bind(this)} 
-        />
-        <SidebarMenu />
-  </Headroom>
+        <Headroom>
+          <HeaderComponent 
+            logo={logo} 
+            isSidebarOpen={isSidebarOpen} 
+            toggleSidebarMenu={this.toggleSidebarMenu.bind(this)} 
+          />
+          <SidebarMenu />
+        </Headroom>
       </React.Fragment>
     );
   }

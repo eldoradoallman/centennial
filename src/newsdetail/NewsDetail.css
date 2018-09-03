@@ -1,0 +1,16 @@
+#title-writer-wrapper {
+  max-width: 700px;
+  margin: auto;
+  padding: 50px 0px;
+  text-align: center;
+}
+
+.news-title {
+  margin: 20px 0px;
+  font-size: 36px;
+  color: #000;
+}
+
+#news-main-image img {
+  width: 100%;
+}

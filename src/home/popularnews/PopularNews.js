@@ -12,7 +12,6 @@ class PopularNews extends Component {
   };
   
   componentDidMount() {
-    const { popular_news } = this.state;
     const url = api.home.popular_news;
 
     axios.get(url)
