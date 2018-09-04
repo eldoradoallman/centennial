@@ -4,6 +4,7 @@ import Sticky from 'react-sticky-el';
 
 import LatestNews from './latestnews/LatestNews';
 import PopularNews from './popularnews/PopularNews';
+import ScrollToTopOnMount from '../ScrollToTopOnMount';
 
 const HomeComponent = ({
   homeFetching,
@@ -17,6 +18,7 @@ const HomeComponent = ({
   closeSidebarMenu
 }) => (
   <div id="home-content" className="page-content-wrapper">
+    <ScrollToTopOnMount />
     <div className="page-content">
       <div id="featured-news-wrapper">
         {

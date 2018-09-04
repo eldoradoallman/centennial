@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 
 import { actions as homeActions } from './HomeDucks';
 import { actions as sidebarMenuActions } from '../sidebarmenu/SidebarMenuDucks';
-import ScrollToTopOnMount from '../ScrollToTopOnMount';
 import HomeComponent from './HomeComponent';
 
 import './Home.css';
@@ -28,9 +27,7 @@ class ConnectedHome extends Component {
     console.log(this.props);
 
     return (
-      <HomeComponent {...this.props}>
-        <ScrollToTopOnMount />
-      </HomeComponent>
+      <HomeComponent {...this.props} />
     );
   }
 }

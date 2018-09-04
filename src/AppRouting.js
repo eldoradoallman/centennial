@@ -14,23 +14,21 @@ import NewsDetail from './newsdetail/NewsDetail';
   )}/>
 ); */
 
-const AppRouting = () => {
-  return (
-    <Router>
-      <React.Fragment>
-        <Header />
-        <Switch>
-          {// To pass props with Route
-          /* <HomeRoute exact path="/" component={Home}/> */}
-          <Route exact path="/" component={Home} />
-          <Route path="/about" component={About} />
-          <Route path="/topics" component={Topics} />
-          <Route path="/:category/:subcategory?/:id-:newstitle" component={NewsDetail} />
-          <Route component={Home} />
-        </Switch>
-      </React.Fragment>
-    </Router>
-  );
-};
+const AppRouting = () => (
+  <Router>
+    <React.Fragment>
+      <Header />
+      <Switch>
+        {// To pass props with Route
+        /* <HomeRoute exact path="/" component={Home}/> */}
+        <Route exact path="/" component={Home} />
+        <Route path="/about" component={About} />
+        <Route path="/topics" component={Topics} />
+        <Route path="/:category/:subcategory?/:id-:newstitle" component={NewsDetail} />
+        <Route component={Home} />
+      </Switch>
+    </React.Fragment>
+  </Router>
+);
 
 export default AppRouting;

@@ -1,16 +1,41 @@
 #title-writer-wrapper {
   max-width: 700px;
   margin: auto;
-  padding: 50px 0px;
+  padding: 60px 0px;
   text-align: center;
 }
 
 .news-title {
-  margin: 20px 0px;
+  margin: 30px 0px;
   font-size: 36px;
   color: #000;
 }
 
 #news-main-image img {
   width: 100%;
+}
+
+.news-detail-content, .image-caption {
+  max-width: 700px;
+  margin: auto;
+  text-align: justify;
+  font-size: 18px;
+  line-height: 1.75;
+}
+
+.image-caption {
+  padding: 20px 0px;
+  font-style: italic;
+}
+
+.news-detail-content p {
+  margin: 20px 0px;
+}
+
+.news-detail-content a:hover {
+  text-decoration: underline;
+}
+
+.news-detail-content * {
+  color: #000;
 }
