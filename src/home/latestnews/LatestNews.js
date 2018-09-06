@@ -9,8 +9,6 @@ import api from '../../api';
 import { actions as latestNewsActions } from './LatestNewsDucks';
 import LatestNewsComponent from './LatestNewsComponent';
 
-import './LatestNews.css';
-
 class ConnectedLatestNews extends Component {
   state = {
     per: 10,

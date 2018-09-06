@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import LatestNewsItemComponent from '../../common/latestnews/LatestNewsItemComponent';
 import LatestNewsTitleComponent from '../../common/latestnews/LatestNewsTitleComponent';
 
+import './LatestNews.css';
+
 const LatestNewsComponent = (props) => {
   if (!props.article.id) {
     return props.article.editorial_picks.map((article_pick, index) => (
