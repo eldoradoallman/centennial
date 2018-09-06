@@ -7,9 +7,9 @@ import axios from 'axios';
 import api from '../../api';
 
 import { actions as latestNewsActions } from './LatestNewsDucks';
-import LatestNewsComponent from './LatestNewsComponent';
+import LatestNewsHomeComponent from './LatestNewsHomeComponent';
 
-class ConnectedLatestNews extends Component {
+class ConnectedLatestNewsHome extends Component {
   state = {
     per: 10,
     page: 1,
@@ -39,7 +39,7 @@ class ConnectedLatestNews extends Component {
       >
         {
           this.state.latest_news.map((article, index) => (
-            <LatestNewsComponent article={article} key={index} index={index} />
+            <LatestNewsHomeComponent article={article} key={index} index={index} />
           ))  
         }
       </InfiniteScroll>
@@ -47,7 +47,7 @@ class ConnectedLatestNews extends Component {
   }
 }
 
-ConnectedLatestNews.propTypes = {
+ConnectedLatestNewsHome.propTypes = {
   latestNewsFetching: PropTypes.bool.isRequired,
   latestNewsFetched: PropTypes.bool.isRequired,
   latestNewsError: PropTypes.object,
@@ -65,6 +65,6 @@ const mapDispatchToProps = (dispatch) => ({
   }, dispatch)
 });
 
-const LatestNews = connect(mapStateToProps, mapDispatchToProps)(ConnectedLatestNews);
+const LatestNewsHome = connect(mapStateToProps, mapDispatchToProps)(ConnectedLatestNewsHome);
 
-export default LatestNews;
+export default LatestNewsHome;

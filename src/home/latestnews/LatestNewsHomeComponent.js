@@ -6,7 +6,7 @@ import LatestNewsTitleComponent from '../../common/latestnews/LatestNewsTitleCom
 
 import './LatestNews.css';
 
-const LatestNewsComponent = (props) => {
+const LatestNewsHomeComponent = (props) => {
   if (!props.article.id) {
     return props.article.editorial_picks.map((article_pick, index) => (
       <React.Fragment key={article_pick.id}>
@@ -59,4 +59,4 @@ const LatestNewsComponent = (props) => {
   }
 };
 
-export default LatestNewsComponent;
+export default LatestNewsHomeComponent;

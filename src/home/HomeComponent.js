@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Sticky from 'react-sticky-el';
 
 import api from '../api';
-import LatestNews from './latestnews/LatestNews';
+import LatestNewsHome from './latestnews/LatestNewsHome';
 import PopularNews from '../common/popularnews/PopularNews';
 import ScrollToTopOnMount from '../ScrollToTopOnMount';
 
@@ -89,7 +89,7 @@ const HomeComponent = ({
       </div>
       <div id="all-topics-news-wrapper">
         <div className="latest-news-wrapper">
-          <LatestNews />
+          <LatestNewsHome />
         </div>
         <div id="popular-news-wrapper">
           <Sticky topOffset={-85}>
