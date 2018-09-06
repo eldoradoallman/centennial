@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import LatestNewsItemComponent from '../../common/LatestNewsItemComponent';
-import LatestNewsTitleComponent from '../../common/LatestNewsTitleComponent';
+import LatestNewsItemComponent from '../../common/latestnews/LatestNewsItemComponent';
+import LatestNewsTitleComponent from '../../common/latestnews/LatestNewsTitleComponent';
 
 const LatestNewsComponent = (props) => {
   if (!props.article.id) {

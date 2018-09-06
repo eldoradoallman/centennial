@@ -8,10 +8,10 @@ import Headroom from 'react-headroom';
 import { actions as headerActions } from './HeaderDucks';
 import HeaderComponent from './HeaderComponent';
 import { actions as sidebarMenuActions } from '../sidebarmenu/SidebarMenuDucks';
-import SidebarMenu from '../sidebarmenu/SidebarMenu';
+import SidebarMenuComponent from '../sidebarmenu/SidebarMenuComponent';
 
 import './Header.css';
-import logo from '../assets/img/logo.jpg';
+import logo from '../../assets/img/logo.jpg';
 
 class ConnectedHeader extends Component {
   componentDidMount() {
@@ -36,7 +36,7 @@ class ConnectedHeader extends Component {
             isSidebarOpen={isSidebarOpen} 
             toggleSidebarMenu={this.toggleSidebarMenu.bind(this)} 
           />
-          <SidebarMenu />
+          <SidebarMenuComponent isSidebarOpen={isSidebarOpen} />
         </Headroom>
       </React.Fragment>
     );

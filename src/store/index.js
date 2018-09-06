@@ -3,8 +3,8 @@ import promise from 'redux-promise-middleware';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 
-import sidebarMenuReducer from '../sidebarmenu/SidebarMenuDucks';
-import headerReducer from '../header/HeaderDucks';
+import sidebarMenuReducer from '../common/sidebarmenu/SidebarMenuDucks';
+import headerReducer from '../common/header/HeaderDucks';
 import homeReducer from '../home/HomeDucks';
 import latestNewsReducer from '../home/latestnews/LatestNewsDucks';
 import aboutReducer from '../about/AboutDucks';

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import api from '../api';
+import api from '../../api';
 
 export const types = {
   FETCH_HEADER_CONTENT: 'FETCH_HEADER_CONTENT',
