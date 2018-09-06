@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 
 import { actions as homeActions } from './HomeDucks';
-import { actions as sidebarMenuActions } from '../sidebarmenu/SidebarMenuDucks';
+import { actions as sidebarMenuActions } from '../common/sidebarmenu/SidebarMenuDucks';
 import HomeComponent from './HomeComponent';
 
 import './Home.css';

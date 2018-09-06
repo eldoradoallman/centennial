@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import api from '../api';
 
-import { actions as sidebarMenuActions } from '../sidebarmenu/SidebarMenuDucks';
+import { actions as sidebarMenuActions } from '../common/sidebarmenu/SidebarMenuDucks';
 import NewsDetailComponent from './NewsDetailComponent';
 
 import './NewsDetail.css';
