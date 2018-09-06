@@ -1,6 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import LatestNewsItemComponent from '../../common/LatestNewsItemComponent';
+import LatestNewsTitleComponent from '../../common/LatestNewsTitleComponent';
+
 const LatestNewsComponent = (props) => {
   if (!props.article.id) {
     return props.article.editorial_picks.map((article_pick, index) => (
@@ -46,35 +49,9 @@ const LatestNewsComponent = (props) => {
       <React.Fragment key={props.article.id}>
         {
           props.index % 8 === 0 &&
-          <div className="category-news-wrapper clear">
-            <h4 className="category-news">{props.article.topic}</h4>
-            <div className="view-all-category view-all-wrapper">
-              <Link to={props.article.url_topic} className="view-all">
-                <span className="arrow-left"></span>
-                <span className="arrow-left"></span>
-                <span className="arrow-left"></span>
-                <span className="view-all-link">LIHAT SELURUHNYA</span>
-              </Link>
-            </div>
-            <div className="border"></div>
-          </div>
+          <LatestNewsTitleComponent article={props.article} />
         }
-        <div className="col-100 col-featured-news">
-          <div className="latest-news-box">
-            <Link to={props.article.url} className="latest-news-image" title={props.article.title}>
-              <img src={props.article.image.size.medium} alt={props.article.image.caption} />
-            </Link>
-            <div className="latest-news-summary">
-              <Link to={props.article.url} className="title-latest-news" title={props.article.title}>{props.article.title}</Link>
-              <p className="article-summary">{props.article.summary.substring(0,140) + '...'}</p>
-              <div className="latest-info-writer-box common">
-                <p className="writer">Ditulis oleh <Link to={props.article.url}>{props.article.writer.name}</Link></p>
-                <p>{props.article.date}</p>
-              </div>
-              <div className="main-button">Simpan Artikel</div>
-            </div>
-          </div>
-        </div>
+        <LatestNewsItemComponent article={props.article} />
       </React.Fragment>
     );
   }
