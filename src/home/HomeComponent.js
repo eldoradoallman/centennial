@@ -2,8 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Sticky from 'react-sticky-el';
 
+import api from '../api';
 import LatestNews from './latestnews/LatestNews';
-import PopularNews from './popularnews/PopularNews';
+import PopularNews from '../common/popularnews/PopularNews';
 import ScrollToTopOnMount from '../ScrollToTopOnMount';
 
 const HomeComponent = ({
@@ -92,11 +93,10 @@ const HomeComponent = ({
         </div>
         <div id="popular-news-wrapper">
           <Sticky topOffset={-85}>
-            <PopularNews />
+            <PopularNews url={api.home.popular_news} />
           </Sticky>
         </div>
       </div>
-      <button onClick={getUserData}>CLICK ME</button>
     </div>
   </div>
 );
