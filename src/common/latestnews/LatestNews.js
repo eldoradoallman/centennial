@@ -4,22 +4,23 @@ import { bindActionCreators } from 'redux';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import api from '../../api';
 
-import { actions as latestNewsActions } from '../../home/latestnews/LatestNewsDucks';
-import LatestNewsItemComponent from './LatestNewsItemComponent';
-import LatestNewsTitleComponent from './LatestNewsTitleComponent';
+import { actions as latestNewsActions } from './LatestNewsDucks';
+import LatestNewsComponent from './LatestNewsComponent';
 
 class ConnectedLatestNews extends Component {
-  state = {
-    per: 10,
-    page: 1,
-    latest_news: []
+  constructor(props) {
+    super(props);
+    this.state = {
+      url: props.url,
+      per: 10,
+      page: 1,
+      latest_news: []
+    };
   }
 
   loadLatestNews() {
-    const { per, page, latest_news } = this.state;
-    const url = api.home.latest_news;
+    const { url, per, page, latest_news } = this.state;
     /* const url = `https://student-example-api.herokuapp.com/v1/contacts.json?per=${per}&page=${page}`; */
 
     axios.get(url)
@@ -40,10 +41,7 @@ class ConnectedLatestNews extends Component {
       >
         {
           this.state.latest_news.map((article, index) => (
-            <React.Fragment key={article.id}>
-              <LatestNewsTitleComponent article={article} />
-              <LatestNewsItemComponent article={article} />
-            </React.Fragment>
+            <LatestNewsComponent key={index} article={article} index={index} page={this.props.page} />
           ))  
         }
       </InfiniteScroll>

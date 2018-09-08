@@ -1,0 +1,24 @@
+#sidebar-menu-wrapper {
+  position: fixed;
+  z-index: 0;
+  top: 0px;
+  bottom: 0px;
+  width: 300px;
+  padding: 138px 40px 20px;
+  background-color: #fff;
+  border-right: 1px solid #f1f1f1;
+  transform: translate3d(-300px,0,0);
+  transition: all 200ms ease-in-out;
+}
+
+.headroom--unpinned #sidebar-menu-wrapper {
+  padding-top: 80px;
+}
+
+#sidebar-menu-wrapper.open {
+  transform: translateZ(0);
+}
+
+.sidebar-menu {
+  margin: 10px 0px;
+}

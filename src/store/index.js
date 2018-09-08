@@ -6,7 +6,7 @@ import logger from 'redux-logger';
 import sidebarMenuReducer from '../common/sidebarmenu/SidebarMenuDucks';
 import headerReducer from '../common/header/HeaderDucks';
 import homeReducer from '../home/HomeDucks';
-import latestNewsReducer from '../home/latestnews/LatestNewsDucks';
+import latestNewsReducer from '../common/latestnews/LatestNewsDucks';
 import aboutReducer from '../about/AboutDucks';
 import topicsReducer from '../topics/TopicsDucks';
 

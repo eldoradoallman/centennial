@@ -11,6 +11,7 @@ import { actions as sidebarMenuActions } from '../sidebarmenu/SidebarMenuDucks';
 import SidebarMenuComponent from '../sidebarmenu/SidebarMenuComponent';
 
 import './Header.css';
+import '../sidebarmenu/SidebarMenu.css';
 import logo from '../../assets/img/logo.jpg';
 
 class ConnectedHeader extends Component {
