@@ -24,12 +24,9 @@ const LatestNewsComponent = ({ article, index, page }) => {
       );
     }
   } else {
-    if (article.id) {
-      return (
-        <LatestNewsItemComponent article={article} />
-      );
-    }
-    return '';
+    return (
+      <LatestNewsItemComponent article={article} />
+    );
   }
 };
 

@@ -2,18 +2,35 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 
-import { actions as homeActions } from '../home/HomeDucks';
+import api from '../api';
 import { actions as sidebarMenuActions } from '../common/sidebarmenu/SidebarMenuDucks';
 import CategoryComponent from './CategoryComponent';
 
 import './Category.css';
 
 class ConnectedCategory extends Component {
+  state = {
+    fetching: false,
+    fetched: false,
+    error: null,
+    editorial_picks: []
+  }
+
   componentDidMount() {
-    if (this.props.users.length === 0) {
-      this.props.fetchHomeContent();
-    }
+    this.setState({ fetching: true });
+    axios.get(api.category.content)
+      .then(json => this.setState({
+        fetching: false,
+        fetched: true,
+        editorial_picks: json.data
+      }))
+      .catch(error => this.setState({
+        fetching: false,
+        fetched: false,
+        error: error
+      }));
   }
 
   componentWillUnmount() {
@@ -23,35 +40,24 @@ class ConnectedCategory extends Component {
   }
   
   render() {
-    const { homeFetched, users, getUserData } = this.props;
-    console.log(this.props);
-
     return (
-      <CategoryComponent {...this.props} />
+      <CategoryComponent {...this.state} />
     );
   }
 }
 
 ConnectedCategory.propTypes = {
-  homeFetching: PropTypes.bool.isRequired,
-  homeFetched: PropTypes.bool.isRequired,
-  homeError: PropTypes.object,
-  users: PropTypes.array.isRequired,
-  fetchHomeContent: PropTypes.func.isRequired,
-  getUserData: PropTypes.func.isRequired,
   isSidebarOpen: PropTypes.bool.isRequired,
   toggleSidebarMenu: PropTypes.func.isRequired,
   closeSidebarMenu: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
-  ...state.home,
   ...state.sidebarMenu
 });
 
 const mapDispatchToProps = (dispatch) => ({
   ...bindActionCreators({
-    ...homeActions,
     ...sidebarMenuActions
   }, dispatch)
 });

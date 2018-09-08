@@ -12,10 +12,13 @@ class ConnectedLatestNews extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      fetching: false,
+      fetched: false,
+      error: null,
+      latest_news: [],
       url: props.url,
       per: 10,
-      page: 1,
-      latest_news: []
+      page: 1
     };
   }
 
@@ -23,12 +26,19 @@ class ConnectedLatestNews extends Component {
     const { url, per, page, latest_news } = this.state;
     /* const url = `https://student-example-api.herokuapp.com/v1/contacts.json?per=${per}&page=${page}`; */
 
+    this.setState({ fetching: true });
     axios.get(url)
       .then(json => this.setState({
+        fetching: false,
+        fetched: true,
         page: this.state.page + 1,
         latest_news: [ ...latest_news, ...json.data.latest_news ]
       }))
-      .catch(error => console.log(error));
+      .catch(error => this.setState({
+        fetching: false,
+        fetched: false,
+        error: error
+      }));
   }
 
   render() {
