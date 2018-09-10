@@ -17,15 +17,18 @@ const CategoryComponent = ({
     <ScrollToTopOnMount />
     <div className="page-content">
       <div id="title-category-wrapper">
-        <h1 className="news-title center">Entertainment</h1>
+        <h1 className="news-title center">{fetched ? editorial_picks[0].category : ''}</h1>
       </div>
       <div id="sub-category-links-wrapper">
         <div id="sub-category-links-content">
-          <Link to="/entertainment" className="sub-category-link current">VIEW ALL</Link>
-          <Link to="/entertainment/movies" className="sub-category-link">MOVIES</Link>
-          <Link to="/entertainment/music" className="sub-category-link">MUSIC</Link>
-          <Link to="/entertainment/games" className="sub-category-link">GAMES</Link>
-          <Link to="/entertainment/kpop" className="sub-category-link">K-POP</Link>
+          {
+            fetched &&
+            editorial_picks[0].subcategory.map((sub, index) => (
+              <Link key={sub.name} to={sub.url} 
+                className={index === 0 ? 'sub-category-link current' : 'sub-category-link'
+              }>{sub.name}</Link>
+            ))
+          }
         </div>
       </div>
       <div id="featured-news-wrapper">
