@@ -17,7 +17,7 @@ const CategoryComponent = ({
     <ScrollToTopOnMount />
     <div className="page-content">
       <div id="title-category-wrapper">
-        <h1 className="news-title center">{fetched ? editorial_picks[0].category : ''}</h1>
+        <h1 className="category-title center">{fetched ? editorial_picks[0].category : ''}</h1>
       </div>
       <div id="sub-category-links-wrapper">
         <div id="sub-category-links-content">
@@ -59,7 +59,7 @@ const CategoryComponent = ({
                         <p className="summary">{article.summary.substring(0,250) + '...'}</p> : ''
                       }
                       <p className="writer">Ditulis oleh <Link to={article.url}>{article.writer.name}</Link></p>
-                      <p>{article.date}</p>
+                      <p className="date">{article.date}</p>
                     </div>
                   </div>
                 </div>

@@ -7,9 +7,17 @@ const NewsDetailComponent = ({ news_detail }) => (
   <div id="news-detail" className="page-content-wrapper">
     <ScrollToTopOnMount />
     <div id="title-writer-wrapper">
-      <Link to="/entertainment">{news_detail.category}</Link><span>/</span><Link to="/entertainment/movies">{news_detail.sub_category}</Link>
+      <div className="breadcrumb">
+        <Link to="/entertainment">{news_detail.category}</Link>
+        <span>/</span>
+        <Link to="/entertainment/movies">{news_detail.sub_category}</Link>
+      </div>
       <h1 className="news-title">{news_detail.title}</h1>
-      <p>Ditulis oleh <Link to={news_detail.writer.url}>{news_detail.writer.name}</Link></p>
+      <Link to={news_detail.writer.url} className="writer-avatar">
+        <img src={news_detail.writer.avatar} alt={news_detail.writer.name} />
+      </Link>
+      <p>Ditulis oleh</p>
+      <p><Link to={news_detail.writer.url} className="writer">{news_detail.writer.name}</Link></p>
       <p>{news_detail.date}</p>
     </div>
     <div id="news-main-image">

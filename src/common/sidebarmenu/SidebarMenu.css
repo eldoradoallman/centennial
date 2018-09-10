@@ -20,5 +20,13 @@
 }
 
 .sidebar-menu {
-  margin: 10px 0px;
+  margin: 20px 0px;
+}
+
+.sidebar-menu a {
+  transition: color 200ms ease-in-out;
+}
+
+.sidebar-menu a:hover {
+  color: #000;
 }
