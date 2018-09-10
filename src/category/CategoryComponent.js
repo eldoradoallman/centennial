@@ -16,63 +16,58 @@ const CategoryComponent = ({
   <div id="home-content" className="page-content-wrapper">
     <ScrollToTopOnMount />
     <div className="page-content">
+      <div id="title-category-wrapper">
+        <h1 className="news-title center">Entertainment</h1>
+      </div>
+      <div id="sub-category-links-wrapper">
+        <div id="sub-category-links-content">
+          <Link to="/entertainment" className="sub-category-link current">VIEW ALL</Link>
+          <Link to="/entertainment/movies" className="sub-category-link">MOVIES</Link>
+          <Link to="/entertainment/music" className="sub-category-link">MUSIC</Link>
+          <Link to="/entertainment/games" className="sub-category-link">GAMES</Link>
+          <Link to="/entertainment/kpop" className="sub-category-link">K-POP</Link>
+        </div>
+      </div>
       <div id="featured-news-wrapper">
         {
           fetched &&
           editorial_picks.map((article, index) => (
             <React.Fragment key={article.id}>
               <div className={
-                index === 0 ? 'col-50 main-col-featured-news' : 
-                index === 1 || index === 2 ? 'col-50 secondary-col-featured-news' :
-                index > 2 ? 'col-25 col-featured-news' : 'col-featured-news'
+                index === 0 ? 'col-100 main-col-featured-news' : 'col-25 col-featured-news'
               }>
-                <div className="featured-news-box">
-                  <Link to={article.url} className="featured-news-image" title={article.title}>
-                    <img src={article.image.size.medium} alt={article.image.caption} />
-                  </Link>
+                <div className="featured-news-box category-box clear">
+                  <div id={
+                    index === 0 ? 'category-image-wrapper' : ''
+                  } className="category-image">
+                    <Link to={article.url} className="featured-news-image" title={article.title}>
+                      <img src={article.image.size.medium} alt={article.image.caption} />
+                    </Link>
+                  </div>
                   <div className={
-                    index === 0 ? 'main-summary featured-news-summary' :
-                    index === 1 || index === 2 ? 'secondary-summary featured-news-summary' : 'featured-news-summary'
+                    index === 0 ? 'main-summary category-news-summary' : 'category-items-summary'
                   }>
-                    <Link to={article.url} className="title-featured-news"><span>{article.title}</span></Link>
+                    <Link to={article.url} className="title-category-news" title={article.title}>
+                      <span>{article.title}</span>
+                    </Link>
                     <div className="info-writer-box">
+                      {
+                        index === 0 ?
+                        <p className="summary">{article.summary.substring(0,250) + '...'}</p> : ''
+                      }
                       <p className="writer">Ditulis oleh <Link to={article.url}>{article.writer.name}</Link></p>
                       <p>{article.date}</p>
                     </div>
-                    {
-                      article.topics.map((topic, index) => (
-                        <Link to={'/' + topic} key={index} className={
-                          topic === 'Pop Culture' ? 'pop-culture-topic topic' : 
-                          topic === 'Beauty & Fashion' ? 'beauty-topic topic' : 
-                          topic === 'Entertainment' ? 'entertainment topic' : 
-                          topic === 'Techno' ? 'techno topic' : 
-                          topic === 'Games' ? 'games topic' : 'topic'
-                        }>{topic}</Link>
-                      ))
-                    }
                   </div>
                 </div>
               </div>
-              {
-                index === 2 || index === 6 ? <br /> : ''
-              }
             </React.Fragment>
           ))
         }
         {
           fetched &&
           <React.Fragment>
-            <div id="home-va-wrapper" className="view-all-wrapper">
-              <Link to="/featured-news" className="view-all">
-                <span className="arrow-left"></span>
-                <span className="arrow-left"></span>
-                <span className="arrow-left"></span>
-                <span className="view-all-link">LIHAT SEMUA BERITA UTAMA</span>
-                <span className="arrow-right"></span>
-                <span className="arrow-right"></span>
-                <span className="arrow-right"></span>
-              </Link>
-            </div>
+            <div id="category-va-wrapper" className="view-all-wrapper"></div>
             <div className="horz-ads">
               <a href="https://steffen-laurens.com/" target="_blank" rel="noopener noreferrer">
                 <img src="https://steffen-laurens.com/centennial/img/google-ads.jpg" alt="Google Ads" />
@@ -83,6 +78,10 @@ const CategoryComponent = ({
       </div>
       <div id="all-topics-news-wrapper">
         <div className="latest-news-wrapper">
+          <div className="category-news-wrapper clear">
+            <h4 className="category-news">Artikel Terbaru</h4>
+            <div className="border"></div>
+          </div>
           <LatestNews url={api.category.latest_news} />
         </div>
         <div id="popular-news-wrapper">

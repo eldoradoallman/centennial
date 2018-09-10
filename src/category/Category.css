@@ -1,0 +1,119 @@
+#sub-category-links-wrapper {
+  text-align: center;
+  margin-bottom: 20px;
+  padding: 0px 10px;
+}
+
+#sub-category-links-content {
+  padding: 20px 0px;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+.sub-category-link {
+  margin: 0px 20px;
+  font-size: 12px;
+  transition: color 200ms ease-in-out;
+}
+
+.sub-category-link:hover {
+  color: #000;
+}
+
+.sub-category-link.current {
+  padding: 5px 10px;
+  border-radius: 3px;
+  color: #fff;
+  background-color: #000;
+  cursor: default;
+  pointer-events: none;
+}
+
+#category-image-wrapper {
+  display: block;
+  position: relative;
+  width: 50%;
+  padding-right: 10px;
+  float: left;
+}
+
+.category-box {
+  border: 1px solid #ececec;
+  box-shadow: 0px 5px 15px 0px rgba(0,0,0,0.05);
+}
+
+.category-image .featured-news-image::after {
+  display: none;
+}
+
+.category-news-summary {
+  position: relative;
+  top: initial;
+  right: initial;
+  bottom: initial;
+  left: initial;
+  width: 50%;
+  padding: 30px 20px;
+  float: right;
+  border: none;
+  box-shadow: none;
+}
+
+.category-items-summary {
+  padding: 15px;
+  border-bottom: 2px solid #000;
+}
+
+.title-category-news {
+  position: relative;
+  top: 0px;
+  left: 0px;
+  max-width: 100%;
+  color: #000;
+}
+
+.title-category-news span {
+  display: block;
+  height: 70px;
+  color: #000;
+  background-color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.main-summary.category-news-summary .title-category-news span {
+  font-size: 24px;
+  color: #000;
+  background-color: transparent;
+}
+
+.category-items-summary .info-writer-box {
+  position: relative;
+  bottom: initial;
+  left: initial;
+  margin-top: 10px;
+  font-size: 12px;
+}
+
+.category-items-summary .writer a {
+  font-size: 13px;
+  font-weight: 700;
+  color: #000;
+}
+
+.category-items-summary .writer a:hover, .main-summary p a:hover {
+  text-decoration: underline;
+}
+
+.main-summary p a {
+  font-weight: 700;
+}
+
+.summary {
+  margin-top: 10px;
+}
+
+#category-va-wrapper {
+  margin: 0px 10px;
+  padding: 0px 0px 20px;
+  border-bottom: 1px solid #f1f1f1;
+}

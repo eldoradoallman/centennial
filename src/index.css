@@ -25,6 +25,10 @@ img {
   vertical-align: top;
 }
 
+.center {
+  text-align: center;
+}
+
 .page-content-wrapper {
   max-width: 1120px;
   margin: auto;

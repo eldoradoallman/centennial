@@ -31,8 +31,8 @@ class ConnectedLatestNews extends Component {
       .then(json => this.setState({
         fetching: false,
         fetched: true,
-        page: this.state.page + 1,
-        latest_news: [ ...latest_news, ...json.data.latest_news ]
+        latest_news: [ ...latest_news, ...json.data.latest_news ],
+        page: this.state.page + 1
       }))
       .catch(error => this.setState({
         fetching: false,
