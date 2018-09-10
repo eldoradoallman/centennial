@@ -7,6 +7,7 @@ import Category from './category/Category';
 import About from './about/About';
 import Topics from './topics/Topics';
 import NewsDetail from './newsdetail/NewsDetail';
+import Profile from './profile/Profile';
 
 // To pass props with Route
 /* const HomeRoute = ({ component: Component, ...rest }) => (
@@ -25,6 +26,7 @@ const AppRouting = () => (
         <Route exact path="/" component={Home} />
         <Route path="/about" component={About} />
         <Route path="/topics" component={Topics} />
+        <Route path="/author/:name" component={Profile} />
         <Route path="/:category/:subcategory?/:id-:newstitle" component={NewsDetail} />
         <Route path="/:category/:subcategory?" component={Category} />
         <Route component={Home} />
