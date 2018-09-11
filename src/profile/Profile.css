@@ -1,0 +1,112 @@
+.page-content-mid-wrapper {
+  width: 100%;
+  max-width: 720px;
+  margin: auto;
+  padding-top: 118px;
+}
+
+.profile-info-wrapper {
+  position: relative;
+  padding-top: 50px;
+}
+
+.profile-photo {
+  position: absolute;
+  top: 50px;
+  left: 0px;
+  width: 150px;
+  height: 150px;
+  border-radius: 100%;
+  overflow: hidden;
+}
+
+.profile-info {
+  min-height: 150px;
+  padding-left: 180px;
+}
+
+.profile-name {
+  font-size: 30px;
+  font-weight: 700;
+  color: #000;
+}
+
+.profile-bio {
+  margin: 10px 0px;
+  font-size: 16px;
+  color: #000;
+}
+
+.followers-link {
+  margin: 0px 10px;
+  transition: color 200ms ease-in-out;
+}
+
+.followers-link b {
+  transition: color 200ms ease-in-out;
+}
+
+.followers-link:hover, .followers-link:hover b {
+  color: #000;
+}
+
+.profile-social-media > a:first-of-type {
+  margin-left: 0px;
+}
+
+.profile-history {
+  margin-top: 50px;
+}
+
+.history-options-wrapper {
+  text-align: center;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+.history-option {
+  position: relative;
+  display: inline-block;
+  margin: 0px 10px;
+  padding: 7px 15px 15px;
+  font-size: 16px;
+  font-weight: 500;
+  border-top: 2px solid #fff;
+  transition: all 200ms ease-in-out;
+}
+
+.history-options-wrapper > a:first-of-type {
+  margin-left: 0px;
+}
+
+.history-option:hover {
+  color: #000;
+}
+
+.history-option.current {
+  color: #fff;
+  background-color: #000;
+  border-top: 2px solid #000;
+  cursor: default;
+  pointer-events: none;
+}
+
+.history-option.current::after {
+  content: '';
+  display: block;
+  position: absolute;
+  right: -10px;
+  bottom: -1px;
+  left: -10px;
+  height: 2px;
+  background-color: #000;
+}
+
+.history-content-wrapper {
+  margin-top: 30px;
+}
+
+.title-history {
+  font-size: 18px;
+  font-weight: 700;
+  color: #000;
+}

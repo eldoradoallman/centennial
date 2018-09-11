@@ -12,6 +12,11 @@ const api = {
   news_detail: {
     content: 'https://api.jsonbin.io/b/5b8fddc83ffac56f4bda6cdb/5'
   },
+  profile: {
+    content: 'https://api.jsonbin.io/b/5b97a3b6d6fe677c48d8a264/3',
+    articles: 'https://api.jsonbin.io/b/5b97aa03d6fe677c48d8a49e',
+    applause: 'https://api.jsonbin.io/b/5b97aa03d6fe677c48d8a49e'
+  },
   header: {
     content: 'https://jsonplaceholder.typicode.com/users'
   }

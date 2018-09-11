@@ -1,30 +1,55 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Route, Link, NavLink } from 'react-router-dom';
 
 import ScrollToTopOnMount from '../ScrollToTopOnMount';
 
-const ProfileComponent = ({ news_detail }) => (
-  <div id="news-detail" className="page-content-wrapper">
+const ProfileComponent = ({ match, profile }) => (
+  <div id="profile" className="page-content-mid-wrapper">
     <ScrollToTopOnMount />
-    <div id="title-writer-wrapper">
-      <div className="breadcrumb">
-        <Link to="/entertainment">{news_detail.category}</Link>
-        <span>/</span>
-        <Link to="/entertainment/movies">{news_detail.sub_category}</Link>
+    <div className="profile-info-wrapper">
+      <div className="profile-photo">
+        <img src={profile.avatar.medium} alt={profile.name} />
       </div>
-      <h1 className="news-title">{news_detail.title}</h1>
-      <Link to={news_detail.writer.url} className="writer-avatar">
-        <img src={news_detail.writer.avatar} alt={news_detail.writer.name} />
-      </Link>
-      <p>Ditulis oleh</p>
-      <p><Link to={news_detail.writer.url} className="writer">{news_detail.writer.name}</Link></p>
-      <p>{news_detail.date}</p>
+      <div className="profile-info">
+        <p className="profile-name">{profile.name}</p>
+        <p className="profile-bio">{profile.bio}</p>
+        <div className="profile-social-media">
+          <Link to={`${match.url}/following`} className="followers-link">Mengikuti <b>{profile.following}</b></Link>
+          <Link to={`${match.url}/followers`} className="followers-link">Pengikut <b>{profile.followers}</b></Link>
+        </div>
+      </div>
+      <div className="profile-history">
+        <div className="history-options-wrapper">
+          {
+            profile.articles &&
+            <NavLink to={match.url} className="history-option" exact activeClassName="current">Profil</NavLink>
+          }
+          {
+            profile.applause &&
+            <NavLink to={`${match.url}/applause`} className="history-option" activeClassName="current">Applause</NavLink>
+          }
+        </div>
+        {
+          profile.articles ?
+          <Route path={`${match.url}/:topicId?`} component={Topic} />
+          :
+          'You haven\'t wrote any articles yet'
+        }
+      </div>
     </div>
-    <div id="news-main-image">
-      <img src={news_detail.image.size.medium} alt={news_detail.image.alt} />
-      <div className="image-caption">{news_detail.image.caption}</div>
-    </div>
-    <div className="news-detail-content" dangerouslySetInnerHTML={{ __html: news_detail.html_content }} />
+  </div>
+);
+
+const Topic = ({ match }) => (
+  <div className="history-content-wrapper">
+    <h3>
+      {
+        match.params.topicId ?
+        match.params.topicId
+        :
+        <h4 className="title-history">Tulisan Terbaru</h4>
+      }
+    </h3>
   </div>
 );
 

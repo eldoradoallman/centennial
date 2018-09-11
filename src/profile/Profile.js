@@ -12,15 +12,24 @@ import './Profile.css';
 
 class ConnectedProfile extends Component {
   state = {
-    news_detail: {}
+    fetching: false,
+    fetched: false,
+    error: null,
+    profile: {}
   };
   
   componentDidMount() {
-    axios.get(api.news_detail.content)
+    this.setState({ fetching: true });
+    axios.get(api.profile.content)
       .then(json => this.setState({
-        news_detail: json.data
+        fetching: false,
+        fetched: true,
+        profile: json.data
       }))
-      .catch(error => console.log(error));
+      .catch(error => this.setState({
+        fetching: false,
+        error
+      }));
   }
   
   componentWillUnmount() {
@@ -31,10 +40,13 @@ class ConnectedProfile extends Component {
 
   render() {
     return (
-      this.state.news_detail.id ?
-      <ProfileComponent {...this.state} />
-      : 
+      this.state.fetching ?
       <p>Loading Content</p>
+      :
+      this.state.fetched ?
+      <ProfileComponent match={this.props.match} profile={this.state.profile} />
+      : 
+      <p>Failed to fetch Content</p>
     );
   }
 }
