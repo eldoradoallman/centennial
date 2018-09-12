@@ -17,19 +17,19 @@ const HeaderComponent = ({ logo, isSidebarOpen, toggleSidebarMenu }) => (
               <NavLink to="/" exact activeClassName="selected">HOME</NavLink>
             </li>
             <li className="desktop-menu">
-              <NavLink to="/about" exact activeClassName="selected">ENTERTAINMENT</NavLink>
+              <NavLink to="/category/entertainment" activeClassName="selected">ENTERTAINMENT</NavLink>
             </li>
             <li className="desktop-menu">
-              <NavLink to="/topics" activeClassName="selected">LIVE STYLE</NavLink>
+              <NavLink to="/category/livestyle" activeClassName="selected">LIVE STYLE</NavLink>
             </li>
             <li className="desktop-menu">
-              <NavLink to="/techno" exact activeClassName="selected">TECHNO</NavLink>
+              <NavLink to="/category/techno" activeClassName="selected">TECHNO</NavLink>
             </li>
             <li className="desktop-menu">
-              <NavLink to="/about-you" exact activeClassName="selected">ABOUT YOU</NavLink>
+              <NavLink to="/category/about-you" activeClassName="selected">ABOUT YOU</NavLink>
             </li>
             <li className="desktop-menu">
-              <NavLink to="/ideas" exact activeClassName="selected">IDEAS</NavLink>
+              <NavLink to="/category/ideas" activeClassName="selected">IDEAS</NavLink>
             </li>
           </ul>
         </div>

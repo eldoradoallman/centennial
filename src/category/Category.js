@@ -22,6 +22,11 @@ class ConnectedCategory extends Component {
   }
 
   capitalizeFirstLetter(string) {
+    if (string === 'livestyle') {
+      return string = 'Live Style';
+    } else if (string === 'about-you') {
+      return string = 'About You';
+    }
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
   
