@@ -27,8 +27,14 @@ const AppRouting = () => (
         <Route path="/about" component={About} />
         <Route path="/topics" component={Topics} />
         <Route path="/author/:name" component={Profile} />
-        <Route path="/:category/:subcategory?/:id-:newstitle" component={NewsDetail} />
-        <Route path="/:category/:subcategory?" component={Category} />
+        <Route 
+          path="/category/:category(entertainment|livestyle|techno|about-you|ideas)/:subcategory?/:id-:newstitle"
+          component={NewsDetail}
+        />
+        <Route
+          path="/category/:category(entertainment|livestyle|techno|about-you|ideas)"
+          component={Category}
+        />
         <Route component={Home} />
       </Switch>
     </React.Fragment>

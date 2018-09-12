@@ -1,47 +1,43 @@
 import React, { Component } from 'react';
+import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-import axios from 'axios';
 
-import api from '../api';
 import { actions as sidebarMenuActions } from '../common/sidebarmenu/SidebarMenuDucks';
-import CategoryComponent from './CategoryComponent';
+import ScrollToTopOnMount from '../ScrollToTopOnMount';
 
 import './Category.css';
+import CategoryOption from './CategoryOption';
 
 class ConnectedCategory extends Component {
   state = {
-    fetching: false,
-    fetched: false,
-    error: null,
-    editorial_picks: []
-  }
-
-  componentDidMount() {
-    this.setState({ fetching: true });
-    axios.get(api.category.content)
-      .then(json => this.setState({
-        fetching: false,
-        fetched: true,
-        editorial_picks: json.data
-      }))
-      .catch(error => this.setState({
-        fetching: false,
-        fetched: false,
-        error: error
-      }));
-  }
+    category: this.props.match.params.category
+  };
 
   componentWillUnmount() {
     if (this.props.isSidebarOpen) {
       this.props.closeSidebarMenu();
     }
   }
+
+  capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
   
   render() {
+    const category = this.capitalizeFirstLetter(this.state.category);
+
     return (
-      <CategoryComponent {...this.state} />
+      <div id="home-content" className="page-content-wrapper">
+        <ScrollToTopOnMount />
+        <div className="page-content">
+          <div id="title-category-wrapper">
+            <h1 className="category-title center">{category}</h1>
+          </div>
+          <Route exact path="/category/:category/:subcategory?" component={CategoryOption} />
+        </div>
+      </div>
     );
   }
 }
