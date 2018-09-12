@@ -1,23 +1,28 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import PropTypes from 'prop-types';
 
-import { actions as sidebarMenuActions } from '../common/sidebarmenu/SidebarMenuDucks';
 import ScrollToTopOnMount from '../ScrollToTopOnMount';
-
-import './Category.css';
 import CategoryOption from './CategoryOption';
 
-class ConnectedCategory extends Component {
+import './Category.css';
+
+class Category extends Component {
   state = {
     category: this.props.match.params.category
   };
-
-  componentWillUnmount() {
-    if (this.props.isSidebarOpen) {
-      this.props.closeSidebarMenu();
+  
+  shouldComponentUpdate(nextProps) {
+    if (this.state.url !== nextProps.match.url) {
+      return true;
+    }
+    return false;
+  }
+  
+  componentDidUpdate(prevProps) {
+    if (this.props.match.url !== prevProps.match.url) {
+      this.setState({
+        category: this.props.match.params.category
+      });
     }
   }
 
@@ -46,23 +51,5 @@ class ConnectedCategory extends Component {
     );
   }
 }
-
-ConnectedCategory.propTypes = {
-  isSidebarOpen: PropTypes.bool.isRequired,
-  toggleSidebarMenu: PropTypes.func.isRequired,
-  closeSidebarMenu: PropTypes.func.isRequired
-};
-
-const mapStateToProps = (state) => ({
-  ...state.sidebarMenu
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  ...bindActionCreators({
-    ...sidebarMenuActions
-  }, dispatch)
-});
-
-const Category = connect(mapStateToProps, mapDispatchToProps)(ConnectedCategory);
 
 export default Category;

@@ -1,20 +1,23 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 
 import api from '../api';
+import { actions as sidebarMenuActions } from '../common/sidebarmenu/SidebarMenuDucks';
 import CategoryOptionComponent from './CategoryOptionComponent';
 
-class CategoryOption extends Component {
+class ConnectedCategoryOption extends Component {
   state = {
-    url: this.props.match.url,
     fetching: false,
     fetched: false,
     error: null,
     editorial_picks: []
   }
 
-  componentDidMount() {
-    console.log(this.props.match);
+  fetchContent() {
+    const url = this.props.match.url;
     this.setState({ fetching: true });
     axios.get(api.category.content)
       .then(json => this.setState({
@@ -29,9 +32,22 @@ class CategoryOption extends Component {
       }));
   }
 
+  componentDidMount() {
+    this.fetchContent();
+  }
+
   componentWillUnmount() {
     if (this.props.isSidebarOpen) {
       this.props.closeSidebarMenu();
+    }
+  }
+  
+  componentDidUpdate(prevProps) {
+    if (this.props.match.url !== prevProps.match.url) {
+      this.fetchContent();
+      if (this.props.isSidebarOpen) {
+        this.props.closeSidebarMenu();
+      }
     }
   }
   
@@ -41,5 +57,23 @@ class CategoryOption extends Component {
     );
   }
 }
+
+ConnectedCategoryOption.propTypes = {
+  isSidebarOpen: PropTypes.bool.isRequired,
+  toggleSidebarMenu: PropTypes.func.isRequired,
+  closeSidebarMenu: PropTypes.func.isRequired
+};
+
+const mapStateToProps = (state) => ({
+  ...state.sidebarMenu
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  ...bindActionCreators({
+    ...sidebarMenuActions
+  }, dispatch)
+});
+
+const CategoryOption = connect(mapStateToProps, mapDispatchToProps)(ConnectedCategoryOption);
 
 export default CategoryOption;
