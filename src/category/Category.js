@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 
+import ScrollToTopOnUpdate from '../ScrollToTopOnUpdate';
 import ScrollToTopOnMount from '../ScrollToTopOnMount';
 import CategoryOption from './CategoryOption';
 
@@ -40,6 +41,7 @@ class Category extends Component {
 
     return (
       <div id="home-content" className="page-content-wrapper">
+        <ScrollToTopOnUpdate />
         <ScrollToTopOnMount />
         <div className="page-content">
           <div id="title-category-wrapper">

@@ -11,7 +11,7 @@ const LatestNewsItemComponent = ({ article }) => (
         <Link to={article.url} className="title-latest-news" title={article.title}>{article.title}</Link>
         <p className="article-summary">{article.summary.substring(0,140) + '...'}</p>
         <div className="latest-info-writer-box common">
-          <p className="writer">Ditulis oleh <Link to={article.url}>{article.writer.name}</Link></p>
+          <p className="writer">Ditulis oleh <Link to={article.writer.url}>{article.writer.name}</Link></p>
           <p>{article.date}</p>
         </div>
         <div className="main-button">Simpan Artikel</div>

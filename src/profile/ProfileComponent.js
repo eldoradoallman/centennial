@@ -42,14 +42,12 @@ const ProfileComponent = ({ match, profile }) => (
 
 const Topic = ({ match }) => (
   <div className="history-content-wrapper">
-    <h3>
-      {
-        match.params.topicId ?
-        match.params.topicId
-        :
-        <h4 className="title-history">Tulisan Terbaru</h4>
-      }
-    </h3>
+    {
+      match.params.topicId ?
+      match.params.topicId
+      :
+      <h4 className="title-history">Tulisan Terbaru</h4>
+    }
   </div>
 );
 

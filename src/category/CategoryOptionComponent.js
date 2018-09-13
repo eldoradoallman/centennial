@@ -20,7 +20,7 @@ const CategoryOptionComponent = ({
           editorial_picks[0].subcategory.map((sub, index) => (
             <NavLink
               key={sub.name}
-              to={`/category${sub.url}`}
+              to={sub.url}
               exact
               activeClassName="current"
               className="sub-category-link"
@@ -56,7 +56,7 @@ const CategoryOptionComponent = ({
                       index === 0 ?
                       <p className="summary">{article.summary.substring(0,250) + '...'}</p> : ''
                     }
-                    <p className="writer">Ditulis oleh <Link to={article.url}>{article.writer.name}</Link></p>
+                    <p className="writer">Ditulis oleh <Link to={article.writer.url}>{article.writer.name}</Link></p>
                     <p className="date">{article.date}</p>
                   </div>
                 </div>
