@@ -19,7 +19,7 @@ const LatestNewsHomeComponent = ({ articlepick, index }) => (
         }>
           <Link to={articlepick.url} className="title-featured-news alt-title" title={articlepick.title}><span>{articlepick.title}</span></Link>
           <div className="latest-info-writer-box">
-            <p className="writer">Ditulis oleh <Link to={articlepick.url}>{articlepick.writer.name}</Link></p>
+            <p className="writer">Ditulis oleh <Link to={articlepick.writer.url}>{articlepick.writer.name}</Link></p>
             <p>{articlepick.date}</p>
           </div>
           {

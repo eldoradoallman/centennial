@@ -39,9 +39,9 @@ const HomeComponent = ({
                     index === 0 ? 'main-summary featured-news-summary' :
                     index === 1 || index === 2 ? 'secondary-summary featured-news-summary' : 'featured-news-summary'
                   }>
-                    <Link to={user.url} className="title-featured-news"><span>{user.title}</span></Link>
+                    <Link to={user.url} className="title-featured-news" title={user.title}><span>{user.title}</span></Link>
                     <div className="info-writer-box">
-                      <p className="writer">Ditulis oleh <Link to={user.url}>{user.writer.name}</Link></p>
+                      <p className="writer">Ditulis oleh <Link to={user.writer.url}>{user.writer.name}</Link></p>
                       <p>{user.date}</p>
                     </div>
                     {
