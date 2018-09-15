@@ -17,8 +17,8 @@ class ConnectedProfile extends Component {
     error: null,
     profile: {}
   };
-  
-  componentDidMount() {
+
+  fetchingContent() {
     this.setState({ fetching: true });
     axios.get(api.profile.content)
       .then(json => this.setState({
@@ -30,6 +30,10 @@ class ConnectedProfile extends Component {
         fetching: false,
         error
       }));
+  }
+  
+  componentDidMount() {
+    this.fetchingContent();
   }
   
   componentWillUnmount() {

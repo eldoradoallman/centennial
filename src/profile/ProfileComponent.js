@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Link, NavLink } from 'react-router-dom';
 
 import ScrollToTopOnMount from '../ScrollToTopOnMount';
+import AuthorArticles from './authorarticles/AuthorArticles';
 
 const ProfileComponent = ({ match, profile }) => (
   <div id="profile" className="page-content-mid-wrapper">
@@ -17,7 +18,10 @@ const ProfileComponent = ({ match, profile }) => (
           <Link to={`${match.url}/following`} className="followers-link">Mengikuti <b>{profile.following}</b></Link>
           <Link to={`${match.url}/followers`} className="followers-link">Pengikut <b>{profile.followers}</b></Link>
         </div>
+        <Link to={`${match.url}/edit`} id="edit-profil-button" className="main-button">Edit Profil</Link>
       </div>
+    </div>
+    <div className="profile-history-wrapper">
       <div className="profile-history">
         <div className="history-options-wrapper">
           {
@@ -26,28 +30,12 @@ const ProfileComponent = ({ match, profile }) => (
           }
           {
             profile.applause &&
-            <NavLink to={`${match.url}/applause`} className="history-option" activeClassName="current">Applause</NavLink>
+            <NavLink to={`${match.url}/applause`} className="history-option" activeClassName="current">Apresiasi</NavLink>
           }
         </div>
-        {
-          profile.articles ?
-          <Route path={`${match.url}/:topicId?`} component={Topic} />
-          :
-          'You haven\'t wrote any articles yet'
-        }
+        <Route path={`${match.url}/:topicId?`} component={AuthorArticles} />
       </div>
     </div>
-  </div>
-);
-
-const Topic = ({ match }) => (
-  <div className="history-content-wrapper">
-    {
-      match.params.topicId ?
-      match.params.topicId
-      :
-      <h4 className="title-history">Tulisan Terbaru</h4>
-    }
   </div>
 );
 

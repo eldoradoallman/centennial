@@ -7,13 +7,13 @@
 
 .profile-info-wrapper {
   position: relative;
-  padding-top: 50px;
+  padding: 50px 10px 0px;
 }
 
 .profile-photo {
   position: absolute;
   top: 50px;
-  left: 0px;
+  left: 10px;
   width: 150px;
   height: 150px;
   border-radius: 100%;
@@ -54,12 +54,24 @@
   margin-left: 0px;
 }
 
-.profile-history {
+.profile-history-wrapper {
   margin-top: 50px;
 }
 
 .history-options-wrapper {
+  position: relative;
+  z-index: 0;
+  padding: 0px 10px;
   text-align: center;
+}
+
+.history-options-wrapper::after {
+  content: '';
+  display: block;
+  position: absolute;
+  right: 10px;
+  bottom: -1px;
+  left: 10px;
   border-bottom: 1px solid #f1f1f1;
 }
 
@@ -83,6 +95,7 @@
 }
 
 .history-option.current {
+  z-index: 1;
   color: #fff;
   background-color: #000;
   border-top: 2px solid #000;
@@ -99,14 +112,4 @@
   left: -10px;
   height: 2px;
   background-color: #000;
-}
-
-.history-content-wrapper {
-  margin-top: 30px;
-}
-
-.title-history {
-  font-size: 18px;
-  font-weight: 700;
-  color: #000;
 }

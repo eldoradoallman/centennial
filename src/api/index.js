@@ -14,8 +14,10 @@ const api = {
   },
   profile: {
     content: 'https://api.jsonbin.io/b/5b97a3b6d6fe677c48d8a264/3',
-    articles: 'https://api.jsonbin.io/b/5b97aa03d6fe677c48d8a49e',
-    applause: 'https://api.jsonbin.io/b/5b97aa03d6fe677c48d8a49e'
+    articles: 'https://api.jsonbin.io/b/5b9cfd2e0fbf2833e2259ac3/1',
+    applause: 'https://api.jsonbin.io/b/5b9d128a1bf1ca33b06b6e32',
+    following: 'https://api.jsonbin.io/b/5b9cfd2e0fbf2833e2259ac3/1',
+    followers: 'https://api.jsonbin.io/b/5b9d128a1bf1ca33b06b6e32'
   },
   header: {
     content: 'https://jsonplaceholder.typicode.com/users'

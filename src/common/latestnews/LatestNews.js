@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import InfiniteScroll from 'react-infinite-scroll-component';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
 import { actions as latestNewsActions } from './LatestNewsDucks';
+import InfiniteScroll from 'react-infinite-scroll-component';
 import LatestNewsComponent from './LatestNewsComponent';
 
 class ConnectedLatestNews extends Component {
