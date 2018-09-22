@@ -28,6 +28,16 @@
   margin: 20px auto 26px;
 }
 
+#user-info {
+  position: absolute;
+  top: 20px;
+  right: 100px;
+}
+
+#user-info button {
+  outline: none;
+}
+
 #header-bottom {
   text-align: center;
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 
-const HeaderComponent = ({ logo, isSidebarOpen, toggleSidebarMenu }) => (
+const HeaderComponent = ({ logo, isSidebarOpen, toggleSidebarMenu, loggedIn, register, logout }) => (
   <div id="header">
     <div id="header-wrapper" className="clear">
       <div id="header-top">
@@ -9,6 +9,16 @@ const HeaderComponent = ({ logo, isSidebarOpen, toggleSidebarMenu }) => (
           <img src={logo} width="150" alt="React Logo" />
         </Link>
       </div>
+      {
+        !loggedIn ?
+        <div id="user-info">
+          <button onClick={() => register({ username: 'duaneallman', password: 'duane1986' })}>REGISTER</button>
+        </div>
+        :
+        <div id="user-info">
+          <button onClick={logout}>LOGOUT</button>
+        </div>
+      }
       <div id="header-bottom">
         <div id="toggle-sidebar-menu" className={isSidebarOpen ? 'open' : ''} onClick={toggleSidebarMenu}></div>
         <div id="desktop-menu-wrapper">

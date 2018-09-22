@@ -1,4 +1,5 @@
 const api = {
+  baseUrl: 'http://localhost:3000',
   home: {
     content: 'https://api.jsonbin.io/b/5b82d040ab9a186eafe0b1bf/1',
     latest_news: 'https://api.jsonbin.io/b/5b8b8c6bdb948c68635b4245/9',

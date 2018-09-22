@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import Headroom from 'react-headroom';
 
+import { actions as userAuthActions } from '../../_user/userAuthDucks';
 import { actions as headerActions } from './HeaderDucks';
 import HeaderComponent from './HeaderComponent';
 import { actions as sidebarMenuActions } from '../sidebarmenu/SidebarMenuDucks';
@@ -26,16 +27,18 @@ class ConnectedHeader extends Component {
   }
   
   render() {
-    const { isSidebarOpen, fetching, fetched, error } = this.props;
-    console.log(this.props);
+    const { isSidebarOpen, loggedIn, register, logout } = this.props;
 
     return (
       <React.Fragment>
         <Headroom>
-          <HeaderComponent 
-            logo={logo} 
-            isSidebarOpen={isSidebarOpen} 
-            toggleSidebarMenu={this.toggleSidebarMenu.bind(this)} 
+          <HeaderComponent
+            logo={logo}
+            isSidebarOpen={isSidebarOpen}
+            toggleSidebarMenu={this.toggleSidebarMenu.bind(this)}
+            loggedIn={loggedIn}
+            register={register}
+            logout={logout}
           />
           <SidebarMenuComponent isSidebarOpen={isSidebarOpen} />
         </Headroom>
@@ -50,6 +53,14 @@ ConnectedHeader.propTypes = {
   headerError: PropTypes.object,
   users: PropTypes.array.isRequired,
   fetchHeaderContent: PropTypes.func.isRequired,
+  registering: PropTypes.bool.isRequired,
+  loggingIn: PropTypes.bool.isRequired,
+  loggedIn: PropTypes.bool.isRequired,
+  error: PropTypes.any,
+  user: PropTypes.any,
+  register: PropTypes.func.isRequired,
+  login: PropTypes.func.isRequired,
+  logout: PropTypes.func.isRequired,
   isSidebarOpen: PropTypes.bool.isRequired,
   toggleSidebarMenu: PropTypes.func.isRequired,
   closeSidebarMenu: PropTypes.func.isRequired
@@ -57,12 +68,14 @@ ConnectedHeader.propTypes = {
 
 const mapStateToProps = (state) => ({
   ...state.header,
+  ...state.userAuth,
   ...state.sidebarMenu
 });
 
 const mapDispatchToProps = (dispatch) => ({
   ...bindActionCreators({
     ...headerActions,
+    ...userAuthActions,
     ...sidebarMenuActions
   }, dispatch)
 });
