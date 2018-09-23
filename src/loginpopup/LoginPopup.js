@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
@@ -23,6 +22,7 @@ ConnectedLoginPopup.propTypes = {
   loggedIn: PropTypes.bool.isRequired,
   error: PropTypes.any,
   login: PropTypes.func.isRequired,
+  logout: PropTypes.func.isRequired,
   isLoginPopupOpen: PropTypes.bool.isRequired,
   openLoginPopup: PropTypes.func.isRequired,
   closeLoginPopup: PropTypes.func.isRequired
@@ -40,6 +40,6 @@ const mapDispatchToProps = (dispatch) => ({
   }, dispatch)
 });
 
-const LoginPopup = withRouter(connect(mapStateToProps, mapDispatchToProps)(ConnectedLoginPopup));
+const LoginPopup = connect(mapStateToProps, mapDispatchToProps)(ConnectedLoginPopup);
 
 export default LoginPopup;

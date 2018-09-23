@@ -50,14 +50,14 @@ const userAuthReducer = (state = initialState, action) => {
     case types.REGISTER_REQUEST_PENDING:
       return { ...state, registering: true, error: null, user: null };
     case types.REGISTER_REQUEST_REJECTED:
-      return { ...state, registering: false, error: actions.payload, user: null };
+      return { ...state, registering: false, error: action.payload, user: null };
     case types.REGISTER_REQUEST_FULFILLED:
       return { ...state, registering: false, error: null, user: action.payload.data };
     
     case types.LOGIN_REQUEST_PENDING:
       return { ...state, loggingIn: true, loggedIn: false, error: null, user: null };
     case types.LOGIN_REQUEST_REJECTED:
-      return { ...state, loggingIn: false, loggedIn: false, error: actions.payload, user: null };
+      return { ...state, loggingIn: false, loggedIn: false, error: action.payload, user: null };
     case types.LOGIN_REQUEST_FULFILLED:
       return { ...state, loggingIn: false, loggedIn: true, error: null, user: action.payload.data };
 
