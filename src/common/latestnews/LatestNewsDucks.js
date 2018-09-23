@@ -1,5 +1,5 @@
 import axios from 'axios';
-import api from '../../api';
+import API from '../../_api';
 
 export const types = {
   FETCH_LATEST_NEWS: 'FETCH_LATEST_NEWS',
@@ -18,7 +18,7 @@ export const initialState = {
 export const actions = {
   fetchLatestNewsContent: () => ({
     type: types.FETCH_LATEST_NEWS,
-    payload: axios.get(api.home.latestNews)
+    payload: axios.get(API.HOME.LATEST_NEWS)
   })
 };
 

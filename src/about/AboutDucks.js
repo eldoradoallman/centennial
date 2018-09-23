@@ -1,5 +1,5 @@
 import axios from 'axios';
-import api from '../api';
+import API from '../_api';
 
 export const types = {
   CHANGE_NAME: 'CHANGE_NAME',

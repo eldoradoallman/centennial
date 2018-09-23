@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
-import api from '../api';
+import API from '../_api';
 import { actions as sidebarMenuActions } from '../common/sidebarmenu/SidebarMenuDucks';
 import CategoryOptionComponent from './CategoryOptionComponent';
 
@@ -19,7 +19,7 @@ class ConnectedCategoryOption extends Component {
   fetchContent() {
     const url = this.props.match.url;
     this.setState({ fetching: true });
-    axios.get(api.category.content)
+    axios.get(API.CATEGORY.CONTENT)
       .then(json => this.setState({
         fetching: false,
         fetched: true,

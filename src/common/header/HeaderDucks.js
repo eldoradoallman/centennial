@@ -1,5 +1,5 @@
 import axios from 'axios';
-import api from '../../api';
+import API from '../../_api';
 
 export const types = {
   FETCH_HEADER_CONTENT: 'FETCH_HEADER_CONTENT',
@@ -18,7 +18,7 @@ export const initialState = {
 export const actions = {
   fetchHeaderContent: () => ({
     type: types.FETCH_HEADER_CONTENT,
-    payload: axios.get(api.header.content)
+    payload: axios.get(API.HEADER.CONTENT)
   })
 };
 

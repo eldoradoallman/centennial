@@ -1,5 +1,5 @@
 import axios from 'axios';
-import api from '../api';
+import { BASE_URL } from '../_config/apiConfig';
 import authHeader from '../_helpers/authHeader';
 import handleError from '../_helpers/handleError';
 
@@ -8,7 +8,7 @@ const userServices = {
     const data = { username, password };
     const config = { headers: { 'Content-Type': 'application/json' } };
   
-    return axios.post(`${api.baseUrl}/users/authenticate`, data, config)
+    return axios.post(`${BASE_URL}/users/authenticate`, data, config)
       .then(user => {
         console.log(user);
         // login successful if there's a jwt token in the response

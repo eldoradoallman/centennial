@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import Sticky from 'react-sticky-el';
 
-import api from '../api';
+import API from '../_api';
 import LatestNews from '../common/latestnews/LatestNews';
 import PopularNews from '../common/popularnews/PopularNews';
 
@@ -83,11 +83,11 @@ const CategoryOptionComponent = ({
           <h4 className="category-news">Artikel Terbaru</h4>
           <div className="border"></div>
         </div>
-        <LatestNews url={api.category.latest_news} />
+        <LatestNews url={API.CATEGORY.LATEST_NEWS} />
       </div>
       <div id="popular-news-wrapper">
         <Sticky topOffset={-85}>
-          <PopularNews url={api.category.popular_news} />
+          <PopularNews url={API.CATEGORY.POPULAR_NEWS} />
         </Sticky>
       </div>
     </div>

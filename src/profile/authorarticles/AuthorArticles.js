@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import api from '../../api';
+import API from '../../_api';
 
 import InfiniteScroll from 'react-infinite-scroll-component';
 import AuthorArticlesComponent from './AuthorArticlesComponent';
@@ -23,12 +23,12 @@ export default class AuthorArticles extends Component {
     let apiUrl;
     
     topic === 'following' ?
-    apiUrl = api.profile.following :
+    apiUrl = API.PROFILE.FOLLOWING :
     topic === 'followers' ?
-    apiUrl = api.profile.followers :
+    apiUrl = API.PROFILE.FOLLOWERS :
     topic === 'applause' ?
-    apiUrl = api.profile.applause :
-    apiUrl = api.profile.articles;
+    apiUrl = API.PROFILE.APPLAUSE :
+    apiUrl = API.PROFILE.ARTICLES;
 
     this.setState({
       fetching: true,

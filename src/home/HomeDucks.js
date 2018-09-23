@@ -1,5 +1,5 @@
 import axios from 'axios';
-import api from '../api';
+import API from '../_api';
 
 export const types = {
   FETCH_HOME_CONTENT: 'FETCH_HOME_CONTENT',
@@ -18,7 +18,7 @@ export const initialState = {
 export const actions = {
   fetchHomeContent: () => ({
     type: types.FETCH_HOME_CONTENT,
-    payload: axios.get(api.home.content)
+    payload: axios.get(API.HOME.CONTENT)
   }),
   getUserData: () => ({
     type: 'CLICK_BUTTON',

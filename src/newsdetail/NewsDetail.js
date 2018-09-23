@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import api from '../api';
+import API from '../_api';
 
 import { actions as sidebarMenuActions } from '../common/sidebarmenu/SidebarMenuDucks';
 import NewsDetailComponent from './NewsDetailComponent';
@@ -16,7 +16,7 @@ class ConnectedNewsDetail extends Component {
   };
   
   componentDidMount() {
-    axios.get(api.news_detail.content)
+    axios.get(API.NEWS_DETAIL.CONTENT)
       .then(json => this.setState({
         news_detail: json.data
       }))

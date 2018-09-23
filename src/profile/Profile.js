@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import api from '../api';
+import API from '../_api';
 
 import { actions as sidebarMenuActions } from '../common/sidebarmenu/SidebarMenuDucks';
 import ProfileComponent from './ProfileComponent';
@@ -20,7 +20,7 @@ class ConnectedProfile extends Component {
 
   fetchingContent() {
     this.setState({ fetching: true });
-    axios.get(api.profile.content)
+    axios.get(API.PROFILE.CONTENT)
       .then(json => this.setState({
         fetching: false,
         fetched: true,
