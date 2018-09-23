@@ -12,12 +12,12 @@ const LoginPopupComponent = ({
     <div id="login-popup">
       <div id="login-popup-wrapper">
         <div id="login-popup-box">
-          <button onClick={() => {
+          <a onClick={() => {
             closeLoginPopup();
             if (error) {
               logout();
             }
-          }} id="close-login-popup" className="main-button">CLOSE</button>
+          }} id="close-login-popup"></a>
           {
             !loggedIn && !error ?
               <React.Fragment>
@@ -32,11 +32,27 @@ const LoginPopupComponent = ({
               </React.Fragment>
             :
             error ?
-              <div>
-                <p>Login Gagal</p>
-                <p>{error}</p>
+              <div id="login-message">
+                <div id="login-message-wrapper">
+                  <div id="login-message-content">
+                    <h6>Login Gagal</h6>
+                    <div id="error-login">{
+                      error === 'Network Error' ?
+                      <span>Koneksi dengan server kami terputus,<br />silahkan coba kembali.</span>
+                      :
+                      error
+                    }</div>
+                  </div>
+                </div>
               </div>
-            : 'Login Berhasil'
+            : 
+            <div id="login-message">
+              <div id="login-message-wrapper">
+                <div id="login-message-content">
+                  <h6>Login Berhasil</h6>
+                </div>
+              </div>
+            </div>
           }
         </div>
       </div>
