@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 
-const HeaderComponent = ({ logo, isSidebarOpen, toggleSidebarMenu, loggedIn, register, logout }) => (
+const HeaderComponent = ({ logo, isSidebarOpen, toggleSidebarMenu, loggedIn, login, register, logout }) => (
   <div id="header">
     <div id="header-wrapper" className="clear">
       <div id="header-top">
@@ -12,7 +12,8 @@ const HeaderComponent = ({ logo, isSidebarOpen, toggleSidebarMenu, loggedIn, reg
       {
         !loggedIn ?
         <div id="user-info">
-          <button onClick={() => register({ username: 'duaneallman', password: 'duane1986' })}>REGISTER</button>
+          <button onClick={() => login({ username: 'duaneallman', email: 'duane@gmail.com', password: 'duane1986' })}>LOGIN</button>
+          <button onClick={() => register({ username: 'duaneallman', email: 'duane@gmail.com', password: 'duane1986' })}>REGISTER</button>
         </div>
         :
         <div id="user-info">

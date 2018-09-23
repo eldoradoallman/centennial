@@ -11,7 +11,6 @@ class ConnectedAbout extends Component {
   
   render() {
     const { name, age, changeAge } = this.props;
-    console.log(this.props);
 
     return (
       <div id="entertainment-content" className="page-content-wrapper">

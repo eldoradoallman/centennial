@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-import axios from 'axios';
 
+import generalServices from '../../_helpers/generalServices';
 import { actions as latestNewsActions } from './LatestNewsDucks';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import LatestNewsComponent from './LatestNewsComponent';
@@ -27,11 +27,11 @@ class ConnectedLatestNews extends Component {
     /* const url = `https://student-example-api.herokuapp.com/v1/contacts.json?per=${per}&page=${page}`; */
 
     this.setState({ fetching: true });
-    axios.get(url)
-      .then(json => this.setState({
+    generalServices.fetchContent(url)
+      .then(json => console.log(json) || this.setState({
         fetching: false,
         fetched: true,
-        latest_news: [ ...latest_news, ...json.data.latest_news ],
+        latest_news: [ ...latest_news, ...json.data.content.latest_news ],
         page: this.state.page + 1
       }))
       .catch(error => this.setState({

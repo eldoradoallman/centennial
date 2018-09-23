@@ -2,19 +2,19 @@ import { API_URL } from '../_config';
 
 const API = {
   USERS: {
-    LOGIN: `${API_URL}/users/login`,
-    REGISTER: `${API_URL}/users/register`,
-    UPDATE: `${API_URL}/users/update`,
-    DELETE: `${API_URL}/users/delete`
+    LOGIN: `http://localhost:5000/api/users/login`,
+    REGISTER: `http://localhost:5000/api/users/register`,
+    UPDATE: `http://localhost:5000/api/users/update`,
+    DELETE: `http://localhost:5000/api/users/delete`
   },
   HOME: {
-    CONTENT: `${API_URL}/5b82d040ab9a186eafe0b1bf/1`,
-    LATEST_NEWS: `${API_URL}/5b8b8c6bdb948c68635b4245/9`,
+    CONTENT: `http://localhost:5000/api/home/content`,
+    LATEST_NEWS: `http://localhost:5000/api/home/latest_news`,
     POPULAR_NEWS: `${API_URL}/5b8be84a3ffac56f4bd8e1e4/3`
   },
   CATEGORY: {
     CONTENT: `${API_URL}/5b9603d7ab9a186eafe7f8ab/4`,
-    LATEST_NEWS: `${API_URL}/5b93c87a3ffac56f4bdb7170/2`,
+    LATEST_NEWS: `http://localhost:5000/api/category/latest_news`,
     POPULAR_NEWS: `${API_URL}/5b8be84a3ffac56f4bd8e1e4/3`
   },
   NEWS_DETAIL: {

@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 
+import API from '../_api';
+import generalServices from '../_helpers/generalServices';
 import { actions as homeActions } from './HomeDucks';
 import { actions as sidebarMenuActions } from '../common/sidebarmenu/SidebarMenuDucks';
 import HomeComponent from './HomeComponent';
@@ -10,10 +12,29 @@ import HomeComponent from './HomeComponent';
 import './Home.css';
 
 class ConnectedHome extends Component {
+  state = {
+    fetching: false,
+    fetched: false,
+    error: null,
+    news: []
+  };
+
+  fetchingContent() {
+    this.setState({ fetching: true });
+    generalServices.fetchContent(API.HOME.CONTENT)
+      .then(json => this.setState({
+        fetching: false,
+        fetched: true,
+        news: json.data.content
+      }))
+      .catch(error => this.setState({
+        fetching: false,
+        error
+      }));
+  }
+
   componentDidMount() {
-    if (this.props.users.length === 0) {
-      this.props.fetchHomeContent();
-    }
+    this.fetchingContent();
   }
 
   componentWillUnmount() {
@@ -23,11 +44,8 @@ class ConnectedHome extends Component {
   }
   
   render() {
-    const { homeFetched, users, getUserData } = this.props;
-    console.log(this.props);
-
     return (
-      <HomeComponent {...this.props} />
+      <HomeComponent {...this.state} />
     );
   }
 }

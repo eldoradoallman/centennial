@@ -27,7 +27,7 @@ class ConnectedHeader extends Component {
   }
   
   render() {
-    const { isSidebarOpen, loggedIn, register, logout } = this.props;
+    const { isSidebarOpen, loggedIn, login, register, logout } = this.props;
 
     return (
       <React.Fragment>
@@ -37,6 +37,7 @@ class ConnectedHeader extends Component {
             isSidebarOpen={isSidebarOpen}
             toggleSidebarMenu={this.toggleSidebarMenu.bind(this)}
             loggedIn={loggedIn}
+            login={login}
             register={register}
             logout={logout}
           />

@@ -8,23 +8,19 @@ import PopularNews from '../common/popularnews/PopularNews';
 import ScrollToTopOnMount from '../ScrollToTopOnMount';
 
 const HomeComponent = ({
-  homeFetching,
-  homeFetched,
-  homeError,
-  users,
-  fetchHomeContent,
-  getUserData,
-  isSidebarOpen,
-  toggleSidebarMenu,
-  closeSidebarMenu
+  fetching,
+  fetched,
+  error,
+  news
 }) => (
   <div id="home-content" className="page-content-wrapper">
     <ScrollToTopOnMount />
     <div className="page-content">
       <div id="featured-news-wrapper">
         {
-          homeFetched &&
-          users.map((user, index) => (
+          fetched &&
+          news.length > 0 &&
+          news.map((user, index) => (
             <React.Fragment key={user.id}>
               <div className={
                 index === 0 ? 'col-50 main-col-featured-news' : 
@@ -65,7 +61,7 @@ const HomeComponent = ({
           ))
         }
         {
-          homeFetched &&
+          fetched &&
           <div id="home-va-wrapper" className="view-all-wrapper">
             <Link to="/featured-news" className="view-all">
               <span className="arrow-left"></span>
@@ -79,7 +75,7 @@ const HomeComponent = ({
           </div>
         }
         {
-          homeFetched &&
+          fetched &&
           <div className="horz-ads">
             <a href="https://steffen-laurens.com/" target="_blank" rel="noopener noreferrer">
               <img src="https://steffen-laurens.com/centennial/img/google-ads.jpg" alt="Google Ads" />

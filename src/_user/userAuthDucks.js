@@ -1,6 +1,6 @@
 import userServices from './userServices';
 
-const user = JSON.parse(localStorage.getItem('user'));
+const user = localStorage.getItem('token');
 
 export const types = {
   REGISTER_REQUEST: 'REGISTER_REQUEST',
@@ -35,9 +35,9 @@ export const actions = {
     type: types.REGISTER_REQUEST,
     payload: userServices.register(user)
   }),
-  login: (username, password) => ({
+  login: (user) => ({
     type: types.LOGIN_REQUEST,
-    payload: userServices.login(username, password)
+    payload: userServices.login(user)
   }),
   logout: () => ({
     type: types.LOGOUT,
@@ -52,14 +52,14 @@ const userAuthReducer = (state = initialState, action) => {
     case types.REGISTER_REQUEST_REJECTED:
       return { ...state, registering: false, error: actions.payload, user: null };
     case types.REGISTER_REQUEST_FULFILLED:
-      return { ...state, registering: false, loggedIn: true, error: null, user: JSON.parse(action.payload.data.data) };
+      return { ...state, registering: false, error: null, user: action.payload.data };
     
     case types.LOGIN_REQUEST_PENDING:
       return { ...state, loggingIn: true, loggedIn: false, error: null, user: null };
     case types.LOGIN_REQUEST_REJECTED:
       return { ...state, loggingIn: false, loggedIn: false, error: actions.payload, user: null };
     case types.LOGIN_REQUEST_FULFILLED:
-      return { ...state, loggingIn: false, loggedIn: true, error: null, user: action.payload.data.user };
+      return { ...state, loggingIn: false, loggedIn: true, error: null, user: action.payload.data };
 
     case types.LOGOUT:
       return { ...state, registering: false, loggingIn: false, loggedIn: false, error: null, user: null };
