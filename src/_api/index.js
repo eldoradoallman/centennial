@@ -1,6 +1,12 @@
-import { API_URL } from '../_config/apiConfig';
+import { API_URL } from '../_config';
 
 const API = {
+  USERS: {
+    LOGIN: `${API_URL}/users/login`,
+    REGISTER: `${API_URL}/users/register`,
+    UPDATE: `${API_URL}/users/update`,
+    DELETE: `${API_URL}/users/delete`
+  },
   HOME: {
     CONTENT: `${API_URL}/5b82d040ab9a186eafe0b1bf/1`,
     LATEST_NEWS: `${API_URL}/5b8b8c6bdb948c68635b4245/9`,
