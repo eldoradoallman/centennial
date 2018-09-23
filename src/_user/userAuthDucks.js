@@ -35,9 +35,9 @@ export const actions = {
     type: types.REGISTER_REQUEST,
     payload: userServices.register(user)
   }),
-  login: (user) => ({
+  login: (user, callback) => ({
     type: types.LOGIN_REQUEST,
-    payload: userServices.login(user)
+    payload: userServices.login(user, callback)
   }),
   logout: () => ({
     type: types.LOGOUT,

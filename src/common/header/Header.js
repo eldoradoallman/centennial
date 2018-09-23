@@ -10,6 +10,7 @@ import { actions as headerActions } from './HeaderDucks';
 import HeaderComponent from './HeaderComponent';
 import { actions as sidebarMenuActions } from '../sidebarmenu/SidebarMenuDucks';
 import SidebarMenuComponent from '../sidebarmenu/SidebarMenuComponent';
+import { actions as loginActions } from '../../login/LoginDucks';
 
 import './Header.css';
 import '../sidebarmenu/SidebarMenu.css';
@@ -27,7 +28,7 @@ class ConnectedHeader extends Component {
   }
   
   render() {
-    const { isSidebarOpen, loggedIn, login, register, logout } = this.props;
+    const { isSidebarOpen, loggedIn, login, register, logout, openPopupLogin } = this.props;
 
     return (
       <React.Fragment>
@@ -40,6 +41,7 @@ class ConnectedHeader extends Component {
             login={login}
             register={register}
             logout={logout}
+            openPopupLogin={openPopupLogin}
           />
           <SidebarMenuComponent isSidebarOpen={isSidebarOpen} />
         </Headroom>
@@ -64,20 +66,25 @@ ConnectedHeader.propTypes = {
   logout: PropTypes.func.isRequired,
   isSidebarOpen: PropTypes.bool.isRequired,
   toggleSidebarMenu: PropTypes.func.isRequired,
-  closeSidebarMenu: PropTypes.func.isRequired
+  closeSidebarMenu: PropTypes.func.isRequired,
+  isPopupLoginOpen: PropTypes.bool.isRequired,
+  openPopupLogin: PropTypes.func.isRequired,
+  closePopupLogin: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
   ...state.header,
   ...state.userAuth,
-  ...state.sidebarMenu
+  ...state.sidebarMenu,
+  ...state.login
 });
 
 const mapDispatchToProps = (dispatch) => ({
   ...bindActionCreators({
     ...headerActions,
     ...userAuthActions,
-    ...sidebarMenuActions
+    ...sidebarMenuActions,
+    ...loginActions
   }, dispatch)
 });
 

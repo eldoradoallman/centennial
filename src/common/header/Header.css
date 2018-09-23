@@ -31,11 +31,19 @@
 #user-info {
   position: absolute;
   top: 20px;
-  right: 100px;
+  right: 30px;
 }
 
-#user-info button {
+#user-info .main-button {
+  position: relative;
+  margin: 0px 10px;
   outline: none;
+}
+
+#user-info .main-button.black-button {
+  color: #fff;
+  background-color: #000;
+  border: 1px solid #000;
 }
 
 #header-bottom {

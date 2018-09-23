@@ -4,7 +4,7 @@ import authHeader from '../_helpers/authHeader';
 import handleError from '../_helpers/handleError';
 
 const userServices = {
-  login: (user) => {
+  login: (user, callback) => {
     const data = user;
     const config = { headers: { 'Content-Type': 'application/json' } };
   
@@ -14,6 +14,9 @@ const userServices = {
         if (user.data.token) {
           // store user details and jwt token in local storage to keep user logged in between page resfreshes
           localStorage.setItem('token', user.data.token);
+          if (callback) {
+            setTimeout(callback, 2000);
+          }
         }
         return user;
       })

@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
+import LoginPopupComponent from './login/LoginPopupComponent';
 import Header from './common/header/Header';
 import Home from './home/Home';
 import Category from './category/Category';
@@ -19,6 +20,7 @@ import Profile from './profile/Profile';
 const AppRouting = () => (
   <Router>
     <React.Fragment>
+      <LoginPopupComponent />
       <Header />
       <Switch>
         {// To pass props with Route

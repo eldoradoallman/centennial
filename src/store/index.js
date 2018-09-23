@@ -5,6 +5,7 @@ import logger from 'redux-logger';
 
 import userAuthReducer from '../_user/userAuthDucks';
 import sidebarMenuReducer from '../common/sidebarmenu/SidebarMenuDucks';
+import loginReducer from '../login/LoginDucks';
 import headerReducer from '../common/header/HeaderDucks';
 import homeReducer from '../home/HomeDucks';
 import latestNewsReducer from '../common/latestnews/LatestNewsDucks';
@@ -14,6 +15,7 @@ import topicsReducer from '../topics/TopicsDucks';
 const appReducer = combineReducers({
   userAuth: userAuthReducer,
   sidebarMenu: sidebarMenuReducer,
+  login: loginReducer,
   header: headerReducer,
   home: homeReducer,
   latestNews: latestNewsReducer,

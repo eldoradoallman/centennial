@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 
-const HeaderComponent = ({ logo, isSidebarOpen, toggleSidebarMenu, loggedIn, login, register, logout }) => (
+const HeaderComponent = ({ logo, isSidebarOpen, toggleSidebarMenu, loggedIn, login, register, logout, openPopupLogin }) => (
   <div id="header">
     <div id="header-wrapper" className="clear">
       <div id="header-top">
@@ -12,12 +12,13 @@ const HeaderComponent = ({ logo, isSidebarOpen, toggleSidebarMenu, loggedIn, log
       {
         !loggedIn ?
         <div id="user-info">
-          <button onClick={() => login({ username: 'duaneallman', email: 'duane@gmail.com', password: 'duane1986' })}>LOGIN</button>
-          <button onClick={() => register({ username: 'duaneallman', email: 'duane@gmail.com', password: 'duane1986' })}>REGISTER</button>
+          {/* <button className="black-button main-button" onClick={() => login({ username: 'duaneallman', email: 'duane@gmail.com', password: 'duane1986' })}>Login</button> */}
+          <button className="black-button main-button" onClick={openPopupLogin}>Login</button>
+          <a className="main-button" onClick={() => register({ username: 'duaneallman', email: 'duane@gmail.com', password: 'duane1986' })}>Register</a>
         </div>
         :
         <div id="user-info">
-          <button onClick={logout}>LOGOUT</button>
+          <button className="main-button" onClick={logout}>Logout</button>
         </div>
       }
       <div id="header-bottom">
