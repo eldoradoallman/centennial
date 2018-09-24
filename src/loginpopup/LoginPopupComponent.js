@@ -1,7 +1,8 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
 
 const LoginPopupComponent = ({
+    registered,
+    errorRegister,
     loggedIn,
     error,
     register,
@@ -14,20 +15,30 @@ const LoginPopupComponent = ({
     goToRegister,
     goToLogin,
     onChange,
+    validatePayload,
     resetForm
   }) => isLoginPopupOpen ? (
     <div id="login-popup">
       <div id="login-popup-wrapper">
-        <div id="login-popup-box">
+        <div id="login-popup-box"
+          className={
+            error || errorRegister ?
+            'error-result'
+            :
+            loggedIn || registered ?
+            'success-result'
+            : 'result'
+          }
+        >
           <a onClick={() => {
             closeLoginPopup();
             resetForm();
-            if (error) {
+            if (error || errorRegister || registered) {
               logout();
             }
           }} id="close-login-popup"></a>
           {
-            !loggedIn && !error ?
+            !loggedIn && !registered && !error && !errorRegister ?
               <div id="login-message">
                 <div id="login-message-wrapper">
                   <div id="login-message-content">
@@ -76,23 +87,25 @@ const LoginPopupComponent = ({
                     {
                       onLogin ?
                         <React.Fragment>
-                          <button
-                            id="login-button"
-                            className="black-button main-button"
-                            onClick={
-                              () => login({ username: 'duaneallman', email: 'duane@gmail.com', password: 'duane1986' }, closeLoginPopup, resetForm)
-                            }
+                          <button id="login-button" className="black-button main-button"
+                            onClick={() => {
+                              const payload = validatePayload('login');
+                              if (payload) {
+                                login(payload, closeLoginPopup, resetForm);
+                              }
+                            }}
                           >LOGIN</button>
                           <p id="to-register-popup">Belum punya akun? <a onClick={() => { goToRegister(); resetForm(); }}>Buat sekarang</a>.</p>
                         </React.Fragment>
                       :
                         <React.Fragment>
-                          <button
-                            id="login-button"
-                            className="black-button main-button"
-                            onClick={
-                              () => register({ username: 'duaneallman', email: 'duane@gmail.com', password: 'duane1986' }, closeLoginPopup, resetForm)
-                            }
+                          <button id="login-button" className="black-button main-button"
+                            onClick={() => {
+                              const payload = validatePayload('register');
+                              if (payload) {
+                                register(payload, logout, resetForm);
+                              }
+                            }}
                           >REGISTER</button>
                           <p id="to-register-popup">Sudah punya akun? <a onClick={() => { goToLogin(); resetForm(); }}>Login sekarang</a>.</p>
                         </React.Fragment>
@@ -108,21 +121,51 @@ const LoginPopupComponent = ({
                     <h6>Login Gagal</h6>
                     <div id="login-summary">{
                       error === 'Network Error' ?
-                      <span>Koneksi dengan server kami terputus,<br />silahkan coba kembali.</span>
+                      <p>Koneksi dengan server kami terputus,<br />silahkan coba kembali.</p>
                       :
                       error
                     }</div>
                   </div>
                 </div>
               </div>
-            : 
-            <div id="login-message">
-              <div id="login-message-wrapper">
-                <div id="login-message-content">
-                  <h6>Login Berhasil</h6>
+            :
+            errorRegister ?
+              <div id="login-message">
+                <div id="login-message-wrapper">
+                  <div id="login-message-content">
+                    <h6>Registrasi Gagal</h6>
+                    <div id="login-summary">{
+                      errorRegister === 'Network Error' ?
+                      <p>Koneksi dengan server kami terputus,<br />silahkan coba kembali.</p>
+                      :
+                      error
+                    }</div>
+                  </div>
                 </div>
               </div>
-            </div>
+            :
+            !loggedIn && registered && !error ?
+              <div id="login-message">
+                <div id="login-message-wrapper">
+                  <div id="login-message-content">
+                    <h6>Aktivasi Akunmu</h6>
+                    <div id="login-summary">
+                      <p>Silahkan melakukan proses aktivasi akun kamu dengan cara <b>KLIK LINK AKTIVASI</b> yang sudah kami kirim<br />ke email kamu.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            :
+              <div id="login-message">
+                <div id="login-message-wrapper">
+                  <div id="login-message-content">
+                    <h6>Login Berhasil</h6>
+                    <div id="login-summary">
+                      <p>Selamat, kamu sudah berhasil login ke website Centennial.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
           }
         </div>
       </div>

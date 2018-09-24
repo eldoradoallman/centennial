@@ -32,6 +32,22 @@ class ConnectedLoginPopup extends Component {
     }
   }
 
+  validatePayload(type) {
+    if (type === 'login') {
+      return {
+        username_email: this.state.loginUsernameEmail,
+        password: this.state.loginPassword
+      };
+    } else if (type === 'register') {
+      return {
+        email: this.state.registerEmail,
+        password: this.state.registerPassword,
+        password_confirm: this.state.registerPasswordConfirm
+      };
+    }
+    return false;
+  }
+
   resetForm() {
     this.setState({
       loginUsernameEmail: '',
@@ -43,11 +59,10 @@ class ConnectedLoginPopup extends Component {
   }
 
   render() {
-    console.log(this.state);
     return (
       <LoginPopupComponent {...this.props}
-        state={this.state}
         onChange={this.onChange.bind(this)}
+        validatePayload={this.validatePayload.bind(this)}
         resetForm={this.resetForm.bind(this)}
       />
     );
@@ -55,6 +70,8 @@ class ConnectedLoginPopup extends Component {
 }
 
 ConnectedLoginPopup.propTypes = {
+  registered: PropTypes.func.isRequired,
+  errorRegister: PropTypes.any,
   loggedIn: PropTypes.bool.isRequired,
   error: PropTypes.any,
   register: PropTypes.func.isRequired,

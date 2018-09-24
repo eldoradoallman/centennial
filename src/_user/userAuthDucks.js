@@ -18,12 +18,16 @@ export const types = {
 
 export const initialState = user ? {
   registering: false,
+  registered: true,
+  errorRegister: null,
   loggingIn: false,
   loggedIn: true,
   error: null,
   user
 } : {
   registering: false,
+  registered: false,
+  errorRegister: null,
   loggingIn: false,
   loggedIn: false,
   error: null,
@@ -48,11 +52,11 @@ export const actions = {
 const userAuthReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.REGISTER_REQUEST_PENDING:
-      return { ...state, registering: true, error: null, user: null };
+      return { ...state, registering: true, registered: false, errorRegister: null, user: null };
     case types.REGISTER_REQUEST_REJECTED:
-      return { ...state, registering: false, error: action.payload, user: null };
+      return { ...state, registering: false, registered: false, errorRegister: action.payload, user: null };
     case types.REGISTER_REQUEST_FULFILLED:
-      return { ...state, registering: false, error: null, user: action.payload.data };
+      return { ...state, registering: false, registered: true, errorRegister: null, user: action.payload.data };
     
     case types.LOGIN_REQUEST_PENDING:
       return { ...state, loggingIn: true, loggedIn: false, error: null, user: null };
@@ -62,7 +66,7 @@ const userAuthReducer = (state = initialState, action) => {
       return { ...state, loggingIn: false, loggedIn: true, error: null, user: action.payload.data };
 
     case types.LOGOUT:
-      return { ...state, registering: false, loggingIn: false, loggedIn: false, error: null, user: null };
+      return { ...state, registering: false, registered: false, errorRegister: null, loggingIn: false, loggedIn: false, error: null, user: null };
     default:
       return state;
   }

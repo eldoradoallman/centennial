@@ -14,7 +14,7 @@ const HeaderComponent = ({ logo, isSidebarOpen, toggleSidebarMenu, loggedIn, log
         <div id="user-info">
           {/* <button className="black-button main-button" onClick={() => login({ username: 'duaneallman', email: 'duane@gmail.com', password: 'duane1986' })}>Login</button> */}
           <button className="black-button main-button" onClick={openLoginPopup}>Login</button>
-          <a className="main-button" onClick={() => register({ username: 'duaneallman', email: 'duane@gmail.com', password: 'duane1986' })}>Register</a>
+          <Link to="/" className="main-button">Register</Link>
         </div>
         :
         <div id="user-info">

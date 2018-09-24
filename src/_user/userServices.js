@@ -15,10 +15,10 @@ const userServices = {
           // store user details and jwt token in local storage to keep user logged in between page resfreshes
           localStorage.setItem('token', user.data.token);
           if (callback) {
-            setTimeout(callback, 2000);
+            setTimeout(callback, 4000);
           }
           if (callbackalt) {
-            setTimeout(callbackalt, 2000);
+            callbackalt();
           }
         }
         return user;
@@ -35,12 +35,8 @@ const userServices = {
   
     return axios.post(API.USERS.REGISTER, data, config)
       .then(user => {
-        if (user.data && callback) {
-          setTimeout(callback, 2000);
-        }
-        if (user.data && callbackalt) {
-          setTimeout(callbackalt, 2000);
-        }
+        callback();
+        callbackalt();
         return user;
       })
       .catch(error => handleError(error));

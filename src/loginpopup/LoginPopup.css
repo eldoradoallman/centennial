@@ -17,14 +17,21 @@
 #login-popup-box {
   position: relative;
   width: 100%;
-  max-width: 600px;
-  min-height: 600px;
+  width: 600px;
+  height: 600px;
   margin: auto;
   padding: 40px;
   background-color: #fff;
   box-shadow: 0px 5px 50px 0px rgba(0,0,0,0.1);
   border-radius: 100%;
   transition: all 200ms ease-in-out;
+}
+
+#login-popup-box.success-result,
+#login-popup-box.error-result {
+  width: 350px;
+  height: 350px;
+  background-color: #000;
 }
 
 #login-message {
@@ -52,6 +59,12 @@
   margin: 30px 0px 20px;
   font-size: 24px;
   color: #000;
+  transition: color 200ms ease-in-out;
+}
+
+#login-popup-box.success-result h6,
+#login-popup-box.error-result h6 {
+  color: #fff;
 }
 
 #login-form {
@@ -68,8 +81,24 @@
   line-height: 1.75;
 }
 
+#login-summary b {
+  color: #fff;
+  font-weight: 700;
+}
+
+#login-popup-box.success-result #login-summary,
+#login-popup-box.error-result #login-summary {
+  max-width: 300px;
+}
+
 #login-summary p {
   color: #000;
+  transition: color 200ms ease-in-out;
+}
+
+#login-popup-box.success-result p,
+#login-popup-box.error-result p {
+  color: #fff;
 }
 
 .login-input input {
@@ -97,8 +126,18 @@
   transition: border 200ms ease-in-out;
 }
 
+#login-popup-box.success-result #close-login-popup,
+#login-popup-box.error-result #close-login-popup {
+  border: 2px solid #000;
+}
+
 #close-login-popup:hover {
   border: 2px solid #000;
+}
+
+#login-popup-box.success-result #close-login-popup:hover,
+#login-popup-box.error-result #close-login-popup:hover {
+  border: 2px solid #fff;
 }
 
 #close-login-popup:before, #close-login-popup:after {
@@ -115,6 +154,13 @@
 
 #close-login-popup:hover::before, #close-login-popup:hover::after {
   background-color: #000;
+}
+
+#login-popup-box.success-result #close-login-popup:hover::before,
+#login-popup-box.success-result #close-login-popup:hover::after,
+#login-popup-box.error-result #close-login-popup:hover::before,
+#login-popup-box.error-result #close-login-popup:hover::after {
+  background-color: #fff;
 }
 
 #close-login-popup:before {
