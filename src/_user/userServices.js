@@ -4,7 +4,7 @@ import authHeader from '../_helpers/authHeader';
 import handleError from '../_helpers/handleError';
 
 const userServices = {
-  login: (user, callback) => {
+  login: (user, callback, callbackalt) => {
     const data = user;
     const config = { headers: { 'Content-Type': 'application/json' } };
   
@@ -17,6 +17,9 @@ const userServices = {
           if (callback) {
             setTimeout(callback, 2000);
           }
+          if (callbackalt) {
+            setTimeout(callbackalt, 2000);
+          }
         }
         return user;
       })
@@ -26,14 +29,17 @@ const userServices = {
     // remove user from local storage to log user out
     localStorage.removeItem('token');
   },
-  register: (user) => {
+  register: (user, callback, callbackalt) => {
     const data = user;
     const config = { headers: { 'Content-Type': 'application/json' } };
   
     return axios.post(API.USERS.REGISTER, data, config)
       .then(user => {
-        if (user.data.token) {
-          localStorage.setItem('token', user.data.token);
+        if (user.data && callback) {
+          setTimeout(callback, 2000);
+        }
+        if (user.data && callbackalt) {
+          setTimeout(callbackalt, 2000);
         }
         return user;
       })

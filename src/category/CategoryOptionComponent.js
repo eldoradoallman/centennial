@@ -10,7 +10,8 @@ const CategoryOptionComponent = ({
   fetching,
   fetched,
   error,
-  editorial_picks
+  editorial_picks,
+  url
 }) => (
   <React.Fragment>
     <div id="sub-category-links-wrapper">
@@ -83,7 +84,7 @@ const CategoryOptionComponent = ({
           <h4 className="category-news">Artikel Terbaru</h4>
           <div className="border"></div>
         </div>
-        <LatestNews url={API.CATEGORY.LATEST_NEWS} />
+        <LatestNews url={API.CATEGORY.LATEST_NEWS} urlLocation={url} />
       </div>
       <div id="popular-news-wrapper">
         <Sticky topOffset={-85}>

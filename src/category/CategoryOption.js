@@ -53,7 +53,7 @@ class ConnectedCategoryOption extends Component {
   
   render() {
     return (
-      <CategoryOptionComponent {...this.state} />
+      <CategoryOptionComponent {...this.state} url={this.props.match.url} />
     );
   }
 }

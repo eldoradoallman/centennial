@@ -21,17 +21,30 @@ class ConnectedLatestNews extends Component {
       page: 1
     };
   }
+  
+  componentDidUpdate(prevProps) {
+    if (this.props.urlLocation !== prevProps.urlLocation) {
+      this.setState({
+        fetching: false,
+        fetched: false,
+        error: null,
+        latest_news: [],
+        url: this.props.url,
+        per: 10,
+        page: 1
+      });
+      this.loadLatestNews();
+    }
+  }
 
   loadLatestNews() {
-    const { url, per, page, latest_news } = this.state;
     /* const url = `https://student-example-api.herokuapp.com/v1/contacts.json?per=${per}&page=${page}`; */
-
     this.setState({ fetching: true });
-    generalServices.fetchContent(url)
-      .then(json => console.log(json) || this.setState({
+    generalServices.fetchContent(this.state.url)
+      .then(json => this.setState({
         fetching: false,
         fetched: true,
-        latest_news: [ ...latest_news, ...json.data.content.latest_news ],
+        latest_news: [ ...this.state.latest_news, ...json.data.content.latest_news ],
         page: this.state.page + 1
       }))
       .catch(error => this.setState({

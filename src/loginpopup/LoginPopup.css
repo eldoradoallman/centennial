@@ -18,11 +18,13 @@
   position: relative;
   width: 100%;
   max-width: 600px;
-  min-height: 350px;
+  min-height: 600px;
   margin: auto;
   padding: 40px;
   background-color: #fff;
   box-shadow: 0px 5px 50px 0px rgba(0,0,0,0.1);
+  border-radius: 100%;
+  transition: all 200ms ease-in-out;
 }
 
 #login-message {
@@ -47,27 +49,49 @@
 }
 
 #login-message h6 {
-  margin: -10px 0px 30px;
-  font-size: 30px;
+  margin: 30px 0px 20px;
+  font-size: 24px;
   color: #000;
 }
 
-#error-login {
+#login-form {
+  margin: 10px 0px;
+}
+
+#login-summary {
   width: 100%;
   max-width: 400px;
   margin: auto;
-  font-size: 16px;
+  padding: 0px 20px;
+  font-size: 14px;
+  font-weight: 400;
   line-height: 1.75;
+}
+
+#login-summary p {
+  color: #000;
+}
+
+.login-input input {
+  width: 100%;
+  max-width: 300px;
+  margin: 10px 0px;
+  padding: 10px 0px 15px;
+  text-align: center;
+  border: none;
+  border-bottom: 1px solid #f1f1f1;
+  outline: none;
 }
 
 #close-login-popup {
   position: absolute;
   z-index: 1;
-  top: 30px;
-  right: 30px;
+  top: 40px;
+  right: 50%;
   width: 30px;
   height: 30px;
-  border: 2px solid #b9b9b9;
+  margin-right: -15px;
+  border: 2px solid #fff;
   border-radius: 100%;
   cursor: pointer;
   transition: border 200ms ease-in-out;
@@ -104,7 +128,7 @@
 #login-button {
   display: block;
   position: relative;
-  margin: auto;
+  margin: 30px auto 0px;
   padding: 5px 20px;
   font-size: 14px;
   font-weight: 700;
@@ -118,4 +142,19 @@
 
 #login-button:hover {
   border-radius: 34px;
+}
+
+#to-register-popup {
+  margin-top: 25px;
+  color: #000;
+}
+
+#to-register-popup a {
+  font-weight: 700;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+#to-register-popup a:hover {
+  text-decoration: none;
 }

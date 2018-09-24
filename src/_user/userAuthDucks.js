@@ -31,13 +31,13 @@ export const initialState = user ? {
 };
 
 export const actions = {
-  register: (user) => ({
+  register: (user, callback, callbackalt) => ({
     type: types.REGISTER_REQUEST,
-    payload: userServices.register(user)
+    payload: userServices.register(user, callback, callbackalt)
   }),
-  login: (user, callback) => ({
+  login: (user, callback, callbackalt) => ({
     type: types.LOGIN_REQUEST,
-    payload: userServices.login(user, callback)
+    payload: userServices.login(user, callback, callbackalt)
   }),
   logout: () => ({
     type: types.LOGOUT,
