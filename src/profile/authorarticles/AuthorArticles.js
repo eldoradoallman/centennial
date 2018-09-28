@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-import API from '../../_api';
 
+import API from '../../_api';
+import generalServices from '../../_helpers/generalServices';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import AuthorArticlesComponent from './AuthorArticlesComponent';
 
@@ -23,22 +23,22 @@ export default class AuthorArticles extends Component {
     let apiUrl;
     
     topic === 'following' ?
-    apiUrl = API.PROFILE.FOLLOWING :
+      apiUrl = API.PROFILE.FOLLOWING :
     topic === 'followers' ?
-    apiUrl = API.PROFILE.FOLLOWERS :
+      apiUrl = API.PROFILE.FOLLOWERS :
     topic === 'applause' ?
-    apiUrl = API.PROFILE.APPLAUSE :
-    apiUrl = API.PROFILE.ARTICLES;
+      apiUrl = API.PROFILE.APPLAUSES :
+      apiUrl = API.PROFILE.ARTICLES;
 
     this.setState({
       fetching: true,
       topic
     });
-    axios.get(apiUrl)
+    generalServices.fetchContent(apiUrl)
       .then(json => this.setState({
         fetching: false,
         fetched: true,
-        content: [ ...this.state.content, ...json.data.articles ],
+        content: [ ...this.state.content, ...json.data.content.articles ],
         page: this.state.page + 1
       }))
       .catch(error => this.setState({

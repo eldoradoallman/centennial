@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-import axios from 'axios';
-import API from '../_api';
 
+import API from '../_api';
+import generalServices from '../_helpers/generalServices';
 import { actions as sidebarMenuActions } from '../common/sidebarmenu/SidebarMenuDucks';
 import ProfileComponent from './ProfileComponent';
 
@@ -20,11 +20,11 @@ class ConnectedProfile extends Component {
 
   fetchingContent() {
     this.setState({ fetching: true });
-    axios.get(API.PROFILE.CONTENT)
+    generalServices.fetchContent(API.PROFILE.CONTENT)
       .then(json => this.setState({
         fetching: false,
         fetched: true,
-        profile: json.data
+        profile: json.data.content
       }))
       .catch(error => this.setState({
         fetching: false,
