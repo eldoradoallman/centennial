@@ -1,14 +1,10 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import PropTypes from 'prop-types';
 
 import generalServices from '../../_helpers/generalServices';
-import { actions as latestNewsActions } from './LatestNewsDucks';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import LatestNewsComponent from './LatestNewsComponent';
 
-class ConnectedLatestNews extends Component {
+class LatestNews extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -71,25 +67,5 @@ class ConnectedLatestNews extends Component {
     );
   }
 }
-
-ConnectedLatestNews.propTypes = {
-  latestNewsFetching: PropTypes.bool.isRequired,
-  latestNewsFetched: PropTypes.bool.isRequired,
-  latestNewsError: PropTypes.object,
-  latestNews: PropTypes.array.isRequired,
-  fetchLatestNewsContent: PropTypes.func.isRequired
-};
-
-const mapStateToProps = (state) => ({
-  ...state.latestNews,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  ...bindActionCreators({
-    ...latestNewsActions
-  }, dispatch)
-});
-
-const LatestNews = connect(mapStateToProps, mapDispatchToProps)(ConnectedLatestNews);
 
 export default LatestNews;

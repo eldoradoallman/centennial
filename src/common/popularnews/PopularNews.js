@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 
+import generalServices from '../../_helpers/generalServices';
 import PopularNewsComponent from './PopularNewsComponent';
 
 import './PopularNews.css';
@@ -15,9 +15,9 @@ class PopularNews extends Component {
   }
   
   componentDidMount() {
-    axios.get(this.state.url)
+    generalServices.fetchContent(this.state.url)
       .then(json => this.setState({
-        popular_news: json.data
+        popular_news: json.data.content
       }))
       .catch(error => console.log(error));
   }

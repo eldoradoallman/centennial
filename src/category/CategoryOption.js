@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-import axios from 'axios';
 
 import API from '../_api';
+import generalServices from '../_helpers/generalServices';
 import { actions as sidebarMenuActions } from '../common/sidebarmenu/SidebarMenuDucks';
 import CategoryOptionComponent from './CategoryOptionComponent';
 
@@ -19,11 +19,11 @@ class ConnectedCategoryOption extends Component {
   fetchContent() {
     const url = this.props.match.url;
     this.setState({ fetching: true });
-    axios.get(API.CATEGORY.CONTENT)
+    generalServices.fetchContent(API.CATEGORY.CONTENT)
       .then(json => this.setState({
         fetching: false,
         fetched: true,
-        editorial_picks: json.data
+        editorial_picks: json.data.content
       }))
       .catch(error => this.setState({
         fetching: false,

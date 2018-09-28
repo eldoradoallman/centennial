@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-import axios from 'axios';
-import API from '../_api';
 
+import API from '../_api';
+import generalServices from '../_helpers/generalServices';
 import { actions as sidebarMenuActions } from '../common/sidebarmenu/SidebarMenuDucks';
 import NewsDetailComponent from './NewsDetailComponent';
 
@@ -16,9 +16,9 @@ class ConnectedNewsDetail extends Component {
   };
   
   componentDidMount() {
-    axios.get(API.NEWS_DETAIL.CONTENT)
+    generalServices.fetchContent(API.NEWS_DETAIL.CONTENT)
       .then(json => this.setState({
-        news_detail: json.data
+        news_detail: json.data.content
       }))
       .catch(error => console.log(error));
   }

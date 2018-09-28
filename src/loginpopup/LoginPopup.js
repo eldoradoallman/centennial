@@ -70,7 +70,7 @@ class ConnectedLoginPopup extends Component {
 }
 
 ConnectedLoginPopup.propTypes = {
-  registered: PropTypes.func.isRequired,
+  registered: PropTypes.bool.isRequired,
   errorRegister: PropTypes.any,
   loggedIn: PropTypes.bool.isRequired,
   error: PropTypes.any,

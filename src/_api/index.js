@@ -10,15 +10,15 @@ const API = {
   HOME: {
     CONTENT: `http://localhost:5000/api/home/content`,
     LATEST_NEWS: `http://localhost:5000/api/home/latest_news`,
-    POPULAR_NEWS: `${API_URL}/5b8be84a3ffac56f4bd8e1e4/3`
+    POPULAR_NEWS: `http://localhost:5000/api/home/popular_news`
   },
   CATEGORY: {
-    CONTENT: `${API_URL}/5b9603d7ab9a186eafe7f8ab/4`,
+    CONTENT: `http://localhost:5000/api/category/content`,
     LATEST_NEWS: `http://localhost:5000/api/category/latest_news`,
-    POPULAR_NEWS: `${API_URL}/5b8be84a3ffac56f4bd8e1e4/3`
+    POPULAR_NEWS: `http://localhost:5000/api/category/popular_news`
   },
   NEWS_DETAIL: {
-    CONTENT: `${API_URL}/5b8fddc83ffac56f4bda6cdb/6`
+    CONTENT: `http://localhost:5000/api/news_detail/content`
   },
   PROFILE: {
     CONTENT: `${API_URL}/5b97a3b6d6fe677c48d8a264/3`,

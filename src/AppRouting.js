@@ -5,8 +5,6 @@ import LoginPopup from './loginpopup/LoginPopup';
 import Header from './common/header/Header';
 import Home from './home/Home';
 import Category from './category/Category';
-import About from './about/About';
-import Topics from './topics/Topics';
 import NewsDetail from './newsdetail/NewsDetail';
 import Profile from './profile/Profile';
 
@@ -26,8 +24,6 @@ const AppRouting = () => (
         {// To pass props with Route
         /* <HomeRoute exact path="/" component={Home}/> */}
         <Route exact path="/" component={Home} />
-        <Route path="/about" component={About} />
-        <Route path="/topics" component={Topics} />
         <Route path="/author/:id/:name" component={Profile} />
         <Route 
           path="/category/:category(entertainment|livestyle|techno|about-you|ideas)/:subcategory?/:id-:newstitle"

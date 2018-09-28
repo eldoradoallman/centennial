@@ -6,23 +6,16 @@ import PropTypes from 'prop-types';
 import Headroom from 'react-headroom';
 
 import { actions as userAuthActions } from '../../_user/userAuthDucks';
-import { actions as headerActions } from './HeaderDucks';
-import HeaderComponent from './HeaderComponent';
 import { actions as sidebarMenuActions } from '../sidebarmenu/SidebarMenuDucks';
 import SidebarMenuComponent from '../sidebarmenu/SidebarMenuComponent';
 import { actions as loginPopupActions } from '../../loginpopup/LoginPopupDucks';
+import HeaderComponent from './HeaderComponent';
 
 import './Header.css';
 import '../sidebarmenu/SidebarMenu.css';
 import logo from '../../assets/img/logo.jpg';
 
 class ConnectedHeader extends Component {
-  componentDidMount() {
-    if (this.props.users.length === 0) {
-      this.props.fetchHeaderContent();
-    }
-  }
-
   toggleSidebarMenu() {
     this.props.toggleSidebarMenu();
   }
@@ -51,11 +44,6 @@ class ConnectedHeader extends Component {
 }
 
 ConnectedHeader.propTypes = {
-  headerFetching: PropTypes.bool.isRequired,
-  headerFetched: PropTypes.bool.isRequired,
-  headerError: PropTypes.object,
-  users: PropTypes.array.isRequired,
-  fetchHeaderContent: PropTypes.func.isRequired,
   registering: PropTypes.bool.isRequired,
   loggingIn: PropTypes.bool.isRequired,
   loggedIn: PropTypes.bool.isRequired,
@@ -73,7 +61,6 @@ ConnectedHeader.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  ...state.header,
   ...state.userAuth,
   ...state.sidebarMenu,
   ...state.loginPopup
@@ -81,7 +68,6 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   ...bindActionCreators({
-    ...headerActions,
     ...userAuthActions,
     ...sidebarMenuActions,
     ...loginPopupActions

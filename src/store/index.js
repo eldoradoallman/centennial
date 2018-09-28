@@ -6,21 +6,13 @@ import logger from 'redux-logger';
 import userAuthReducer from '../_user/userAuthDucks';
 import sidebarMenuReducer from '../common/sidebarmenu/SidebarMenuDucks';
 import loginPopupReducer from '../loginpopup/LoginPopupDucks';
-import headerReducer from '../common/header/HeaderDucks';
 import homeReducer from '../home/HomeDucks';
-import latestNewsReducer from '../common/latestnews/LatestNewsDucks';
-import aboutReducer from '../about/AboutDucks';
-import topicsReducer from '../topics/TopicsDucks';
 
 const appReducer = combineReducers({
   userAuth: userAuthReducer,
   sidebarMenu: sidebarMenuReducer,
   loginPopup: loginPopupReducer,
-  header: headerReducer,
-  home: homeReducer,
-  latestNews: latestNewsReducer,
-  about: aboutReducer,
-  topics: topicsReducer
+  home: homeReducer
 });
 
 const middleware = applyMiddleware(promise(), thunk, logger);
