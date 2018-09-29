@@ -33,7 +33,12 @@ const ProfileComponent = ({ match, profile }) => (
             <NavLink to={`${match.url}/applause`} className="history-option" activeClassName="current">Apresiasi</NavLink>
           }
         </div>
-        <Route path={`${match.url}/:topicId?`} component={AuthorArticles} />
+        <Route
+          path={`${match.url}/:topicId?`}
+          component={(props) => (
+            <AuthorArticles {...props} authorId={match.params.id} />
+          )}
+        />
       </div>
     </div>
   </div>

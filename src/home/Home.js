@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 
 import API from '../_api';
 import generalServices from '../_helpers/generalServices';
-import { actions as homeActions } from './HomeDucks';
 import { actions as sidebarMenuActions } from '../common/sidebarmenu/SidebarMenuDucks';
 import HomeComponent from './HomeComponent';
 
@@ -21,7 +20,7 @@ class ConnectedHome extends Component {
 
   fetchingContent() {
     this.setState({ fetching: true });
-    generalServices.fetchContent(API.HOME.CONTENT)
+    generalServices.fetchContent(`${API.HOME}/content`)
       .then(json => this.setState({
         fetching: false,
         fetched: true,
@@ -51,19 +50,12 @@ class ConnectedHome extends Component {
 }
 
 ConnectedHome.propTypes = {
-  homeFetching: PropTypes.bool.isRequired,
-  homeFetched: PropTypes.bool.isRequired,
-  homeError: PropTypes.object,
-  users: PropTypes.array.isRequired,
-  fetchHomeContent: PropTypes.func.isRequired,
-  getUserData: PropTypes.func.isRequired,
   isSidebarOpen: PropTypes.bool.isRequired,
   toggleSidebarMenu: PropTypes.func.isRequired,
   closeSidebarMenu: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
-  ...state.home,
   ...state.sidebarMenu
   // selectors implementation
   /* categories: getResourcesGroupedByCategory(state) */
@@ -71,7 +63,6 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   ...bindActionCreators({
-    ...homeActions,
     ...sidebarMenuActions
   }, dispatch)
 });

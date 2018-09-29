@@ -15,6 +15,7 @@ export default class AuthorArticles extends Component {
     content: [],
     per: 10,
     page: 1,
+    has_more: true,
     topic: ''
   };
 
@@ -23,12 +24,12 @@ export default class AuthorArticles extends Component {
     let apiUrl;
     
     topic === 'following' ?
-      apiUrl = API.PROFILE.FOLLOWING :
+      apiUrl = `${API.PROFILE}/${this.props.authorId}/articles?per=${this.state.per}&page=${this.state.page}` :
     topic === 'followers' ?
-      apiUrl = API.PROFILE.FOLLOWERS :
+      apiUrl = `${API.PROFILE}/${this.props.authorId}/applauses?per=${this.state.per}&page=${this.state.page}` :
     topic === 'applause' ?
-      apiUrl = API.PROFILE.APPLAUSES :
-      apiUrl = API.PROFILE.ARTICLES;
+      apiUrl = `${API.PROFILE}/${this.props.authorId}/applauses?per=${this.state.per}&page=${this.state.page}` :
+      apiUrl = `${API.PROFILE}/${this.props.authorId}/articles?per=${this.state.per}&page=${this.state.page}`;
 
     this.setState({
       fetching: true,
@@ -39,10 +40,12 @@ export default class AuthorArticles extends Component {
         fetching: false,
         fetched: true,
         content: [ ...this.state.content, ...json.data.content.articles ],
-        page: this.state.page + 1
+        page: this.state.page + 1,
+        has_more: json.data.content.has_more
       }))
       .catch(error => this.setState({
         fetching: false,
+        fetched: false,
         error
       }));
   }
@@ -53,7 +56,16 @@ export default class AuthorArticles extends Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.match.url !== prevProps.match.url) {
-      this.setState({ content: [] });
+      this.setState({
+        fetching: false,
+        fetched: false,
+        error: null,
+        content: [],
+        per: 10,
+        page: 1,
+        has_more: true,
+        topic: ''
+      });
       this.fetchingContent();
     }
   }
@@ -77,7 +89,7 @@ export default class AuthorArticles extends Component {
           <InfiniteScroll
             dataLength={content.length}
             next={this.fetchingContent.bind(this)}
-            hasMore={true}
+            hasMore={this.state.has_more}
             loader={<p>Loading...</p>}
           >
             <AuthorArticlesComponent content={content} />

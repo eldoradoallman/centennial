@@ -16,7 +16,7 @@ class ConnectedNewsDetail extends Component {
   };
   
   componentDidMount() {
-    generalServices.fetchContent(API.NEWS_DETAIL.CONTENT)
+    generalServices.fetchContent(API.NEWS_DETAIL)
       .then(json => this.setState({
         news_detail: json.data.content
       }))

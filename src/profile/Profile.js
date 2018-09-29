@@ -20,7 +20,7 @@ class ConnectedProfile extends Component {
 
   fetchingContent() {
     this.setState({ fetching: true });
-    generalServices.fetchContent(API.PROFILE.CONTENT)
+    generalServices.fetchContent(`${API.PROFILE}/${this.props.match.params.id}/content`)
       .then(json => this.setState({
         fetching: false,
         fetched: true,

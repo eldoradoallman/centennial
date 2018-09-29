@@ -85,11 +85,11 @@ const HomeComponent = ({
       </div>
       <div id="all-topics-news-wrapper">
         <div className="latest-news-wrapper">
-          <LatestNews url={API.HOME.LATEST_NEWS} page="home" />
+          <LatestNews url={`${API.HOME}/latest_news`} page="home" />
         </div>
         <div id="popular-news-wrapper">
           <Sticky topOffset={-85}>
-            <PopularNews url={API.HOME.POPULAR_NEWS} />
+            <PopularNews url={`${API.HOME}/popular_news`} />
           </Sticky>
         </div>
       </div>

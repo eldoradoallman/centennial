@@ -8,7 +8,7 @@ const userServices = {
     const data = user;
     const config = { headers: { 'Content-Type': 'application/json' } };
   
-    return axios.post(API.USERS.LOGIN, data, config)
+    return axios.post(`${API.USERS}/login`, data, config)
       .then(user => {
         // login successful if there's a jwt token in the response
         if (user.data.token) {
@@ -33,7 +33,7 @@ const userServices = {
     const data = user;
     const config = { headers: { 'Content-Type': 'application/json' } };
   
-    return axios.post(API.USERS.REGISTER, data, config)
+    return axios.post(`${API.USERS}/register`, data, config)
       .then(user => {
         callback();
         callbackalt();
@@ -45,12 +45,12 @@ const userServices = {
     const data = user;
     const config = { headers: { ...authHeader(), 'Content-Type': 'application/json' } };
     
-    return axios.put(API.USERS.UPDATE, data, config).catch(error => handleError(error));
+    return axios.put(`${API.USERS}/update`, data, config).catch(error => handleError(error));
   },
   delete: (id) => {
     const config = { headers: authHeader() };
   
-    return axios.delete(API.USERS.DELETE, config).catch(error => handleError(error));
+    return axios.delete(`${API.USERS}/delete`, config).catch(error => handleError(error));
   }
 };
 

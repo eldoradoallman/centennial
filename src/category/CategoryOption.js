@@ -19,7 +19,7 @@ class ConnectedCategoryOption extends Component {
   fetchContent() {
     const url = this.props.match.url;
     this.setState({ fetching: true });
-    generalServices.fetchContent(API.CATEGORY.CONTENT)
+    generalServices.fetchContent(`${API.CATEGORY}/content`)
       .then(json => this.setState({
         fetching: false,
         fetched: true,

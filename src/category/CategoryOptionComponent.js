@@ -84,11 +84,11 @@ const CategoryOptionComponent = ({
           <h4 className="category-news">Artikel Terbaru</h4>
           <div className="border"></div>
         </div>
-        <LatestNews url={API.CATEGORY.LATEST_NEWS} urlLocation={url} />
+        <LatestNews url={`${API.CATEGORY}/latest_news`} urlLocation={url} />
       </div>
       <div id="popular-news-wrapper">
         <Sticky topOffset={-85}>
-          <PopularNews url={API.CATEGORY.POPULAR_NEWS} />
+          <PopularNews url={`${API.CATEGORY}/popular_news`} />
         </Sticky>
       </div>
     </div>

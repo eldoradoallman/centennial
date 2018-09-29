@@ -14,7 +14,8 @@ class LatestNews extends Component {
       latest_news: [],
       url: props.url,
       per: 10,
-      page: 1
+      page: 1,
+      has_more: true
     };
   }
   
@@ -27,26 +28,27 @@ class LatestNews extends Component {
         latest_news: [],
         url: this.props.url,
         per: 10,
-        page: 1
+        page: 1,
+        has_more: true
       });
       this.loadLatestNews();
     }
   }
 
   loadLatestNews() {
-    /* const url = `https://student-example-api.herokuapp.com/v1/contacts.json?per=${per}&page=${page}`; */
     this.setState({ fetching: true });
-    generalServices.fetchContent(this.state.url)
+    generalServices.fetchContent(`${this.state.url}?per=${this.state.per}&page=${this.state.page}`)
       .then(json => this.setState({
         fetching: false,
         fetched: true,
         latest_news: [ ...this.state.latest_news, ...json.data.content.latest_news ],
-        page: this.state.page + 1
+        page: this.state.page + 1,
+        has_more: json.data.content.has_more
       }))
       .catch(error => this.setState({
         fetching: false,
         fetched: false,
-        error: error
+        error
       }));
   }
 
@@ -55,7 +57,7 @@ class LatestNews extends Component {
       <InfiniteScroll
         dataLength={this.state.latest_news.length}
         next={this.loadLatestNews.bind(this)}
-        hasMore={true}
+        hasMore={this.state.has_more}
         loader={<p>Loading...</p>}
       >
         {
