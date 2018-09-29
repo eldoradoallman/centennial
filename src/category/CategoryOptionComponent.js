@@ -11,14 +11,17 @@ const CategoryOptionComponent = ({
   fetched,
   error,
   editorial_picks,
+  category,
+  subcategory,
+  subcategories,
   url
 }) => (
   <React.Fragment>
     <div id="sub-category-links-wrapper">
       <div id="sub-category-links-content">
         {
-          fetched &&
-          editorial_picks[0].subcategory.map((sub, index) => (
+          subcategories &&
+          subcategories.map((sub, index) => (
             <NavLink
               key={sub.name}
               to={sub.url}
@@ -84,11 +87,11 @@ const CategoryOptionComponent = ({
           <h4 className="category-news">Artikel Terbaru</h4>
           <div className="border"></div>
         </div>
-        <LatestNews url={`${API.CATEGORY}/latest_news`} urlLocation={url} />
+        <LatestNews url={`${API.CATEGORY}/${category}${subcategory ? '/' + subcategory : '' }/latest_news`} urlLocation={url} />
       </div>
       <div id="popular-news-wrapper">
         <Sticky topOffset={-85}>
-          <PopularNews url={`${API.CATEGORY}/popular_news`} />
+          <PopularNews url={`${API.CATEGORY}/${category}${subcategory ? '/' + subcategory : '' }/popular_news`} />
         </Sticky>
       </div>
     </div>

@@ -24,9 +24,9 @@ export default class AuthorArticles extends Component {
     let apiUrl;
     
     topic === 'following' ?
-      apiUrl = `${API.PROFILE}/${this.props.authorId}/articles?per=${this.state.per}&page=${this.state.page}` :
+      apiUrl = `${API.PROFILE}/${this.props.authorId}/following?per=${this.state.per}&page=${this.state.page}` :
     topic === 'followers' ?
-      apiUrl = `${API.PROFILE}/${this.props.authorId}/applauses?per=${this.state.per}&page=${this.state.page}` :
+      apiUrl = `${API.PROFILE}/${this.props.authorId}/followers?per=${this.state.per}&page=${this.state.page}` :
     topic === 'applause' ?
       apiUrl = `${API.PROFILE}/${this.props.authorId}/applauses?per=${this.state.per}&page=${this.state.page}` :
       apiUrl = `${API.PROFILE}/${this.props.authorId}/articles?per=${this.state.per}&page=${this.state.page}`;

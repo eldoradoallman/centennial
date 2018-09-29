@@ -35,7 +35,7 @@ const ProfileComponent = ({ match, profile }) => (
         </div>
         <Route
           path={`${match.url}/:topicId?`}
-          component={(props) => (
+          render={(props) => (
             <AuthorArticles {...props} authorId={match.params.id} />
           )}
         />

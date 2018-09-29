@@ -17,9 +17,9 @@ class ConnectedCategoryOption extends Component {
   }
 
   fetchContent() {
-    const url = this.props.match.url;
+    const { category, subcategory } = this.props.match.params;
     this.setState({ fetching: true });
-    generalServices.fetchContent(`${API.CATEGORY}/content`)
+    generalServices.fetchContent(`${API.CATEGORY}/${category}${subcategory ? '/' + subcategory : '' }/content`)
       .then(json => this.setState({
         fetching: false,
         fetched: true,
@@ -52,8 +52,15 @@ class ConnectedCategoryOption extends Component {
   }
   
   render() {
+    const { category, subcategory } = this.props.match.params;
     return (
-      <CategoryOptionComponent {...this.state} url={this.props.match.url} />
+      <CategoryOptionComponent
+        {...this.state}
+        category={category}
+        subcategory={subcategory}
+        subcategories={this.props.subcategories}
+        url={this.props.match.url}
+      />
     );
   }
 }
