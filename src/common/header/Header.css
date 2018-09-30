@@ -37,12 +37,18 @@
 #user-info .main-button {
   position: relative;
   margin: 0px 10px;
+  font-weight: 500;
+  border: 1px solid #e9e9e9;
   outline: none;
 }
 
 #user-info .main-button.black-button {
   color: #fff;
   background-color: #000;
+  border: 1px solid #000;
+}
+
+#user-info .main-button:hover {
   border: 1px solid #000;
 }
 

@@ -21,7 +21,7 @@ class ConnectedHeader extends Component {
   }
   
   render() {
-    const { isSidebarOpen, loggedIn, login, register, logout, openLoginPopup } = this.props;
+    const { isSidebarOpen, loggedIn, login, register, logout, openRegisterPopup, openLoginPopup } = this.props;
 
     return (
       <React.Fragment>
@@ -34,6 +34,7 @@ class ConnectedHeader extends Component {
             login={login}
             register={register}
             logout={logout}
+            openRegisterPopup={openRegisterPopup}
             openLoginPopup={openLoginPopup}
           />
           <SidebarMenuComponent isSidebarOpen={isSidebarOpen} />
@@ -56,6 +57,7 @@ ConnectedHeader.propTypes = {
   toggleSidebarMenu: PropTypes.func.isRequired,
   closeSidebarMenu: PropTypes.func.isRequired,
   isLoginPopupOpen: PropTypes.bool.isRequired,
+  openRegisterPopup: PropTypes.func.isRequired,
   openLoginPopup: PropTypes.func.isRequired,
   closeLoginPopup: PropTypes.func.isRequired
 };

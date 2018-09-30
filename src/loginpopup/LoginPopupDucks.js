@@ -1,4 +1,5 @@
 export const types = {
+  OPEN_REGISTER_POPUP: 'OPEN_REGISTER_POPUP',
   OPEN_LOGIN_POPUP: 'OPEN_LOGIN_POPUP',
   CLOSE_LOGIN_POPUP: 'CLOSE_LOGIN_POPUP',
   GO_TO_REGISTER: 'GO_TO_REGISTER',
@@ -12,6 +13,9 @@ export const initialState = {
 };
 
 export const actions = {
+  openRegisterPopup: () => ({
+    type: types.OPEN_REGISTER_POPUP
+  }),
   openLoginPopup: () => ({
     type: types.OPEN_LOGIN_POPUP
   }),
@@ -28,6 +32,9 @@ export const actions = {
 
 const loginPopupReducer = (state = initialState, action) => {
   switch (action.type) {
+    case types.OPEN_REGISTER_POPUP:
+      document.body.style.overflow = 'hidden';
+      return { ...state, isLoginPopupOpen: true, onLogin: false, onRegister: true };
     case types.OPEN_LOGIN_POPUP:
       document.body.style.overflow = 'hidden';
       return { ...state, isLoginPopupOpen: true, onLogin: true, onRegister: false };
