@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 
 import API from '../_api';
 import generalServices from '../_helpers/generalServices';
@@ -15,28 +16,40 @@ class ConnectedCategoryOption extends Component {
     error: null,
     editorial_picks: []
   }
-
-  fetchContent() {
+  
+  signal = axios.CancelToken.source();
+  
+  loadContent = async () => {
     const { category, subcategory } = this.props.match.params;
-    this.setState({ fetching: true });
-    generalServices.fetchContent(`${API.CATEGORY}/${category}${subcategory ? '/' + subcategory : '' }/content`)
-      .then(json => this.setState({
+
+    try {
+      this.setState({ fetching: true });
+      const data = await generalServices.fetchContents(`${API.CATEGORY}/${category}${subcategory ? '/' + subcategory : '' }/content`, this.signal.token);
+      console.log(data.message);
+      this.setState({
         fetching: false,
         fetched: true,
-        editorial_picks: json.data.content
-      }))
-      .catch(error => this.setState({
-        fetching: false,
-        fetched: false,
-        error: error
-      }));
+        editorial_picks: data.content
+      });
+    } catch (error) {
+      if (axios.isCancel(error)) {
+        console.log('Error: ', error.message);
+      } else {
+        this.setState({
+          fetching: false,
+          fetched: false,
+          error
+        });
+      }
+    }
   }
 
   componentDidMount() {
-    this.fetchContent();
+    this.loadContent();
   }
 
   componentWillUnmount() {
+    this.signal.cancel('Category Content Api is being canceled');
     if (this.props.isSidebarOpen) {
       this.props.closeSidebarMenu();
     }
@@ -44,10 +57,10 @@ class ConnectedCategoryOption extends Component {
   
   componentDidUpdate(prevProps) {
     if (this.props.match.url !== prevProps.match.url) {
-      this.fetchContent();
       if (this.props.isSidebarOpen) {
         this.props.closeSidebarMenu();
       }
+      this.loadContent();
     }
   }
   

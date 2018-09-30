@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 
 import { actions as userAuthActions } from '../_user/userAuthDucks';
 import { actions as loginPopupActions } from './LoginPopupDucks';
@@ -17,6 +18,30 @@ class ConnectedLoginPopup extends Component {
     registerPassword: '',
     registerPasswordConfirm: ''
   };
+  
+  signal = axios.CancelToken.source();
+  
+  submitLogin = async (payload, callback, callbackalt) => {
+    try {
+      this.setState({ fetching: true });
+      await this.props.login(this.signal.token, payload, callback, callbackalt);
+    } catch (error) {
+      if (axios.isCancel(error)) {
+        console.log('Error: ', error.message);
+      }
+    }
+  }
+
+  submitRegister = async (payload, callback, callbackalt) => {
+    try {
+      this.setState({ fetching: true });
+      await this.props.register(this.signal.token, payload, callback, callbackalt);
+    } catch (error) {
+      if (axios.isCancel(error)) {
+        console.log('Error: ', error.message);
+      }
+    }
+  }
 
   onChange(event) {
     if (event.target.id === 'login-username-email') {
@@ -64,6 +89,8 @@ class ConnectedLoginPopup extends Component {
         onChange={this.onChange.bind(this)}
         validatePayload={this.validatePayload.bind(this)}
         resetForm={this.resetForm.bind(this)}
+        submitLogin={this.submitLogin.bind(this)}
+        submitRegister={this.submitRegister.bind(this)}
       />
     );
   }

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 import API from '../../_api';
 import generalServices from '../../_helpers/generalServices';
@@ -18,8 +19,10 @@ export default class AuthorArticles extends Component {
     has_more: true,
     topic: ''
   };
-
-  fetchingContent() {
+  
+  signal = axios.CancelToken.source();
+  
+  loadLatestContents = async () => {
     let topic = this.props.match.params.topicId;
     let apiUrl;
     
@@ -31,27 +34,39 @@ export default class AuthorArticles extends Component {
       apiUrl = `${API.PROFILE}/${this.props.authorId}/applauses?per=${this.state.per}&page=${this.state.page}` :
       apiUrl = `${API.PROFILE}/${this.props.authorId}/articles?per=${this.state.per}&page=${this.state.page}`;
 
-    this.setState({
-      fetching: true,
-      topic
-    });
-    generalServices.fetchContent(apiUrl)
-      .then(json => this.setState({
+    try {
+      this.setState({
+        fetching: true,
+        topic
+      });
+      const data = await generalServices.fetchContents(apiUrl, this.signal.token);
+      console.log(data.message);
+      this.setState({
         fetching: false,
         fetched: true,
-        content: [ ...this.state.content, ...json.data.content.articles ],
+        content: [ ...this.state.content, ...data.content.articles ],
         page: this.state.page + 1,
-        has_more: json.data.content.has_more
-      }))
-      .catch(error => this.setState({
-        fetching: false,
-        fetched: false,
-        error
-      }));
+        has_more: data.content.has_more
+      });
+    } catch (error) {
+      if (axios.isCancel(error)) {
+        console.log('Error: ', error.message);
+      } else {
+        this.setState({
+          fetching: false,
+          fetched: false,
+          error
+        });
+      }
+    }
   }
   
   componentDidMount() {
-    this.fetchingContent();
+    this.loadLatestContents();
+  }
+
+  componentWillUnmount() {
+    this.signal.cancel('Latest Articles Api is being canceled');
   }
 
   componentDidUpdate(prevProps) {
@@ -66,7 +81,7 @@ export default class AuthorArticles extends Component {
         has_more: true,
         topic: ''
       });
-      this.fetchingContent();
+      this.loadLatestContents();
     }
   }
 
@@ -88,9 +103,11 @@ export default class AuthorArticles extends Component {
           fetched &&
           <InfiniteScroll
             dataLength={content.length}
-            next={this.fetchingContent.bind(this)}
+            next={this.loadLatestContents.bind(this)}
             hasMore={this.state.has_more}
             loader={<p>Loading...</p>}
+            endMessage={<p>All contents already shown.</p>}
+            scrollThreshold="250px"
           >
             <AuthorArticlesComponent content={content} />
           </InfiniteScroll>

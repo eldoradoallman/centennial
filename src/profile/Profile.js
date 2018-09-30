@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 
 import API from '../_api';
 import generalServices from '../_helpers/generalServices';
@@ -17,26 +18,38 @@ class ConnectedProfile extends Component {
     error: null,
     profile: {}
   };
-
-  fetchingContent() {
-    this.setState({ fetching: true });
-    generalServices.fetchContent(`${API.PROFILE}/${this.props.match.params.id}/content`)
-      .then(json => this.setState({
+  
+  signal = axios.CancelToken.source();
+  
+  loadContent = async () => {
+    try {
+      this.setState({ fetching: true });
+      const data = await generalServices.fetchContents(`${API.PROFILE}/${this.props.match.params.id}/content`, this.signal.token);
+      console.log(data.message);
+      this.setState({
         fetching: false,
         fetched: true,
-        profile: json.data.content
-      }))
-      .catch(error => this.setState({
-        fetching: false,
-        error
-      }));
+        profile: data.content
+      });
+    } catch (error) {
+      if (axios.isCancel(error)) {
+        console.log('Error: ', error.message);
+      } else {
+        this.setState({
+          fetching: false,
+          fetched: false,
+          error
+        });
+      }
+    }
   }
   
   componentDidMount() {
-    this.fetchingContent();
+    this.loadContent();
   }
   
   componentWillUnmount() {
+    this.signal.cancel('Profile Content Api is being canceled');
     if (this.props.isSidebarOpen) {
       this.props.closeSidebarMenu();
     }

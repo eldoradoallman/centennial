@@ -1,12 +1,19 @@
 import axios from 'axios';
 import authHeader from './authHeader';
-import handleError from './handleError';
 
 const generalServices = {
-  fetchContent: (api_url) => {
-    const config = { headers: { ...authHeader(), 'Content-Type': 'application/json' } };
-    
-    return axios.post(api_url, {}, config).catch(error => handleError(error));
+  fetchContents: async (api_url, cancelToken) => {
+    const config = {
+      headers: { ...authHeader(), 'Content-Type': 'application/json' },
+      cancelToken: cancelToken
+    };
+
+    try {
+      const { data } = await axios.post(api_url, {}, config);
+      return data;
+    } catch (error) {
+      throw error;
+    }
   }
 };
 

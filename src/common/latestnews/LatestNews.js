@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 import generalServices from '../../_helpers/generalServices';
 import InfiniteScroll from 'react-infinite-scroll-component';
@@ -18,6 +19,45 @@ class LatestNews extends Component {
       has_more: true
     };
   }
+
+  signal = axios.CancelToken.source();
+
+  loadLatestNews = async () => {
+    try {
+      this.setState({ fetching: true });
+      const data = await generalServices.fetchContents(`${this.state.url}?per=${this.state.per}&page=${this.state.page}`, this.signal.token);
+      console.log(data.message);
+      this.setState({
+        fetching: false,
+        fetched: true,
+        latest_news: [ ...this.state.latest_news, ...data.content.latest_news ],
+        page: this.state.page + 1,
+        has_more: data.content.has_more
+      });
+    } catch (error) {
+      if (axios.isCancel(error)) {
+        console.log('Error: ', error.message);
+      } else {
+        this.setState({
+          fetching: false,
+          fetched: false,
+          error
+        });
+      }
+    }
+  }
+
+  componentDidMount() {
+    setTimeout(() => {
+      if (!this.state.fetching && this.state.latest_news.length === 0) {
+        this.loadLatestNews();
+      }
+    }, 100);
+  }
+
+  componentWillUnmount() {
+    this.signal.cancel('Latest News Api is being canceled');
+  }
   
   componentDidUpdate(prevProps) {
     if (this.props.urlLocation !== prevProps.urlLocation) {
@@ -31,34 +71,24 @@ class LatestNews extends Component {
         page: 1,
         has_more: true
       });
-      this.loadLatestNews();
+      setTimeout(() => {
+        if (!this.state.fetching && this.state.latest_news.length === 0) {
+          this.loadLatestNews();
+        }
+      }, 100);
     }
   }
 
-  loadLatestNews() {
-    this.setState({ fetching: true });
-    generalServices.fetchContent(`${this.state.url}?per=${this.state.per}&page=${this.state.page}`)
-      .then(json => this.setState({
-        fetching: false,
-        fetched: true,
-        latest_news: [ ...this.state.latest_news, ...json.data.content.latest_news ],
-        page: this.state.page + 1,
-        has_more: json.data.content.has_more
-      }))
-      .catch(error => this.setState({
-        fetching: false,
-        fetched: false,
-        error
-      }));
-  }
-
   render() {
+    console.log(this.state.latest_news);
     return (
       <InfiniteScroll
         dataLength={this.state.latest_news.length}
         next={this.loadLatestNews.bind(this)}
         hasMore={this.state.has_more}
         loader={<p>Loading...</p>}
+        endMessage={<p>All contents already shown.</p>}
+        scrollThreshold="250px"
       >
         {
           this.state.latest_news.map((article, index) => (

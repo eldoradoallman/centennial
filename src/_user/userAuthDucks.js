@@ -35,13 +35,13 @@ export const initialState = user ? {
 };
 
 export const actions = {
-  register: (user, callback, callbackalt) => ({
+  register: (cancelToken, user, callback, callbackalt) => ({
     type: types.REGISTER_REQUEST,
-    payload: userServices.register(user, callback, callbackalt)
+    payload: userServices.register(cancelToken, user, callback, callbackalt)
   }),
-  login: (user, callback, callbackalt) => ({
+  login: (cancelToken, user, callback, callbackalt) => ({
     type: types.LOGIN_REQUEST,
-    payload: userServices.login(user, callback, callbackalt)
+    payload: userServices.login(cancelToken, user, callback, callbackalt)
   }),
   logout: () => ({
     type: types.LOGOUT,
@@ -54,16 +54,16 @@ const userAuthReducer = (state = initialState, action) => {
     case types.REGISTER_REQUEST_PENDING:
       return { ...state, registering: true, registered: false, errorRegister: null, user: null };
     case types.REGISTER_REQUEST_REJECTED:
-      return { ...state, registering: false, registered: false, errorRegister: action.payload, user: null };
+      return { ...state, registering: false, registered: false, errorRegister: action.payload.message, user: null };
     case types.REGISTER_REQUEST_FULFILLED:
-      return { ...state, registering: false, registered: true, errorRegister: null, user: action.payload.data };
+      return { ...state, registering: false, registered: true, errorRegister: null, user: action.payload };
     
     case types.LOGIN_REQUEST_PENDING:
       return { ...state, loggingIn: true, loggedIn: false, error: null, user: null };
     case types.LOGIN_REQUEST_REJECTED:
-      return { ...state, loggingIn: false, loggedIn: false, error: action.payload, user: null };
+      return { ...state, loggingIn: false, loggedIn: false, error: action.payload.message, user: null };
     case types.LOGIN_REQUEST_FULFILLED:
-      return { ...state, loggingIn: false, loggedIn: true, error: null, user: action.payload.data };
+      return { ...state, loggingIn: false, loggedIn: true, error: null, user: action.payload };
 
     case types.LOGOUT:
       return { ...state, registering: false, registered: false, errorRegister: null, loggingIn: false, loggedIn: false, error: null, user: null };

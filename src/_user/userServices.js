@@ -1,56 +1,63 @@
 import axios from 'axios';
 import API from '../_api';
 import authHeader from '../_helpers/authHeader';
-import handleError from '../_helpers/handleError';
 
 const userServices = {
-  login: (user, callback, callbackalt) => {
-    const data = user;
-    const config = { headers: { 'Content-Type': 'application/json' } };
-  
-    return axios.post(`${API.USERS}/login`, data, config)
-      .then(user => {
-        // login successful if there's a jwt token in the response
-        if (user.data.token) {
-          // store user details and jwt token in local storage to keep user logged in between page resfreshes
-          localStorage.setItem('token', user.data.token);
-          if (callback) {
-            setTimeout(callback, 4000);
-          }
-          if (callbackalt) {
-            callbackalt();
-          }
+  login: async (cancelToken, payload, callback, callbackalt) => {
+    const payloadData = payload;
+    const config = {
+      headers: { 'Content-Type': 'application/json' },
+      cancelToken: cancelToken
+    };
+
+    try {
+      const { data } = await axios.post(`${API.USERS}/login`, payloadData, config);
+      // login successful if there's a jwt token in the response
+      if (data.token) {
+        // store user details and jwt token in local storage to keep user logged in between page resfreshes
+        localStorage.setItem('token', data.token);
+        if (callback) {
+          setTimeout(callback, 4000);
         }
-        return user;
-      })
-      .catch(error => handleError(error));
+        if (callbackalt) {
+          callbackalt();
+        }
+      }
+      return data;
+    } catch (error) {
+      return Promise.reject(error);
+    }
   },
   logout: () => {
     // remove user from local storage to log user out
     localStorage.removeItem('token');
   },
-  register: (user, callback, callbackalt) => {
-    const data = user;
-    const config = { headers: { 'Content-Type': 'application/json' } };
-  
-    return axios.post(`${API.USERS}/register`, data, config)
-      .then(user => {
-        callback();
-        callbackalt();
-        return user;
-      })
-      .catch(error => handleError(error));
+  register: async (cancelToken, payload, callback, callbackalt) => {
+    const payloadData = payload;
+    const config = {
+      headers: { 'Content-Type': 'application/json' },
+      cancelToken: cancelToken
+    };
+
+    try {
+      const { data } = await axios.post(`${API.USERS}/register`, payloadData, config);
+      callback();
+      callbackalt();
+      return data;
+    } catch (error) {
+      return Promise.reject(error);
+    }
   },
   update: (user) => {
     const data = user;
     const config = { headers: { ...authHeader(), 'Content-Type': 'application/json' } };
     
-    return axios.put(`${API.USERS}/update`, data, config).catch(error => handleError(error));
+    return axios.put(`${API.USERS}/update`, data, config).catch(error => console.log(error));
   },
   delete: (id) => {
     const config = { headers: authHeader() };
   
-    return axios.delete(`${API.USERS}/delete`, config).catch(error => handleError(error));
+    return axios.delete(`${API.USERS}/delete`, config).catch(error => console.log(error));
   }
 };
 

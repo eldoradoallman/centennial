@@ -5,8 +5,6 @@ const LoginPopupComponent = ({
     errorRegister,
     loggedIn,
     error,
-    register,
-    login,
     logout,
     isLoginPopupOpen,
     onLogin,
@@ -16,7 +14,9 @@ const LoginPopupComponent = ({
     goToLogin,
     onChange,
     validatePayload,
-    resetForm
+    resetForm,
+    submitLogin,
+    submitRegister
   }) => isLoginPopupOpen ? (
     <div id="login-popup">
       <div id="login-popup-wrapper">
@@ -91,7 +91,7 @@ const LoginPopupComponent = ({
                             onClick={() => {
                               const payload = validatePayload('login');
                               if (payload) {
-                                login(payload, closeLoginPopup, resetForm);
+                                submitLogin(payload, closeLoginPopup, resetForm);
                               }
                             }}
                           >LOGIN</button>
@@ -103,7 +103,7 @@ const LoginPopupComponent = ({
                             onClick={() => {
                               const payload = validatePayload('register');
                               if (payload) {
-                                register(payload, logout, resetForm);
+                                submitRegister(payload, logout, resetForm);
                               }
                             }}
                           >REGISTER</button>

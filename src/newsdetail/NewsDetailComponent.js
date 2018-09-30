@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import ScrollToTopOnMount from '../ScrollToTopOnMount';
 
-const NewsDetailComponent = ({ news_detail }) => (
+const NewsDetailComponent = ({ news_detail, sub_category }) => (
   <div id="news-detail" className="page-content-wrapper">
     <ScrollToTopOnMount />
     <div id="title-writer-wrapper">
@@ -13,7 +13,7 @@ const NewsDetailComponent = ({ news_detail }) => (
           news_detail.sub_category &&
           <React.Fragment>
             <span>/</span>
-            <Link to={`/category/${news_detail.category}/${news_detail.sub_category}`}>{news_detail.sub_category}</Link>
+            <Link to={`/category/${news_detail.category}/${news_detail.sub_category}`}>{sub_category}</Link>
           </React.Fragment>
         }
       </div>
