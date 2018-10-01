@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-import generalServices from '../../_helpers/generalServices';
+import Services from '../../Services';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import LatestNewsComponent from './LatestNewsComponent';
 
@@ -25,7 +25,7 @@ class LatestNews extends Component {
   loadLatestNews = async () => {
     try {
       this.setState({ fetching: true });
-      const data = await generalServices.fetchContents(`${this.state.url}?per=${this.state.per}&page=${this.state.page}`, this.signal.token);
+      const data = await Services.fetchContent(`${this.state.url}?per=${this.state.per}&page=${this.state.page}`, this.signal.token);
       console.log(data.message);
       this.setState({
         fetching: false,

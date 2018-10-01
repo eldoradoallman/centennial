@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-import generalServices from '../../_helpers/generalServices';
+import Services from '../../Services';
 import PopularNewsComponent from './PopularNewsComponent';
 
 import './PopularNews.css';
@@ -23,7 +23,7 @@ class PopularNews extends Component {
   loadPopularNews = async () => {
     try {
       this.setState({ fetching: true });
-      const data = await generalServices.fetchContents(this.state.url, this.signal.token);
+      const data = await Services.fetchContent(this.state.url, this.signal.token);
       console.log(data.message);
       this.setState({
         fetching: false,

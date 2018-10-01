@@ -1,4 +1,4 @@
-import userServices from './userServices';
+import Services from '../Services';
 
 const user = localStorage.getItem('token');
 
@@ -37,15 +37,15 @@ export const initialState = user ? {
 export const actions = {
   register: (cancelToken, user, callback, callbackalt) => ({
     type: types.REGISTER_REQUEST,
-    payload: userServices.register(cancelToken, user, callback, callbackalt)
+    payload: Services.user.register(cancelToken, user, callback, callbackalt)
   }),
   login: (cancelToken, user, callback, callbackalt) => ({
     type: types.LOGIN_REQUEST,
-    payload: userServices.login(cancelToken, user, callback, callbackalt)
+    payload: Services.user.login(cancelToken, user, callback, callbackalt)
   }),
   logout: () => ({
     type: types.LOGOUT,
-    payload: userServices.logout()
+    payload: Services.user.logout()
   })
 };
 

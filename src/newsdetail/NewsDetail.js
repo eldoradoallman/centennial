@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 
 import API from '../_api';
-import generalServices from '../_helpers/generalServices';
+import Services from '../Services';
 import { actions as sidebarMenuActions } from '../common/sidebarmenu/SidebarMenuDucks';
 import NewsDetailComponent from './NewsDetailComponent';
 
@@ -24,7 +24,7 @@ class ConnectedNewsDetail extends Component {
   loadContent = async () => {
     try {
       this.setState({ fetching: true });
-      const data = await generalServices.fetchContents(API.NEWS_DETAIL, this.signal.token);
+      const data = await Services.fetchContent(API.NEWS_DETAIL, this.signal.token);
       console.log(data.message);
       this.setState({
         fetching: false,

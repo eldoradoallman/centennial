@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 
 import API from '../_api';
-import generalServices from '../_helpers/generalServices';
+import Services from '../Services';
 import { actions as sidebarMenuActions } from '../common/sidebarmenu/SidebarMenuDucks';
 import ProfileComponent from './ProfileComponent';
 
@@ -24,7 +24,7 @@ class ConnectedProfile extends Component {
   loadContent = async () => {
     try {
       this.setState({ fetching: true });
-      const data = await generalServices.fetchContents(`${API.PROFILE}/${this.props.match.params.id}/content`, this.signal.token);
+      const data = await Services.fetchContent(`${API.PROFILE}/${this.props.match.params.id}/content`, this.signal.token);
       console.log(data.message);
       this.setState({
         fetching: false,

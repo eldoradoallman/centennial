@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 import API from '../../_api';
-import generalServices from '../../_helpers/generalServices';
+import Services from '../../Services';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import AuthorArticlesComponent from './AuthorArticlesComponent';
 
@@ -39,7 +39,7 @@ export default class AuthorArticles extends Component {
         fetching: true,
         topic
       });
-      const data = await generalServices.fetchContents(apiUrl, this.signal.token);
+      const data = await Services.fetchContent(apiUrl, this.signal.token);
       console.log(data.message);
       this.setState({
         fetching: false,

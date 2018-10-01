@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 
 import API from '../_api';
-import generalServices from '../_helpers/generalServices';
+import Services from '../Services';
 import { actions as sidebarMenuActions } from '../common/sidebarmenu/SidebarMenuDucks';
 import CategoryOptionComponent from './CategoryOptionComponent';
 
@@ -24,7 +24,7 @@ class ConnectedCategoryOption extends Component {
 
     try {
       this.setState({ fetching: true });
-      const data = await generalServices.fetchContents(`${API.CATEGORY}/${category}${subcategory ? '/' + subcategory : '' }/content`, this.signal.token);
+      const data = await Services.fetchContent(`${API.CATEGORY}/${category}${subcategory ? '/' + subcategory : '' }/content`, this.signal.token);
       console.log(data.message);
       this.setState({
         fetching: false,
