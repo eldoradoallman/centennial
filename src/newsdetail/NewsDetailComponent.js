@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import ScrollToTopOnMount from '../ScrollToTopOnMount';
+import ScrollToTopOnMount from '../common/scrolltotop/ScrollToTopOnMount';
 
 const NewsDetailComponent = ({ news_detail, sub_category }) => (
   <div id="news-detail" className="page-content-wrapper">

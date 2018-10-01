@@ -5,7 +5,7 @@ import Sticky from 'react-sticky-el';
 import API from '../_api';
 import LatestNews from '../common/latestnews/LatestNews';
 import PopularNews from '../common/popularnews/PopularNews';
-import ScrollToTopOnMount from '../ScrollToTopOnMount';
+import ScrollToTopOnMount from '../common/scrolltotop/ScrollToTopOnMount';
 
 const HomeComponent = ({
   fetching,

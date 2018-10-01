@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Link, NavLink } from 'react-router-dom';
 
-import ScrollToTopOnMount from '../ScrollToTopOnMount';
+import ScrollToTopOnMount from '../common/scrolltotop/ScrollToTopOnMount';
 import AuthorArticles from './authorarticles/AuthorArticles';
 
 const ProfileComponent = ({ match, profile }) => (

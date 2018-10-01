@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 
-import ScrollToTopOnUpdate from '../ScrollToTopOnUpdate';
-import ScrollToTopOnMount from '../ScrollToTopOnMount';
+import ScrollToTopOnUpdate from '../common/scrolltotop/ScrollToTopOnUpdate';
+import ScrollToTopOnMount from '../common/scrolltotop/ScrollToTopOnMount';
 import CategoryOption from './CategoryOption';
 
 import './Category.css';
