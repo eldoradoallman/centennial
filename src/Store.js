@@ -3,9 +3,9 @@ import promise from 'redux-promise-middleware';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 
-import userAuthReducer from '../_user/userAuthDucks';
-import sidebarMenuReducer from '../common/sidebarmenu/SidebarMenuDucks';
-import loginPopupReducer from '../loginpopup/LoginPopupDucks';
+import userAuthReducer from './_user/userAuthDucks';
+import sidebarMenuReducer from './sidebarmenu/SidebarMenuDucks';
+import loginPopupReducer from './loginpopup/LoginPopupDucks';
 
 const appReducer = combineReducers({
   userAuth: userAuthReducer,
@@ -14,8 +14,9 @@ const appReducer = combineReducers({
 });
 
 const middleware = applyMiddleware(promise(), thunk, logger);
-const store = createStore(appReducer, middleware);
 
-store.subscribe(() => store.getState());
+const Store = createStore(appReducer, middleware);
 
-export default store;
+Store.subscribe(() => Store.getState());
+
+export default Store;

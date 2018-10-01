@@ -6,7 +6,7 @@ import axios from 'axios';
 
 import API from '../_api';
 import Services from '../Services';
-import { actions as sidebarMenuActions } from '../common/sidebarmenu/SidebarMenuDucks';
+import { actions as sidebarMenuActions } from '../sidebarmenu/SidebarMenuDucks';
 import NewsDetailComponent from './NewsDetailComponent';
 
 import './NewsDetail.css';

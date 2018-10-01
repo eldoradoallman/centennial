@@ -5,15 +5,15 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import Headroom from 'react-headroom';
 
-import { actions as userAuthActions } from '../../_user/userAuthDucks';
+import { actions as userAuthActions } from '../_user/userAuthDucks';
 import { actions as sidebarMenuActions } from '../sidebarmenu/SidebarMenuDucks';
 import SidebarMenuComponent from '../sidebarmenu/SidebarMenuComponent';
-import { actions as loginPopupActions } from '../../loginpopup/LoginPopupDucks';
+import { actions as loginPopupActions } from '../loginpopup/LoginPopupDucks';
 import HeaderComponent from './HeaderComponent';
 
 import './Header.css';
 import '../sidebarmenu/SidebarMenu.css';
-import logo from '../../assets/img/logo.jpg';
+import logo from '../assets/img/logo.jpg';
 
 class ConnectedHeader extends Component {
   toggleSidebarMenu() {

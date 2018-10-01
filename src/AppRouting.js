@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import LoginPopup from './loginpopup/LoginPopup';
-import Header from './common/header/Header';
+import Header from './header/Header';
 import Home from './home/Home';
 import Category from './category/Category';
 import NewsDetail from './newsdetail/NewsDetail';
