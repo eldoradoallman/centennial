@@ -30,13 +30,13 @@ const LoginPopupComponent = ({
             : 'result'
           }
         >
-          <a onClick={() => {
+          <div onClick={() => {
             closeLoginPopup();
             resetForm();
             if (error || errorRegister || registered) {
               logout();
             }
-          }} id="close-login-popup"></a>
+          }} id="close-login-popup"></div>
           {
             !loggedIn && !registered && !error && !errorRegister ?
               <div id="login-message">

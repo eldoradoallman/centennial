@@ -3,12 +3,16 @@ import { Link, NavLink } from 'react-router-dom';
 
 const HeaderComponent = ({
     logo,
+    searchIcon,
     isSidebarOpen,
     toggleSidebarMenu,
     loggedIn,
     logout,
     openRegisterPopup,
-    openLoginPopup
+    openLoginPopup,
+    onInputChange,
+    submitSearch,
+    searchQuery
   }) => (
   <div id="header">
     <div id="header-wrapper" className="clear">
@@ -51,6 +55,19 @@ const HeaderComponent = ({
               <NavLink to="/category/ideas" activeClassName="selected">IDEAS</NavLink>
             </li>
           </ul>
+        </div>
+        <div id="search-wrapper">
+          <input
+            id="search-input"
+            type="text"
+            placeholder="Cari artikel di sini..."
+            value={searchQuery}
+            onChange={onInputChange}
+            onKeyPress={(evt) => evt.key === 'Enter' && submitSearch(evt)}
+          />
+          <div id="submit-search" onClick={submitSearch}>
+            <img src={searchIcon} />
+          </div>
         </div>
       </div>
     </div>

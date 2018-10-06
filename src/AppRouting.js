@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import LoginPopup from './loginpopup/LoginPopup';
 import Header from './header/Header';
 import Home from './home/Home';
+import Search from './search/Search';
 import Category from './category/Category';
 import NewsDetail from './newsdetail/NewsDetail';
 import Profile from './profile/Profile';
@@ -24,6 +25,7 @@ const AppRouting = () => (
         {// To pass props with Route
         /* <HomeRoute exact path="/" component={Home}/> */}
         <Route exact path="/" component={Home} />
+        <Route path="/search" component={Search} />
         <Route path="/author/:id/:name" component={Profile} />
         <Route 
           path="/category/:category(entertainment|livestyle|techno|about-you|ideas)/:subcategory?/:id-:newstitle"

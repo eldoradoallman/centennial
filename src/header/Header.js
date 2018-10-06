@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import Headroom from 'react-headroom';
 
+import Functions from '../Functions';
 import { actions as userAuthActions } from '../_user/userAuthDucks';
 import { actions as sidebarMenuActions } from '../sidebarmenu/SidebarMenuDucks';
 import SidebarMenuComponent from '../sidebarmenu/SidebarMenuComponent';
@@ -14,20 +15,43 @@ import HeaderComponent from './HeaderComponent';
 import './Header.css';
 import '../sidebarmenu/SidebarMenu.css';
 import logo from '../assets/img/logo.jpg';
+import searchIcon from '../assets/img/search-icon.svg';
 
 class ConnectedHeader extends Component {
+  state = {
+    searchQuery: ''
+  };
+
   toggleSidebarMenu() {
     this.props.toggleSidebarMenu();
+  }
+
+  onInputChange(evt) {
+    this.setState({ searchQuery: evt.target.value });
+  }
+
+  submitSearch() {
+    const searchResult = Functions.replaceWhiteSpaces(this.state.searchQuery);
+    if (searchResult) {
+      this.props.history.push({
+        pathname: '/search',
+        search: `?q=${searchResult}`,
+        state: { searchQuery: this.state.searchQuery }
+      });
+      this.setState({ searchQuery: '' });
+    }
   }
   
   render() {
     const { isSidebarOpen, loggedIn, login, register, logout, openRegisterPopup, openLoginPopup } = this.props;
+    const { searchQuery } = this.state;
 
     return (
       <React.Fragment>
         <Headroom>
           <HeaderComponent
             logo={logo}
+            searchIcon={searchIcon}
             isSidebarOpen={isSidebarOpen}
             toggleSidebarMenu={this.toggleSidebarMenu.bind(this)}
             loggedIn={loggedIn}
@@ -36,6 +60,9 @@ class ConnectedHeader extends Component {
             logout={logout}
             openRegisterPopup={openRegisterPopup}
             openLoginPopup={openLoginPopup}
+            onInputChange={this.onInputChange.bind(this)}
+            submitSearch={this.submitSearch.bind(this)}
+            searchQuery={searchQuery}
           />
           <SidebarMenuComponent isSidebarOpen={isSidebarOpen} />
         </Headroom>
