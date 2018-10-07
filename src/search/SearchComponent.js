@@ -1,28 +1,35 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
+import API from '../_api';
 import ScrollToTopOnMount from '../common/scrolltotop/ScrollToTopOnMount';
+import LatestNews from '../common/latestnews/LatestNews';
 
 const SearchComponent = ({
-    news_detail,
-    title
+    title,
+    searchParams,
+    inputClassName,
+    inputOnMouseOver,
+    inputOnMouseLeave,
+    onInputChange,
+    submitSearch
   }) => (
   <div id="search" className="page-content-wrapper">
     <ScrollToTopOnMount />
-    <div id="title-writer-wrapper">
-      <h1 className="news-title">{title}</h1>
-      <Link to={news_detail.writer.url} className="writer-avatar">
-        <img src={news_detail.writer.avatar.small} alt={news_detail.writer.name} />
-      </Link>
-      <p>Ditulis oleh</p>
-      <p><Link to={news_detail.writer.url} className="writer">{news_detail.writer.name}</Link></p>
-      <p>{news_detail.date}</p>
+    <div id="title-search-wrapper">
+      <h4 className="search-result">Berikut adalah hasil pencarianmu berdasarkan 'kata kunci':</h4>
+      <input
+        className={inputClassName}
+        type="text"
+        placeholder={title}
+        onMouseOver={inputOnMouseOver}
+        onMouseLeave={inputOnMouseLeave}
+        onChange={onInputChange}
+        onKeyPress={(evt) => evt.key === 'Enter' && submitSearch(evt)}
+      />
     </div>
-    <div id="news-main-image">
-      <img src={news_detail.image.size.medium} alt={news_detail.image.alt} />
-      <div className="image-caption">{news_detail.image.caption}</div>
+    <div className="search-content-wrapper">
+      <LatestNews url={`${API.SEARCH}`} searchParams={searchParams} />
     </div>
-    <div className="news-detail-content" dangerouslySetInnerHTML={{ __html: news_detail.html_content }} />
   </div>
 );
 

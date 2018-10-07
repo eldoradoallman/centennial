@@ -2,10 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-import axios from 'axios';
 
-import API from '../_api';
-import Services from '../Services';
+import Functions from '../Functions';
 import { actions as sidebarMenuActions } from '../sidebarmenu/SidebarMenuDucks';
 import SearchComponent from './SearchComponent';
 
@@ -13,72 +11,64 @@ import './Search.css';
 
 class ConnectedSearch extends Component {
   state = {
-    fetching: false,
-    fetched: false,
-    error: null,
-    news_detail: {}
+    searchParams: this.props.history.location.search,
+    title: this.props.history.location.state.searchQuery,
+    inputClassName: 'search-title',
+    searchQuery: ''
   };
   
-  signal = axios.CancelToken.source();
-  
-  loadContent = async () => {
-    try {
-      this.setState({ fetching: true });
-      const data = await Services.fetchContent(API.NEWS_DETAIL, this.signal.token);
-      console.log(data.message);
-      this.setState({
-        fetching: false,
-        fetched: true,
-        news_detail: data.content
-      });
-    } catch (error) {
-      if (axios.isCancel(error)) {
-        console.log('Error: ', error.message);
-      } else {
-        this.setState({
-          fetching: false,
-          fetched: false,
-          error
-        });
-      }
-    }
-  }
-  
-  componentDidMount() {
-    console.log(this.props);
-    this.loadContent();
-  }
-  
   componentWillUnmount() {
-    this.signal.cancel('News Detail Content Api is being canceled');
     if (this.props.isSidebarOpen) {
       this.props.closeSidebarMenu();
     }
   }
 
-  resolveSubCategory(string) {
-    if (string === 'popculture') {
-      return 'POP CULTURE';
-    } else if (string === 'beautyfashion') {
-      return 'BEAUTY & FASHION';
-    } else if (string === 'autosports') {
-      return 'AUTO & SPORTS';
-    } else if (string === 'hangout') {
-      return 'HANGOUT ZONE';
+  componentDidUpdate(prevProps) {
+    if (
+      this.props.match.url === prevProps.match.url &&
+      this.props.location.search !== prevProps.location.search
+    ) {
+      this.setState({
+        searchParams: this.props.history.location.search,
+        title: this.props.history.location.state.searchQuery,
+        inputClassName: 'search-title',
+        searchQuery: ''
+      });
+    }
+  }
+
+  inputOnMouseOver() {
+    this.setState({ inputClassName: 'search-title active' });
+  }
+
+  inputOnMouseLeave() {
+    this.setState({ inputClassName: 'search-title' });
+  }
+
+  onInputChange(evt) {
+    this.setState({ searchQuery: evt.target.value });
+  }
+
+  submitSearch() {
+    const searchResult = Functions.replaceWhiteSpaces(this.state.searchQuery);
+    if (searchResult) {
+      this.props.history.push({
+        pathname: '/search',
+        search: `?q=${searchResult}`,
+        state: { searchQuery: this.state.searchQuery }
+      });
+      this.setState({ searchQuery: '' });
     }
   }
 
   render() {
-    const { history } = this.props;
-    const { sub_category } = this.state.news_detail;
     return (
-      this.state.news_detail.id ?
-        <SearchComponent {...this.state}
-          title={history.location.state.searchQuery}
-          sub_category={this.resolveSubCategory(sub_category)}
-        />
-      : 
-        <p>Loading Content</p>
+      <SearchComponent {...this.state}
+        inputOnMouseOver={this.inputOnMouseOver.bind(this)}
+        inputOnMouseLeave={this.inputOnMouseLeave.bind(this)}
+        onInputChange={this.onInputChange.bind(this)}
+        submitSearch={this.submitSearch.bind(this)}
+      />
     );
   }
 }

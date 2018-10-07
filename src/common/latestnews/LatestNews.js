@@ -25,7 +25,8 @@ class LatestNews extends Component {
   loadLatestNews = async () => {
     try {
       this.setState({ fetching: true });
-      const data = await Services.fetchContent(`${this.state.url}?per=${this.state.per}&page=${this.state.page}`, this.signal.token);
+      const data = await Services.fetchContent(`
+        ${this.state.url}${this.props.searchParams ? this.props.searchParams + '&' : '?'}per=${this.state.per}&page=${this.state.page}`, this.signal.token);
       console.log(data.message);
       this.setState({
         fetching: false,
@@ -60,7 +61,10 @@ class LatestNews extends Component {
   }
   
   componentDidUpdate(prevProps) {
-    if (this.props.urlLocation !== prevProps.urlLocation) {
+    if (
+      this.props.urlLocation !== prevProps.urlLocation ||
+      this.props.searchParams !== prevProps.searchParams
+    ) {
       this.setState({
         fetching: false,
         fetched: false,

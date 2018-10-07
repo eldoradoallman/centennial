@@ -4,16 +4,19 @@ dl,h1,h2,h3,h4,h5,h6,ol,ul{margin-top:0;margin-bottom:0}button,iframe,img{border
   color: #b3b3b3;
   opacity: 1; /* Firefox */
   font-family: 'Quicksand', sans-serif;
+  transition: all 200ms ease-in-out;
 }
 
 :-ms-input-placeholder { /* Internet Explorer 10-11 */
   color: #b3b3b3;
   font-family: 'Quicksand', sans-serif;
+  transition: all 200ms ease-in-out;
 }
 
 ::-ms-input-placeholder { /* Microsoft Edge */
   color: #b3b3b3;
   font-family: 'Quicksand', sans-serif;
+  transition: all 200ms ease-in-out;
 }
 
 input, textarea, select {
