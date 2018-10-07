@@ -10,6 +10,8 @@ const HeaderComponent = ({
     logout,
     openRegisterPopup,
     openLoginPopup,
+    isSearchbarOpen,
+    toggleSearchbar,
     onInputChange,
     submitSearch,
     searchQuery
@@ -56,16 +58,27 @@ const HeaderComponent = ({
             </li>
           </ul>
         </div>
-        <div id="search-wrapper">
+        <div id="search-wrapper" className={isSearchbarOpen ? 'searchbar active' : 'searchbar'}>
           <input
             id="search-input"
             type="text"
             placeholder="Cari artikel di sini..."
             value={searchQuery}
             onChange={onInputChange}
-            onKeyPress={(evt) => evt.key === 'Enter' && submitSearch(evt)}
+            onKeyPress={(evt) => {
+              if (evt.key === 'Enter') {
+                toggleSearchbar();
+                submitSearch();
+              }
+            }}
           />
-          <div id="submit-search" onClick={submitSearch}>
+          <div
+            id="submit-search"
+            onClick={() => {
+              toggleSearchbar();
+              submitSearch();
+            }}
+          >
             <img src={searchIcon} />
           </div>
         </div>

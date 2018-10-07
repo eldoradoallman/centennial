@@ -129,6 +129,13 @@
   position: absolute;
   right: 40px;
   bottom: 18px;
+  width: 24px;
+  overflow: hidden;
+  transition: all 500ms ease-in-out;
+}
+
+#search-wrapper.active {
+  width: 200px;
 }
 
 #search-input {
@@ -138,10 +145,23 @@
   border: none;
 }
 
+#search-input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #808080;
+}
+
+#search-input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: #808080;
+}
+
+#search-input::-ms-input-placeholder { /* Microsoft Edge */
+  color: #808080;
+}
+
 #submit-search {
   position: absolute;
   top: 0px;
   right: 0px;
+  background-color: #fff;
   transform: rotateZ(90deg);
   cursor: pointer;
 }

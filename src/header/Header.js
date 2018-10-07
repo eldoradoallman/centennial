@@ -19,11 +19,16 @@ import searchIcon from '../assets/img/search-icon.svg';
 
 class ConnectedHeader extends Component {
   state = {
+    isSearchbarOpen: false,
     searchQuery: ''
   };
 
   toggleSidebarMenu() {
     this.props.toggleSidebarMenu();
+  }
+
+  toggleSearchbar() {
+    this.setState({ isSearchbarOpen: !this.state.isSearchbarOpen });
   }
 
   onInputChange(evt) {
@@ -44,7 +49,7 @@ class ConnectedHeader extends Component {
   
   render() {
     const { isSidebarOpen, loggedIn, login, register, logout, openRegisterPopup, openLoginPopup } = this.props;
-    const { searchQuery } = this.state;
+    const { isSearchbarOpen, searchQuery } = this.state;
 
     return (
       <React.Fragment>
@@ -60,6 +65,8 @@ class ConnectedHeader extends Component {
             logout={logout}
             openRegisterPopup={openRegisterPopup}
             openLoginPopup={openLoginPopup}
+            isSearchbarOpen={isSearchbarOpen}
+            toggleSearchbar={this.toggleSearchbar.bind(this)}
             onInputChange={this.onInputChange.bind(this)}
             submitSearch={this.submitSearch.bind(this)}
             searchQuery={searchQuery}
