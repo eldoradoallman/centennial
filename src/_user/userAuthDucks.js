@@ -1,6 +1,12 @@
 import Services from '../Services';
 
-const user = localStorage.getItem('token');
+let user = localStorage.getItem('token');
+
+if (user) {
+  user = JSON.parse(user);
+  user.avatar.small = decodeURI(user.avatar.small);
+  user.avatar.medium = decodeURI(user.avatar.medium);
+}
 
 export const types = {
   REGISTER_REQUEST: 'REGISTER_REQUEST',
@@ -52,11 +58,11 @@ export const actions = {
 const userAuthReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.REGISTER_REQUEST_PENDING:
-      return { ...state, registering: true, registered: false, errorRegister: null, user: null };
+      return { ...state, registering: true, registered: false, errorRegister: null };
     case types.REGISTER_REQUEST_REJECTED:
-      return { ...state, registering: false, registered: false, errorRegister: action.payload.message, user: null };
+      return { ...state, registering: false, registered: false, errorRegister: action.payload.message };
     case types.REGISTER_REQUEST_FULFILLED:
-      return { ...state, registering: false, registered: true, errorRegister: null, user: action.payload };
+      return { ...state, registering: false, registered: true, errorRegister: null };
     
     case types.LOGIN_REQUEST_PENDING:
       return { ...state, loggingIn: true, loggedIn: false, error: null, user: null };

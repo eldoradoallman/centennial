@@ -1,10 +1,16 @@
 const Functions = {
   setAuthHeader: () => {
     // return authorization header with jwt token
-    let token = localStorage.getItem('token');
+    let user = localStorage.getItem('token');
+    
+    if (user) {
+      user = JSON.parse(user);
+      user.avatar.small = decodeURI(user.avatar.small);
+      user.avatar.medium = decodeURI(user.avatar.medium);
+    }
   
-    if (token) {
-      return { 'Authorization': 'Bearer ' + token };
+    if (user) {
+      return { 'Authorization': 'Bearer ' + user.token };
     } else {
       return {};
     }

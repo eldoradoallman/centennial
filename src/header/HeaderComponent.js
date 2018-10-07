@@ -4,12 +4,16 @@ import { Link, NavLink } from 'react-router-dom';
 const HeaderComponent = ({
     logo,
     searchIcon,
+    user,
     isSidebarOpen,
     toggleSidebarMenu,
     loggedIn,
     logout,
     openRegisterPopup,
     openLoginPopup,
+    Functions,
+    isUserSettingsOpen,
+    toggleUserSettings,
     isSearchbarOpen,
     toggleSearchbar,
     onInputChange,
@@ -31,7 +35,19 @@ const HeaderComponent = ({
           </div>
         :
           <div id="user-info">
-            <button className="main-button" onClick={logout}>Logout</button>
+            <div id="user-avatar" onClick={toggleUserSettings}>
+              <img src={user.avatar ? user.avatar.small : ''} alt="" />
+            </div>
+            {
+              isUserSettingsOpen ?
+                <div id="user-settings-wrapper">
+                  <a>Profile</a>
+                  <a>Bookmarks</a>
+                  <button onClick={logout}>Logout</button>
+                </div>
+              :
+                ''
+            }
           </div>
       }
       <div id="header-bottom">
@@ -67,7 +83,10 @@ const HeaderComponent = ({
             onChange={onInputChange}
             onKeyPress={(evt) => {
               if (evt.key === 'Enter') {
-                toggleSearchbar();
+                const searchResult = Functions.replaceWhiteSpaces(searchQuery);
+                if (searchResult) {
+                  toggleSearchbar();
+                }
                 submitSearch();
               }
             }}

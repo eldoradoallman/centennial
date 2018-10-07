@@ -15,8 +15,13 @@ const userServices = {
       const { data } = await axios.post(`${API.USERS}/login`, payloadData, config);
       // login successful if there's a jwt token in the response
       if (data.token) {
+        console.log(data);
+        let smallAvatar = encodeURI(data.avatar.small);
+        let mediumAvatar = encodeURI(data.avatar.medium);
+        data.avatar.small = smallAvatar;
+        data.avatar.medium = mediumAvatar;
         // store user details and jwt token in local storage to keep user logged in between page resfreshes
-        localStorage.setItem('token', data.token);
+        localStorage.setItem('token', JSON.stringify(data));
         if (callback) {
           setTimeout(callback, 4000);
         }
