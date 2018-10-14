@@ -4,11 +4,13 @@ import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 
 import userAuthReducer from './_user/userAuthDucks';
+import bookmarksReducer from './bookmarks/BookmarksDucks';
 import sidebarMenuReducer from './sidebarmenu/SidebarMenuDucks';
 import loginPopupReducer from './loginpopup/LoginPopupDucks';
 
 const appReducer = combineReducers({
   userAuth: userAuthReducer,
+  bookmarks: bookmarksReducer,
   sidebarMenu: sidebarMenuReducer,
   loginPopup: loginPopupReducer
 });

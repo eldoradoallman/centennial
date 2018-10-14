@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 
 import Services from '../../Services';
+import { actions as bookmarksActions } from '../../bookmarks/BookmarksDucks';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import LatestNewsComponent from './LatestNewsComponent';
 
-class LatestNews extends Component {
+class ConnectedLatestNews extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -96,12 +100,33 @@ class LatestNews extends Component {
       >
         {
           this.state.latest_news.map((article, index) => (
-            <LatestNewsComponent key={index} article={article} index={index} page={this.props.page} />
+            <LatestNewsComponent {...this.props} key={index} article={article} index={index} page={this.props.page} />
           ))  
         }
       </InfiniteScroll>
     );
   }
 }
+
+ConnectedLatestNews.propTypes = {
+  addArticlePending: PropTypes.bool.isRequired,
+  addArticleRejected: PropTypes.bool.isRequired,
+  addArticleFulfilled: PropTypes.bool.isRequired,
+  removeArticlePending: PropTypes.bool.isRequired,
+  removeArticleRejected: PropTypes.bool.isRequired,
+  removeArticleFulfilled: PropTypes.bool.isRequired,
+  addArticle: PropTypes.func.isRequired,
+  removeArticle: PropTypes.func.isRequired
+};
+
+const mapStateToProps = (state) => ({
+  ...state.bookmarks
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  ...bindActionCreators(bookmarksActions, dispatch)
+});
+
+const LatestNews = connect(mapStateToProps, mapDispatchToProps)(ConnectedLatestNews);
 
 export default LatestNews;

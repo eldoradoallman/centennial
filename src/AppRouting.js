@@ -5,6 +5,7 @@ import LoginPopup from './loginpopup/LoginPopup';
 import Header from './header/Header';
 import Home from './home/Home';
 import Search from './search/Search';
+import Bookmarks from './bookmarks/Bookmarks';
 import Category from './category/Category';
 import NewsDetail from './newsdetail/NewsDetail';
 import Profile from './profile/Profile';
@@ -26,6 +27,7 @@ const AppRouting = () => (
         /* <HomeRoute exact path="/" component={Home}/> */}
         <Route exact path="/" component={Home} />
         <Route path="/search" component={Search} />
+        <Route path="/bookmarks" component={Bookmarks} />
         <Route path="/author/:id/:name" component={Profile} />
         <Route 
           path="/category/:category(entertainment|livestyle|techno|about-you|ideas)/:subcategory?/:id-:newstitle"

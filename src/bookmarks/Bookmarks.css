@@ -1,0 +1,41 @@
+#title-search-wrapper {
+  max-width: 700px;
+  padding: 60px 0px 0px;
+}
+
+.bookmarks-title {
+  display: block;
+  width: 100%;
+  margin: 0px 0px 30px;
+  font-size: 30px;
+  color: #000;
+}
+
+.search-title::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #000;
+}
+
+.search-title:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: #000;
+}
+
+.search-title::-ms-input-placeholder { /* Microsoft Edge */
+  color: #000;
+}
+
+.search-title.active::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #b3b3b3;
+}
+
+.search-title.active:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: #b3b3b3;
+}
+
+.search-title.active::-ms-input-placeholder { /* Microsoft Edge */
+  color: #b3b3b3;
+}
+
+.search-content-wrapper {
+  max-width: 720px;
+  margin: 0px -10px;
+}

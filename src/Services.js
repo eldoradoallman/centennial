@@ -2,6 +2,7 @@ import axios from 'axios';
 
 import Functions from './Functions';
 import userServices from './_user/userServices';
+import BookmarksServices from './bookmarks/BookmarksServices';
 
 const Services = {
   fetchContent: async (api_url, cancelToken) => {
@@ -17,7 +18,8 @@ const Services = {
       throw error;
     }
   },
-  user: userServices
+  user: userServices,
+  bookmarks: BookmarksServices
 };
 
 export default Services;

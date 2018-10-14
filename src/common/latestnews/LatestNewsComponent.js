@@ -6,26 +6,26 @@ import LatestNewsTitleComponent from './LatestNewsTitleComponent';
 
 import './LatestNews.css';
 
-const LatestNewsComponent = ({ article, index, page }) => {
-  if (page === 'home') {
-    if (!article.id) {
-      return article.editorial_picks.map((article_pick, index) => (
+const LatestNewsComponent = (props) => {
+  if (props.page === 'home') {
+    if (!props.article.id) {
+      return props.article.editorial_picks.map((article_pick, index) => (
         <LatestNewsHomeComponent key={article_pick.id} articlepick={article_pick} index={index} />
       ));
     } else {
       return (
-        <React.Fragment key={article.id}>
+        <React.Fragment key={props.article.id}>
           {
-            index % 8 === 0 &&
-            <LatestNewsTitleComponent article={article} />
+            props.index % 8 === 0 &&
+            <LatestNewsTitleComponent article={props.article} />
           }
-          <LatestNewsItemComponent article={article} />
+          <LatestNewsItemComponent {...props} />
         </React.Fragment>
       );
     }
   } else {
     return (
-      <LatestNewsItemComponent article={article} />
+      <LatestNewsItemComponent {...props} />
     );
   }
 };
