@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 
 import LoginPopup from './loginpopup/LoginPopup';
 import Header from './header/Header';
@@ -10,24 +10,30 @@ import Category from './category/Category';
 import NewsDetail from './newsdetail/NewsDetail';
 import Profile from './profile/Profile';
 
-// To pass props with Route
-/* const HomeRoute = ({ component: Component, ...rest }) => (
-  <Route {...rest} render={props => (
-    <Component john="3" {...props}/>
-  )}/>
-); */
-
-const AppRouting = () => (
+const AppRouting = ({ loggedIn, user }) => (
   <Router>
     <React.Fragment>
       <LoginPopup />
       <Header />
       <Switch>
-        {// To pass props with Route
-        /* <HomeRoute exact path="/" component={Home}/> */}
         <Route exact path="/" component={Home} />
         <Route path="/search" component={Search} />
-        <Route path="/bookmarks" component={Bookmarks} />
+        <Route path="/bookmarks" render={(props) => {
+          if (loggedIn) {
+            return (
+              <Bookmarks user={user} />
+            );
+          } else {
+            return (
+              <Redirect
+                to={{
+                  pathname: "/",
+                  state: { from: props.location }
+                }}
+              />
+            );
+          }
+        }} />
         <Route path="/author/:id/:name" component={Profile} />
         <Route 
           path="/category/:category(entertainment|livestyle|techno|about-you|ideas)/:subcategory?/:id-:newstitle"

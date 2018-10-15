@@ -41,8 +41,8 @@ const HeaderComponent = ({
             {
               isUserSettingsOpen ?
                 <div id="user-settings-wrapper">
-                  <a>Profile</a>
-                  <a>Bookmarks</a>
+                  <Link to="/author/5/kevin-dharmawangsa" onClick={toggleUserSettings}>Profile</Link>
+                  <Link to="/bookmarks" onClick={toggleUserSettings}>Bookmarks</Link>
                   <button onClick={logout}>Logout</button>
                 </div>
               :

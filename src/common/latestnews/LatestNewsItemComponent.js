@@ -14,7 +14,13 @@ const LatestNewsItemComponent = (props) => console.log(props) || (
           <p className="writer">Ditulis oleh <Link to={props.article.writer.url}>{props.article.writer.name}</Link></p>
           <p>{props.article.date}</p>
         </div>
-        <div className="main-button">Simpan Artikel</div>
+        <div className="main-button" onClick={() => props.addArticle(
+          {
+            userID: '',
+            articleID: props.article.id
+          },
+          props.cancelToken
+        )}>Simpan Artikel</div>
       </div>
     </div>
   </div>

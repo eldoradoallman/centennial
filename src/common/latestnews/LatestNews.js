@@ -100,7 +100,7 @@ class ConnectedLatestNews extends Component {
       >
         {
           this.state.latest_news.map((article, index) => (
-            <LatestNewsComponent {...this.props} key={index} article={article} index={index} page={this.props.page} />
+            <LatestNewsComponent {...this.props} key={index} article={article} index={index} page={this.props.page} cancelToken={this.signal.token} />
           ))  
         }
       </InfiniteScroll>
