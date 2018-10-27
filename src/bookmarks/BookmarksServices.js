@@ -12,7 +12,7 @@ const BookmarksServices = {
     };
 
     try {
-      const { data } = await axios.put(`${API.BOOKMARKS}/add_article`, {}, config);
+      const { data } = await axios.put(`${API.BOOKMARKS}/addarticle`, {}, config);
       return data;
     } catch (error) {
       throw error;
@@ -26,7 +26,7 @@ const BookmarksServices = {
     };
 
     try {
-      const { data } = await axios.delete(`${API.BOOKMARKS}/remove_article`, config);
+      const { data } = await axios.delete(`${API.BOOKMARKS}/removearticle`, config);
       return data;
     } catch (error) {
       throw error;

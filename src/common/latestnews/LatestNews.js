@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 
 import Services from '../../Services';
+import { actions as userAuthActions } from '../../_user/userAuthDucks';
 import { actions as bookmarksActions } from '../../bookmarks/BookmarksDucks';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import LatestNewsComponent from './LatestNewsComponent';
@@ -27,10 +28,11 @@ class ConnectedLatestNews extends Component {
   signal = axios.CancelToken.source();
 
   loadLatestNews = async () => {
+    const apiUrl = `${this.state.url}${this.props.searchParams ? this.props.searchParams + '&' : '?'}per=${this.state.per}&page=${this.state.page}`;
+
     try {
       this.setState({ fetching: true });
-      const data = await Services.fetchContent(`
-        ${this.state.url}${this.props.searchParams ? this.props.searchParams + '&' : '?'}per=${this.state.per}&page=${this.state.page}`, this.signal.token);
+      const data = await Services.fetchContent(apiUrl, this.signal.token);
       console.log(data.message);
       this.setState({
         fetching: false,
@@ -100,7 +102,14 @@ class ConnectedLatestNews extends Component {
       >
         {
           this.state.latest_news.map((article, index) => (
-            <LatestNewsComponent {...this.props} key={index} article={article} index={index} page={this.props.page} cancelToken={this.signal.token} />
+            <LatestNewsComponent {...this.props}
+              key={index}
+              user={this.props.user}
+              article={article}
+              index={index}
+              page={this.props.page}
+              cancelToken={this.signal.token}
+            />
           ))  
         }
       </InfiniteScroll>
@@ -109,6 +118,14 @@ class ConnectedLatestNews extends Component {
 }
 
 ConnectedLatestNews.propTypes = {
+  registering: PropTypes.bool.isRequired,
+  loggingIn: PropTypes.bool.isRequired,
+  loggedIn: PropTypes.bool.isRequired,
+  error: PropTypes.any,
+  user: PropTypes.any,
+  register: PropTypes.func.isRequired,
+  login: PropTypes.func.isRequired,
+  logout: PropTypes.func.isRequired,
   addArticlePending: PropTypes.bool.isRequired,
   addArticleRejected: PropTypes.bool.isRequired,
   addArticleFulfilled: PropTypes.bool.isRequired,
@@ -120,11 +137,15 @@ ConnectedLatestNews.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
+  ...state.userAuth,
   ...state.bookmarks
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  ...bindActionCreators(bookmarksActions, dispatch)
+  ...bindActionCreators({
+    ...userAuthActions,
+    ...bookmarksActions
+  }, dispatch)
 });
 
 const LatestNews = connect(mapStateToProps, mapDispatchToProps)(ConnectedLatestNews);

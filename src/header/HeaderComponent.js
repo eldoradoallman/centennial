@@ -98,7 +98,7 @@ const HeaderComponent = ({
               submitSearch();
             }}
           >
-            <img src={searchIcon} />
+            <img src={searchIcon} alt="" />
           </div>
         </div>
       </div>

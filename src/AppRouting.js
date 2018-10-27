@@ -18,22 +18,12 @@ const AppRouting = ({ loggedIn, user }) => (
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/search" component={Search} />
-        <Route path="/bookmarks" render={(props) => {
-          if (loggedIn) {
-            return (
-              <Bookmarks user={user} />
-            );
-          } else {
-            return (
-              <Redirect
-                to={{
-                  pathname: "/",
-                  state: { from: props.location }
-                }}
-              />
-            );
-          }
-        }} />
+        <Route path="/bookmarks" render={(props) => 
+          loggedIn ?
+            <Bookmarks user={user} />
+          :
+            <Redirect to={{ pathname: "/", state: { from: props.location } }} />
+        } />
         <Route path="/author/:id/:name" component={Profile} />
         <Route 
           path="/category/:category(entertainment|livestyle|techno|about-you|ideas)/:subcategory?/:id-:newstitle"

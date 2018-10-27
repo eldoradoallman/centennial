@@ -9,46 +9,15 @@ import BookmarksComponent from './BookmarksComponent';
 import './Bookmarks.css';
 
 class ConnectedBookmarks extends Component {
-  state = {
-    inputClassName: 'search-title',
-    searchQuery: ''
-  };
-  
   componentWillUnmount() {
     if (this.props.isSidebarOpen) {
       this.props.closeSidebarMenu();
     }
   }
 
-  componentDidUpdate(prevProps) {
-    if (
-      this.props.match.url === prevProps.match.url &&
-      this.props.location.search !== prevProps.location.search
-    ) {
-      this.setState({
-        inputClassName: 'search-title',
-        searchQuery: ''
-      });
-    }
-  }
-
-  inputOnMouseOver() {
-    this.setState({ inputClassName: 'search-title active' });
-  }
-
-  inputOnMouseLeave() {
-    this.setState({ inputClassName: 'search-title' });
-  }
-
-  submitSearch() {
-  }
-
   render() {
     return (
-      <BookmarksComponent {...this.state}
-        inputOnMouseOver={this.inputOnMouseOver.bind(this)}
-        inputOnMouseLeave={this.inputOnMouseLeave.bind(this)}
-      />
+      <BookmarksComponent {...this.props} />
     );
   }
 }

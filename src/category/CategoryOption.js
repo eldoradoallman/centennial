@@ -66,9 +66,9 @@ class ConnectedCategoryOption extends Component {
   
   render() {
     const { category, subcategory } = this.props.match.params;
+    
     return (
-      <CategoryOptionComponent
-        {...this.state}
+      <CategoryOptionComponent {...this.state}
         category={category}
         subcategory={subcategory}
         subcategories={this.props.subcategories}

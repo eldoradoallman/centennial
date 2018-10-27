@@ -72,7 +72,10 @@ class Category extends Component {
             exact
             path="/category/:category/:subcategory?"
             render={(props) => (
-              <CategoryOption {...props} category={this.state.category} subcategories={this.state.subcategories} />
+              <CategoryOption {...props}
+                category={this.state.category}
+                subcategories={this.state.subcategories}
+              />
             )}
           />
         </div>

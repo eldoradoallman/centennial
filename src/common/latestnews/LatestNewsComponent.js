@@ -10,7 +10,11 @@ const LatestNewsComponent = (props) => {
   if (props.page === 'home') {
     if (!props.article.id) {
       return props.article.editorial_picks.map((article_pick, index) => (
-        <LatestNewsHomeComponent key={article_pick.id} articlepick={article_pick} index={index} />
+        <LatestNewsHomeComponent
+          key={article_pick.id}
+          articlepick={article_pick}
+          index={index}
+        />
       ));
     } else {
       return (
