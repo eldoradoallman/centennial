@@ -18,19 +18,23 @@ class ConnectedSearch extends Component {
   };
   
   componentWillUnmount() {
-    if (this.props.isSidebarOpen) {
-      this.props.closeSidebarMenu();
+    const { isSidebarOpen, closeSidebarMenu } = this.props;
+
+    if (isSidebarOpen) {
+      closeSidebarMenu();
     }
   }
 
   componentDidUpdate(prevProps) {
+    const { match, location, history } = this.props;
+
     if (
-      this.props.match.url === prevProps.match.url &&
-      this.props.location.search !== prevProps.location.search
+      match.url === prevProps.match.url &&
+      location.search !== prevProps.location.search
     ) {
       this.setState({
-        searchParams: this.props.history.location.search,
-        title: this.props.history.location.state.searchQuery,
+        searchParams: history.location.search,
+        title: history.location.state.searchQuery,
         inputClassName: 'search-title',
         searchQuery: ''
       });
@@ -50,12 +54,15 @@ class ConnectedSearch extends Component {
   }
 
   submitSearch() {
-    const searchResult = Functions.replaceWhiteSpaces(this.state.searchQuery);
+    const { history } = this.props;
+    const { searchQuery } = this.state;
+    const searchResult = Functions.replaceWhiteSpaces(searchQuery);
+
     if (searchResult) {
-      this.props.history.push({
+      history.push({
         pathname: '/search',
         search: `?q=${searchResult}`,
-        state: { searchQuery: this.state.searchQuery }
+        state: { searchQuery: searchQuery }
       });
       this.setState({ searchQuery: '' });
     }

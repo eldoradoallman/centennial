@@ -21,18 +21,22 @@ export default class AuthorArticles extends Component {
   };
   
   signal = axios.CancelToken.source();
-  
+
+  resolveApiUrl(topic, authorId, per, page) {
+    return topic === 'following' ?
+        `${API.PROFILE}/${authorId}/following?per=${per}&page=${page}` :
+      topic === 'followers' ?
+        `${API.PROFILE}/${authorId}/followers?per=${per}&page=${page}` :
+      topic === 'applause' ?
+        `${API.PROFILE}/${authorId}/applauses?per=${per}&page=${page}` :
+        `${API.PROFILE}/${authorId}/articles?per=${per}&page=${page}`;
+  }
+
   loadLatestContents = async () => {
-    let topic = this.props.match.params.topicId;
-    let apiUrl;
-    
-    topic === 'following' ?
-      apiUrl = `${API.PROFILE}/${this.props.authorId}/following?per=${this.state.per}&page=${this.state.page}` :
-    topic === 'followers' ?
-      apiUrl = `${API.PROFILE}/${this.props.authorId}/followers?per=${this.state.per}&page=${this.state.page}` :
-    topic === 'applause' ?
-      apiUrl = `${API.PROFILE}/${this.props.authorId}/applauses?per=${this.state.per}&page=${this.state.page}` :
-      apiUrl = `${API.PROFILE}/${this.props.authorId}/articles?per=${this.state.per}&page=${this.state.page}`;
+    const { match, authorId } = this.props;
+    const { per, page, content } = this.state;
+    const topic = match.params.topicId;
+    const apiUrl = this.resolveApiUrl(topic, authorId, per, page);
 
     try {
       this.setState({
@@ -44,8 +48,8 @@ export default class AuthorArticles extends Component {
       this.setState({
         fetching: false,
         fetched: true,
-        content: [ ...this.state.content, ...data.content.articles ],
-        page: this.state.page + 1,
+        content: [ ...content, ...data.content.articles ],
+        page: page + 1,
         has_more: data.content.has_more
       });
     } catch (error) {
@@ -59,8 +63,15 @@ export default class AuthorArticles extends Component {
         });
       }
     }
+  };
+
+  resolveTitle(topic) {
+    return topic ?
+      topic === 'following' ? 'Mengikuti' :
+      topic === 'followers' ? 'Pengikut' : 'Apresiasi'
+      : 'Tulisan Terbaru';
   }
-  
+
   componentDidMount() {
     this.loadLatestContents();
   }
@@ -86,29 +97,27 @@ export default class AuthorArticles extends Component {
   }
 
   render() {
-    const { fetching, fetched, error, content, topic } = this.state;
+    const { fetching, fetched, error, content, has_more, topic } = this.state;
+    const titleTab = this.resolveTitle(topic);
 
     return (
       <div className="history-content-wrapper">
-        <h4 className="title-history">
-          {
-            topic ?
-            topic === 'following' ? 'Mengikuti' :
-            topic === 'followers' ? 'Pengikut' : 'Apresiasi'
-            : 'Tulisan Terbaru'
-          }
-        </h4>
+        <h4 className="title-history">{titleTab}</h4>
         {
           fetched &&
           <InfiniteScroll
             dataLength={content.length}
             next={this.loadLatestContents.bind(this)}
-            hasMore={this.state.has_more}
+            hasMore={has_more}
             loader={<p>Loading...</p>}
             endMessage={<p>All contents already shown.</p>}
             scrollThreshold="250px"
           >
-            <AuthorArticlesComponent content={content} />
+            {
+              content.map((article, index) => (
+                <AuthorArticlesComponent key={index} article={article} />
+              ))  
+            }
           </InfiniteScroll>
         }
       </div>

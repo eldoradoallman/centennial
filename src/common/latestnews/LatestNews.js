@@ -28,7 +28,9 @@ class ConnectedLatestNews extends Component {
   signal = axios.CancelToken.source();
 
   loadLatestNews = async () => {
-    const apiUrl = `${this.state.url}${this.props.searchParams ? this.props.searchParams + '&' : '?'}per=${this.state.per}&page=${this.state.page}`;
+    const { searchParams } = this.props;
+    const { url, per, page, latest_news } = this.state;
+    const apiUrl = `${url}${searchParams ? searchParams + '&' : '?'}per=${per}&page=${page}`;
 
     try {
       this.setState({ fetching: true });
@@ -37,8 +39,8 @@ class ConnectedLatestNews extends Component {
       this.setState({
         fetching: false,
         fetched: true,
-        latest_news: [ ...this.state.latest_news, ...data.content.latest_news ],
-        page: this.state.page + 1,
+        latest_news: [ ...latest_news, ...data.content.latest_news ],
+        page: page + 1,
         has_more: data.content.has_more
       });
     } catch (error) {
@@ -55,11 +57,9 @@ class ConnectedLatestNews extends Component {
   };
 
   componentDidMount() {
-    setTimeout(() => {
-      if (!this.state.fetching && this.state.latest_news.length === 0) {
-        this.loadLatestNews();
-      }
-    }, 100);
+    const { fetching, latest_news } = this.state;
+
+    setTimeout(() => !fetching && latest_news.length === 0 && this.loadLatestNews(), 100);
   }
 
   componentWillUnmount() {
@@ -67,47 +67,48 @@ class ConnectedLatestNews extends Component {
   }
   
   componentDidUpdate(prevProps) {
+    const { urlLocation, searchParams, url } = this.props;
+
     if (
-      this.props.urlLocation !== prevProps.urlLocation ||
-      this.props.searchParams !== prevProps.searchParams
+      urlLocation !== prevProps.urlLocation ||
+      searchParams !== prevProps.searchParams
     ) {
       this.setState({
         fetching: false,
         fetched: false,
         error: null,
         latest_news: [],
-        url: this.props.url,
+        url,
         per: 10,
         page: 1,
         has_more: true
       });
-      setTimeout(() => {
-        if (!this.state.fetching && this.state.latest_news.length === 0) {
-          this.loadLatestNews();
-        }
-      }, 100);
+      setTimeout(() => !this.state.fetching && this.state.latest_news.length === 0 && this.loadLatestNews(), 100);
     }
   }
 
   render() {
-    console.log(this.state.latest_news);
+    const { user, page } = this.props;
+    const { latest_news, has_more } = this.state;
+    console.log(latest_news);
+
     return (
       <InfiniteScroll
-        dataLength={this.state.latest_news.length}
+        dataLength={latest_news.length}
         next={this.loadLatestNews.bind(this)}
-        hasMore={this.state.has_more}
+        hasMore={has_more}
         loader={<p>Loading...</p>}
         endMessage={<p>All contents already shown.</p>}
         scrollThreshold="250px"
       >
         {
-          this.state.latest_news.map((article, index) => (
+          latest_news.map((article, index) => (
             <LatestNewsComponent {...this.props}
               key={index}
-              user={this.props.user}
+              user={user}
               article={article}
               index={index}
-              page={this.props.page}
+              page={page}
               cancelToken={this.signal.token}
             />
           ))  

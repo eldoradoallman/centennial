@@ -58,16 +58,24 @@ class ConnectedLoginPopup extends Component {
   }
 
   validatePayload(type) {
+    const {
+      loginUsernameEmail,
+      loginPassword,
+      registerEmail,
+      registerPassword,
+      registerPasswordConfirm
+    } = this.state;
+
     if (type === 'login') {
       return {
-        username_email: this.state.loginUsernameEmail,
-        password: this.state.loginPassword
+        username_email: loginUsernameEmail,
+        password: loginPassword
       };
     } else if (type === 'register') {
       return {
-        email: this.state.registerEmail,
-        password: this.state.registerPassword,
-        password_confirm: this.state.registerPasswordConfirm
+        email: registerEmail,
+        password: registerPassword,
+        password_confirm: registerPasswordConfirm
       };
     }
     return false;

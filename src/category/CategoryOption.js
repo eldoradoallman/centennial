@@ -21,10 +21,11 @@ class ConnectedCategoryOption extends Component {
   
   loadContent = async () => {
     const { category, subcategory } = this.props.match.params;
+    const apiUrl = `${API.CATEGORY}/${category}${subcategory ? '/' + subcategory : '' }/content`;
 
     try {
       this.setState({ fetching: true });
-      const data = await Services.fetchContent(`${API.CATEGORY}/${category}${subcategory ? '/' + subcategory : '' }/content`, this.signal.token);
+      const data = await Services.fetchContent(apiUrl, this.signal.token);
       console.log(data.message);
       this.setState({
         fetching: false,
@@ -49,30 +50,35 @@ class ConnectedCategoryOption extends Component {
   }
 
   componentWillUnmount() {
+    const { isSidebarOpen, closeSidebarMenu } = this.props;
+
     this.signal.cancel('Category Content Api is being canceled');
-    if (this.props.isSidebarOpen) {
-      this.props.closeSidebarMenu();
+    if (isSidebarOpen) {
+      closeSidebarMenu();
     }
   }
   
   componentDidUpdate(prevProps) {
-    if (this.props.match.url !== prevProps.match.url) {
-      if (this.props.isSidebarOpen) {
-        this.props.closeSidebarMenu();
+    const { match, isSidebarOpen, closeSidebarMenu } = this.props;
+
+    if (match.url !== prevProps.match.url) {
+      if (isSidebarOpen) {
+        closeSidebarMenu();
       }
       this.loadContent();
     }
   }
-  
+
   render() {
+    const { subcategories, match } = this.props;
     const { category, subcategory } = this.props.match.params;
     
     return (
       <CategoryOptionComponent {...this.state}
         category={category}
         subcategory={subcategory}
-        subcategories={this.props.subcategories}
-        url={this.props.match.url}
+        subcategories={subcategories}
+        url={match.url}
       />
     );
   }

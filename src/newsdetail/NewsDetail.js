@@ -49,9 +49,11 @@ class ConnectedNewsDetail extends Component {
   }
   
   componentWillUnmount() {
+    const { isSidebarOpen, closeSidebarMenu } = this.props;
+
     this.signal.cancel('News Detail Content Api is being canceled');
-    if (this.props.isSidebarOpen) {
-      this.props.closeSidebarMenu();
+    if (isSidebarOpen) {
+      closeSidebarMenu();
     }
   }
 
@@ -68,12 +70,13 @@ class ConnectedNewsDetail extends Component {
   }
 
   render() {
-    const { sub_category } = this.state.news_detail;
+    const { id, sub_category } = this.state.news_detail;
+
     return (
-      this.state.news_detail.id ?
-      <NewsDetailComponent {...this.state} sub_category={this.resolveSubCategory(sub_category)} />
+      id ?
+        <NewsDetailComponent {...this.state} sub_category={this.resolveSubCategory(sub_category)} />
       : 
-      <p>Loading Content</p>
+        <p>Loading Content</p>
     );
   }
 }

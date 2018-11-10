@@ -21,10 +21,12 @@ class Category extends Component {
   }
   
   componentDidUpdate(prevProps) {
-    if (this.props.match.url !== prevProps.match.url) {
+    const { url, params } = this.props.match;
+
+    if (url !== prevProps.match.url) {
       this.setState({
-        category: this.props.match.params.category,
-        subcategories: this.resolveSubCategory(this.props.match.params.category)
+        category: params.category,
+        subcategories: this.resolveSubCategory(params.category)
       });
     }
   }
@@ -58,7 +60,8 @@ class Category extends Component {
   }
   
   render() {
-    const category = this.capitalizeFirstLetter(this.state.category);
+    const { category, subcategories } = this.state;
+    const categoryTitle = this.capitalizeFirstLetter(this.state.category);
 
     return (
       <div id="home-content" className="page-content-wrapper">
@@ -66,15 +69,15 @@ class Category extends Component {
         <ScrollToTopOnMount />
         <div className="page-content">
           <div id="title-category-wrapper">
-            <h1 className="category-title center">{category}</h1>
+            <h1 className="category-title center">{categoryTitle}</h1>
           </div>
           <Route
             exact
             path="/category/:category/:subcategory?"
             render={(props) => (
               <CategoryOption {...props}
-                category={this.state.category}
-                subcategories={this.state.subcategories}
+                category={category}
+                subcategories={subcategories}
               />
             )}
           />

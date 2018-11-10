@@ -1,12 +1,10 @@
 #title-bookmarks-wrapper {
-  max-width: 700px;
-  margin: auto;
-  padding: 60px 0px 0px;
+  padding: 60px 10px 0px;
 }
 
-.bookmarks-content-wrapper {
-  max-width: 720px;
-  margin: auto;
+.writer-info-top.bookmarks-writer-info-top,
+.article-summary-wrapper.bookmarks-article-summary-wrapper {
+  padding: 25px;
 }
 
 .bookmarks-title {

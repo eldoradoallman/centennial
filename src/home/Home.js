@@ -22,9 +22,11 @@ class ConnectedHome extends Component {
   signal = axios.CancelToken.source();
   
   loadContent = async () => {
+    const apiUrl = `${API.HOME}/content`;
+
     try {
       this.setState({ fetching: true });
-      const data = await Services.fetchContent(`${API.HOME}/content`, this.signal.token);
+      const data = await Services.fetchContent(apiUrl, this.signal.token);
       console.log(data.message);
       this.setState({
         fetching: false,
@@ -49,12 +51,14 @@ class ConnectedHome extends Component {
   }
 
   componentWillUnmount() {
+    const { isSidebarOpen, closeSidebarMenu } = this.props;
+
     this.signal.cancel('Home Content Api is being canceled');
-    if (this.props.isSidebarOpen) {
-      this.props.closeSidebarMenu();
+    if (isSidebarOpen) {
+      closeSidebarMenu();
     }
   }
-  
+
   render() {
     return (
       <HomeComponent {...this.state} />

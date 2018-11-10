@@ -22,9 +22,11 @@ class ConnectedProfile extends Component {
   signal = axios.CancelToken.source();
   
   loadContent = async () => {
+    const apiUrl = `${API.PROFILE}/${this.props.match.params.id}/content`;
+
     try {
       this.setState({ fetching: true });
-      const data = await Services.fetchContent(`${API.PROFILE}/${this.props.match.params.id}/content`, this.signal.token);
+      const data = await Services.fetchContent(apiUrl, this.signal.token);
       console.log(data.message);
       this.setState({
         fetching: false,
@@ -49,21 +51,26 @@ class ConnectedProfile extends Component {
   }
   
   componentWillUnmount() {
+    const { isSidebarOpen, closeSidebarMenu } = this.props;
+
     this.signal.cancel('Profile Content Api is being canceled');
-    if (this.props.isSidebarOpen) {
-      this.props.closeSidebarMenu();
+    if (isSidebarOpen) {
+      closeSidebarMenu();
     }
   }
 
   render() {
+    const { match } = this.props;
+    const { fetching, fetched, profile } = this.state;
+
     return (
-      this.state.fetching ?
-      <p>Loading Content</p>
+      fetching ?
+        <p>Loading Content</p>
       :
-      this.state.fetched ?
-      <ProfileComponent match={this.props.match} profile={this.state.profile} />
+      fetched ?
+        <ProfileComponent match={match} profile={profile} />
       : 
-      <p>Failed to fetch Content</p>
+        <p>Failed to fetch Content</p>
     );
   }
 }

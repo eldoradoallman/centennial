@@ -70,10 +70,10 @@ class ConnectedBookmarks extends Component {
 
   render() {
     const { user } = this.props;
-    const { bookmarks, has_more, page } = this.state;
+    const { bookmarks, has_more } = this.state;
 
     return (
-      <div id="search" className="page-content-wrapper">
+      <div id="search" className="page-content-mid-wrapper">
         <ScrollToTopOnMount />
         <div id="title-bookmarks-wrapper">
           <h1 className="bookmarks-title">Bookmarks</h1>
@@ -89,14 +89,7 @@ class ConnectedBookmarks extends Component {
           >
             {
               bookmarks.map((article, index) => (
-                <BookmarksComponent {...this.props}
-                  key={index}
-                  user={user}
-                  article={article}
-                  index={index}
-                  page={page}
-                  cancelToken={this.signal.token}
-                />
+                <BookmarksComponent key={index} article={article} />
               ))  
             }
           </InfiniteScroll>
