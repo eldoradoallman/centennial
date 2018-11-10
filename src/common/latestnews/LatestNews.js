@@ -52,7 +52,7 @@ class ConnectedLatestNews extends Component {
         });
       }
     }
-  }
+  };
 
   componentDidMount() {
     setTimeout(() => {

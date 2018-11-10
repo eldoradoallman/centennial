@@ -39,14 +39,12 @@ const HeaderComponent = ({
               <img src={user.avatar ? user.avatar.small : ''} alt="" />
             </div>
             {
-              isUserSettingsOpen ?
-                <div id="user-settings-wrapper">
-                  <Link to="/author/5/kevin-dharmawangsa" onClick={toggleUserSettings}>Profile</Link>
-                  <Link to="/bookmarks" onClick={toggleUserSettings}>Bookmarks</Link>
-                  <button onClick={logout}>Logout</button>
-                </div>
-              :
-                ''
+              isUserSettingsOpen &&
+              <div id="user-settings-wrapper">
+                <Link to="/author/5/kevin-dharmawangsa" onClick={toggleUserSettings}>Profile</Link>
+                <Link to="/bookmarks" onClick={toggleUserSettings}>Bookmarks</Link>
+                <button onClick={logout}>Logout</button>
+              </div>
             }
           </div>
       }

@@ -69,9 +69,9 @@ export default class AuthorArticles extends Component {
     this.signal.cancel('Latest Articles Api is being canceled');
   }
 
-  componentDidUpdate(prevProps) {
+  async componentDidUpdate(prevProps) {
     if (this.props.match.url !== prevProps.match.url) {
-      this.setState({
+      await this.setState({
         fetching: false,
         fetched: false,
         error: null,
@@ -90,15 +90,14 @@ export default class AuthorArticles extends Component {
 
     return (
       <div className="history-content-wrapper">
-        {
-          topic ?
-          <h4 className="title-history">{
+        <h4 className="title-history">
+          {
+            topic ?
             topic === 'following' ? 'Mengikuti' :
             topic === 'followers' ? 'Pengikut' : 'Apresiasi'
-          }</h4>
-          :
-          <h4 className="title-history">Tulisan Terbaru</h4>
-        }
+            : 'Tulisan Terbaru'
+          }
+        </h4>
         {
           fetched &&
           <InfiniteScroll

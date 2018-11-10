@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const AuthorArticlesComponent = ({ content }) => (
   content.map((article, index) => (
-    <div key={article.id} className="col-50 collection-articles">
+    <div key={index} className="col-50 collection-articles">
       <div className="collection-articles-box">
         <div className="writer-info-top clear">
           <Link to={article.writer.url} className="writer-image">

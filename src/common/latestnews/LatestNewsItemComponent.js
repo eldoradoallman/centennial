@@ -23,32 +23,35 @@ const LatestNewsItemComponent = ({
         </div>
         {
           loggedIn &&
-          (
-            article.isBookmarked ?
-              <div className="main-button"
-                onClick={() => {
-                  const payload = {
-                    userID: user.id,
-                    articleID: article.id
-                  };
-                  removeArticle(payload, cancelToken);
-                }
-              }>Artikel Tersimpan</div>
-            :
-              <div className="main-button"
-                onClick={() => {
-                  const payload = {
-                    userID: user.id,
-                    articleID: article.id
-                  };
-                  addArticle(payload, cancelToken);
-                }
-              }>Simpan Artikel</div>
-          )
+          <ButtonBookmarks
+            user={user}
+            article={article}
+            action={article.isBookmarked ? removeArticle : addArticle}
+            cancelToken={cancelToken}
+            text={article.isBookmarked ? "Artikel Tersimpan" : "Simpan Artikel"}
+          />
         }
       </div>
     </div>
   </div>
+);
+
+const ButtonBookmarks = ({
+    user,
+    article,
+    action,
+    cancelToken,
+    text
+  }) => (
+  <div className="main-button"
+    onClick={() => {
+      const payload = {
+        userID: user.id,
+        articleID: article.id
+      };
+      action(payload, cancelToken);
+    }}
+  >{text}</div>
 );
 
 export default LatestNewsItemComponent;

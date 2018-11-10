@@ -1,6 +1,12 @@
-#title-search-wrapper {
+#title-bookmarks-wrapper {
   max-width: 700px;
+  margin: auto;
   padding: 60px 0px 0px;
+}
+
+.bookmarks-content-wrapper {
+  max-width: 720px;
+  margin: auto;
 }
 
 .bookmarks-title {
@@ -9,6 +15,11 @@
   margin: 0px 0px 30px;
   font-size: 30px;
   color: #000;
+}
+
+.title-article.bookmarks-title-article {
+  height: auto;
+  font-size: 20px;
 }
 
 .search-title::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
