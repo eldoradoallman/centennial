@@ -56,10 +56,18 @@ class PopularNews extends Component {
     const { fetching } = this.state;
 
     return (
-      fetching ?
-        <LoaderComponent />
-      :
-        <PopularNewsComponent {...this.state} />
+      <React.Fragment>
+        <div className="category-news-wrapper clear">
+          <h4 className="category-news">Artikel Populer</h4>
+          <div className="border"></div>
+        </div>
+        {
+          fetching ?
+            <LoaderComponent />
+          :
+            <PopularNewsComponent {...this.state} />
+        }
+      </React.Fragment>
     );
   }
 }
