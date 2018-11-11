@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
@@ -76,15 +77,34 @@ class ConnectedCategoryOption extends Component {
     const { fetching } = this.state;
     
     return (
-      fetching ?
-        <LoaderComponent />
-      :
-        <CategoryOptionComponent {...this.state}
-          category={category}
-          subcategory={subcategory}
-          subcategories={subcategories}
-          url={match.url}
-        />
+      <React.Fragment>
+        <div id="sub-category-links-wrapper">
+          <div id="sub-category-links-content">
+            {
+              subcategories &&
+              subcategories.map((sub, index) => (
+                <NavLink
+                  key={sub.name}
+                  to={sub.url}
+                  exact
+                  activeClassName="current"
+                  className="sub-category-link"
+                >{sub.name}</NavLink>
+              ))
+            }
+          </div>
+        </div>
+        {
+          fetching ?
+            <LoaderComponent />
+          :
+            <CategoryOptionComponent {...this.state}
+              category={category}
+              subcategory={subcategory}
+              url={match.url}
+            />
+        }
+      </React.Fragment>
     );
   }
 }

@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const BookmarksComponent = ({
+    removeArticlePending,
     loggedIn,
     user,
     article,
@@ -26,7 +27,12 @@ const BookmarksComponent = ({
             <ButtonBookmarks
               user={user}
               article={article}
-              action={removeArticle}
+              action={
+                !removeArticlePending ?
+                  removeArticle
+                :
+                  () => console.log('Pending Remove Bookmarks')
+              }
               cancelToken={cancelToken}
               text={'Hapus dari Bookmarks'}
             />

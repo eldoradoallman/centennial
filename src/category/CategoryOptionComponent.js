@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Sticky from 'react-sticky-el';
 
 import API from '../_api';
@@ -13,26 +13,9 @@ const CategoryOptionComponent = ({
   editorial_picks,
   category,
   subcategory,
-  subcategories,
   url
 }) => (
   <React.Fragment>
-    <div id="sub-category-links-wrapper">
-      <div id="sub-category-links-content">
-        {
-          subcategories &&
-          subcategories.map((sub, index) => (
-            <NavLink
-              key={sub.name}
-              to={sub.url}
-              exact
-              activeClassName="current"
-              className="sub-category-link"
-            >{sub.name}</NavLink>
-          ))
-        }
-      </div>
-    </div>
     <div id="featured-news-wrapper">
       {
         fetched &&
