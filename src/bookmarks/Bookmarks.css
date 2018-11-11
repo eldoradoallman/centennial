@@ -1,18 +1,38 @@
 #title-bookmarks-wrapper {
-  padding: 60px 10px 0px;
+  padding: 60px 10px 50px;
 }
 
 .writer-info-top.bookmarks-writer-info-top,
 .article-summary-wrapper.bookmarks-article-summary-wrapper {
+  position: relative;
   padding: 25px;
 }
 
-.bookmarks-title {
-  display: block;
-  width: 100%;
-  margin: 0px 0px 30px;
-  font-size: 30px;
-  color: #000;
+.button-bookmarks-wrapper {
+  position: absolute;
+  width: 200px;
+  height: 100%;
+  top: 0px;
+  right: 25px;
+}
+
+.button-bookmarks-wrapper .main-button {
+  bottom: 50%;
+  margin-bottom: -15px;
+  font-weight: 500;
+}
+
+.article-writer-info.bookmarks-awi {
+  margin-top: 0px;
+  font-size: 13px;
+}
+
+.article-writer-info.bookmarks-awi a {
+  font-size: 14px;
+}
+
+.bookmarks-title.category-title {
+  margin-top: -10px;
 }
 
 .title-article.bookmarks-title-article {

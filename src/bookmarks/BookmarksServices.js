@@ -4,6 +4,19 @@ import API from '../_api';
 import Functions from '../Functions';
 
 const BookmarksServices = {
+  getBookmarksList: async (api_url, cancelToken) => {
+    const config = {
+      headers: { ...Functions.setAuthHeader(), 'Content-Type': 'application/json' },
+      cancelToken: cancelToken
+    };
+
+    try {
+      const { data } = await axios.post(api_url, {}, config);
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  },
   addArticle: async (payload, cancelToken) => {
     const config = {
       headers: { ...Functions.setAuthHeader(), 'Content-Type': 'application/json' },
