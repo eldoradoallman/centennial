@@ -8,6 +8,7 @@ import Services from '../../Services';
 import { actions as userAuthActions } from '../../_user/userAuthDucks';
 import { actions as bookmarksActions } from '../../bookmarks/BookmarksDucks';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import LoaderComponent from '../loader/LoaderComponent';
 import LatestNewsComponent from './LatestNewsComponent';
 
 class ConnectedLatestNews extends Component {
@@ -97,7 +98,7 @@ class ConnectedLatestNews extends Component {
         dataLength={latest_news.length}
         next={this.loadLatestNews.bind(this)}
         hasMore={has_more}
-        loader={<p>Loading...</p>}
+        loader={<LoaderComponent />}
         endMessage={<p>All contents already shown.</p>}
         scrollThreshold="250px"
       >

@@ -7,6 +7,8 @@ import axios from 'axios';
 import API from '../_api';
 import Services from '../Services';
 import { actions as sidebarMenuActions } from '../sidebarmenu/SidebarMenuDucks';
+import ScrollToTopOnMount from '../common/scrolltotop/ScrollToTopOnMount';
+import LoaderComponent from '../common/loader/LoaderComponent';
 import HomeComponent from './HomeComponent';
 
 import './Home.css';
@@ -60,8 +62,18 @@ class ConnectedHome extends Component {
   }
 
   render() {
+    const { fetching } = this.state;
+    
     return (
-      <HomeComponent {...this.state} />
+      <div id="home-content" className="page-content-wrapper">
+        <ScrollToTopOnMount />
+        {
+          fetching ?
+            <LoaderComponent />
+          :
+            <HomeComponent {...this.state} />
+        }
+      </div>
     );
   }
 }

@@ -7,6 +7,8 @@ import axios from 'axios';
 import API from '../_api';
 import Services from '../Services';
 import { actions as sidebarMenuActions } from '../sidebarmenu/SidebarMenuDucks';
+import ScrollToTopOnMount from '../common/scrolltotop/ScrollToTopOnMount';
+import LoaderComponent from '../common/loader/LoaderComponent';
 import NewsDetailComponent from './NewsDetailComponent';
 
 import './NewsDetail.css';
@@ -73,10 +75,15 @@ class ConnectedNewsDetail extends Component {
     const { id, sub_category } = this.state.news_detail;
 
     return (
-      id ?
-        <NewsDetailComponent {...this.state} sub_category={this.resolveSubCategory(sub_category)} />
-      : 
-        <p>Loading Content</p>
+      <div id="news-detail" className="page-content-wrapper">
+        <ScrollToTopOnMount />
+        {
+          id ?
+            <NewsDetailComponent {...this.state} sub_category={this.resolveSubCategory(sub_category)} />
+          : 
+            <LoaderComponent />
+        }
+      </div>
     );
   }
 }

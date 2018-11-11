@@ -4,11 +4,12 @@ import axios from 'axios';
 import API from '../../_api';
 import Services from '../../Services';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import LoaderComponent from '../../common/loader/LoaderComponent';
 import AuthorArticlesComponent from './AuthorArticlesComponent';
 
 import './AuthorArticles.css';
 
-export default class AuthorArticles extends Component {
+class AuthorArticles extends Component {
   state = {
     fetching: false,
     fetched: false,
@@ -103,24 +104,23 @@ export default class AuthorArticles extends Component {
     return (
       <div className="history-content-wrapper">
         <h4 className="title-history">{titleTab}</h4>
-        {
-          fetched &&
-          <InfiniteScroll
-            dataLength={content.length}
-            next={this.loadLatestContents.bind(this)}
-            hasMore={has_more}
-            loader={<p>Loading...</p>}
-            endMessage={<p>All contents already shown.</p>}
-            scrollThreshold="250px"
-          >
-            {
-              content.map((article, index) => (
-                <AuthorArticlesComponent key={index} article={article} />
-              ))  
-            }
-          </InfiniteScroll>
-        }
+        <InfiniteScroll
+          dataLength={content.length}
+          next={this.loadLatestContents.bind(this)}
+          hasMore={has_more}
+          loader={<LoaderComponent />}
+          endMessage={<p>All contents already shown.</p>}
+          scrollThreshold="250px"
+        >
+          {
+            content.map((article, index) => (
+              <AuthorArticlesComponent key={index} article={article} />
+            ))  
+          }
+        </InfiniteScroll>
       </div>
     );
   }
 }
+
+export default AuthorArticles;

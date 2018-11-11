@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 import Services from '../../Services';
+import LoaderComponent from '../loader/LoaderComponent';
 import PopularNewsComponent from './PopularNewsComponent';
 
 import './PopularNews.css';
@@ -52,8 +53,13 @@ class PopularNews extends Component {
   }
 
   render() {
+    const { fetching } = this.state;
+
     return (
-      <PopularNewsComponent {...this.state} />
+      fetching ?
+        <LoaderComponent />
+      :
+        <PopularNewsComponent {...this.state} />
     );
   }
 }

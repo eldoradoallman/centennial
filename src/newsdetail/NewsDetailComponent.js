@@ -1,11 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import ScrollToTopOnMount from '../common/scrolltotop/ScrollToTopOnMount';
-
 const NewsDetailComponent = ({ news_detail, sub_category }) => (
-  <div id="news-detail" className="page-content-wrapper">
-    <ScrollToTopOnMount />
+  <React.Fragment>
     <div id="title-writer-wrapper">
       <div className="breadcrumb">
         <Link to={`/category/${news_detail.category}`}>{news_detail.category}</Link>
@@ -30,7 +27,7 @@ const NewsDetailComponent = ({ news_detail, sub_category }) => (
       <div className="image-caption">{news_detail.image.caption}</div>
     </div>
     <div className="news-detail-content" dangerouslySetInnerHTML={{ __html: news_detail.html_content }} />
-  </div>
+  </React.Fragment>
 );
 
 export default NewsDetailComponent;

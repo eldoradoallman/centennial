@@ -7,6 +7,8 @@ import axios from 'axios';
 import API from '../_api';
 import Services from '../Services';
 import { actions as sidebarMenuActions } from '../sidebarmenu/SidebarMenuDucks';
+import ScrollToTopOnMount from '../common/scrolltotop/ScrollToTopOnMount';
+import LoaderComponent from '../common/loader/LoaderComponent';
 import ProfileComponent from './ProfileComponent';
 
 import './Profile.css';
@@ -64,13 +66,16 @@ class ConnectedProfile extends Component {
     const { fetching, fetched, profile } = this.state;
 
     return (
-      fetching ?
-        <p>Loading Content</p>
-      :
-      fetched ?
-        <ProfileComponent match={match} profile={profile} />
-      : 
-        <p>Failed to fetch Content</p>
+      <div id="profile" className="page-content-mid-wrapper">
+        <ScrollToTopOnMount />
+        {
+          fetching ?
+            <LoaderComponent />
+          :
+            fetched &&
+            <ProfileComponent match={match} profile={profile} />
+        }
+      </div>
     );
   }
 }

@@ -10,6 +10,7 @@ import { actions as userAuthActions } from '../_user/userAuthDucks';
 import { actions as bookmarksActions } from './BookmarksDucks';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import ScrollToTopOnMount from '../common/scrolltotop/ScrollToTopOnMount';
+import LoaderComponent from '../common/loader/LoaderComponent';
 import BookmarksComponent from './BookmarksComponent';
 
 import './Bookmarks.css';
@@ -38,7 +39,7 @@ class ConnectedBookmarks extends Component {
   }
 
   render() {
-    const { bookmarksList, has_more } = this.props;
+    const { getArticlesFulfilled, getArticlesRejected, bookmarksList, has_more } = this.props;
     console.log(bookmarksList);
 
     return (
@@ -52,8 +53,11 @@ class ConnectedBookmarks extends Component {
             dataLength={bookmarksList.length}
             next={this.getBookmarksCollection.bind(this)}
             hasMore={has_more}
-            loader={<p>Loading...</p>}
-            endMessage={<p>All contents already shown.</p>}
+            loader={
+              !getArticlesRejected &&
+              !getArticlesFulfilled &&
+              <LoaderComponent />
+            }
             scrollThreshold="250px"
           >
             {

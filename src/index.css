@@ -52,6 +52,14 @@ img {
   vertical-align: top;
 }
 
+.loader {
+  padding: 100px 0px;
+}
+
+.loader img {
+  width: 40px;
+}
+
 .center {
   text-align: center;
 }

@@ -8,6 +8,7 @@ import API from '../_api';
 import Services from '../Services';
 import { actions as sidebarMenuActions } from '../sidebarmenu/SidebarMenuDucks';
 import CategoryOptionComponent from './CategoryOptionComponent';
+import LoaderComponent from '../common/loader/LoaderComponent';
 
 class ConnectedCategoryOption extends Component {
   state = {
@@ -72,14 +73,18 @@ class ConnectedCategoryOption extends Component {
   render() {
     const { subcategories, match } = this.props;
     const { category, subcategory } = this.props.match.params;
+    const { fetching } = this.state;
     
     return (
-      <CategoryOptionComponent {...this.state}
-        category={category}
-        subcategory={subcategory}
-        subcategories={subcategories}
-        url={match.url}
-      />
+      fetching ?
+        <LoaderComponent />
+      :
+        <CategoryOptionComponent {...this.state}
+          category={category}
+          subcategory={subcategory}
+          subcategories={subcategories}
+          url={match.url}
+        />
     );
   }
 }
