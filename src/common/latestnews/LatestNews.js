@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
+import { logger } from '../../Functions';
 import Services from '../../Services';
 import { actions as userAuthActions } from '../../_user/userAuthDucks';
 import { actions as bookmarksActions } from '../../bookmarks/BookmarksDucks';
@@ -43,10 +44,10 @@ class ConnectedLatestNews extends Component {
         page: page + 1,
         has_more: data.content.has_more
       });
-      console.log(data.message);
+      logger(() => console.log(data.message));
     } catch (error) {
       if (axios.isCancel(error)) {
-        console.log('Error: ', error.message);
+        logger(() => console.log('Error: ', error.message));
       } else {
         await this.setState({
           fetching: false,
@@ -108,7 +109,7 @@ class ConnectedLatestNews extends Component {
   render() {
     const { user, pageDomain } = this.props;
     const { latest_news, has_more } = this.state;
-    console.log(latest_news);
+    logger(() => console.log(latest_news));
 
     return (
       <InfiniteScroll

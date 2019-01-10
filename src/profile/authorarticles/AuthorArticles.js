@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 import API from '../../_api';
+import { logger } from '../../Functions';
 import Services from '../../Services';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import LoaderComponent from '../../common/loader/LoaderComponent';
@@ -52,10 +53,10 @@ class AuthorArticles extends Component {
         page: page + 1,
         has_more: data.content.has_more
       });
-      console.log(data.message);
+      logger(() => console.log(data.message));
     } catch (error) {
       if (axios.isCancel(error)) {
-        console.log('Error: ', error.message);
+        logger(() => console.log('Error: ', error.message));
       } else {
         await this.setState({
           fetching: false,

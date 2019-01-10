@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 
 import API from '../_api';
+import { logger } from '../Functions';
 import Services from '../Services';
 import { actions as sidebarMenuActions } from '../sidebarmenu/SidebarMenuDucks';
 import ScrollToTopOnMount from '../common/scrolltotop/ScrollToTopOnMount';
@@ -29,7 +30,7 @@ class ConnectedProfile extends Component {
     try {
       this.setState({ fetching: true });
       const data = await Services.fetchContent(apiUrl, this.signal.token);
-      console.log(data.message);
+      logger(() => console.log(data.message));
       this.setState({
         fetching: false,
         fetched: true,
@@ -37,7 +38,7 @@ class ConnectedProfile extends Component {
       });
     } catch (error) {
       if (axios.isCancel(error)) {
-        console.log('Error: ', error.message);
+        logger(() => console.log('Error: ', error.message));
       } else {
         this.setState({
           fetching: false,

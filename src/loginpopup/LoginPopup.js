@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
+import { logger } from '../Functions';
 import { actions as userAuthActions } from '../_user/userAuthDucks';
 import { actions as loginPopupActions } from './LoginPopupDucks';
 import LoginPopupComponent from './LoginPopupComponent';
@@ -27,7 +28,7 @@ class ConnectedLoginPopup extends Component {
       await this.props.login(this.signal.token, payload, callback, callbackalt);
     } catch (error) {
       if (axios.isCancel(error)) {
-        console.log('Error: ', error.message);
+        logger(() => console.log('Error: ', error.message));
       }
     }
   }
@@ -38,7 +39,7 @@ class ConnectedLoginPopup extends Component {
       await this.props.register(this.signal.token, payload, callback, callbackalt);
     } catch (error) {
       if (axios.isCancel(error)) {
-        console.log('Error: ', error.message);
+        logger(() => console.log('Error: ', error.message));
       }
     }
   }

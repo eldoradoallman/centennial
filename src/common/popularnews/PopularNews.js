@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+import { logger } from '../../Functions';
 import Services from '../../Services';
 import LoaderComponent from '../loader/LoaderComponent';
 import PopularNewsComponent from './PopularNewsComponent';
@@ -25,7 +26,7 @@ class PopularNews extends Component {
     try {
       this.setState({ fetching: true });
       const data = await Services.fetchContent(this.state.url, this.signal.token);
-      console.log(data.message);
+      logger(() => console.log(data.message));
       this.setState({
         fetching: false,
         fetched: true,
@@ -33,7 +34,7 @@ class PopularNews extends Component {
       });
     } catch (error) {
       if (axios.isCancel(error)) {
-        console.log('Error: ', error.message);
+        logger(() => console.log('Error: ', error.message));
       } else {
         this.setState({
           fetching: false,

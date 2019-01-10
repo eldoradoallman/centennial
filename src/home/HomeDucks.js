@@ -1,5 +1,6 @@
 import axios from 'axios';
 import API from '../_api';
+import { logger } from '../Functions';
 
 export const types = {
   FETCH_HOME_CONTENT: 'FETCH_HOME_CONTENT',
@@ -22,7 +23,7 @@ export const actions = {
   }),
   getUserData: () => ({
     type: 'CLICK_BUTTON',
-    payload: console.log('the button has been clicked')
+    payload: logger(() => console.log('the button has been clicked'))
   })
 };
 

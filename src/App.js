@@ -3,12 +3,13 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 
+import { logger } from './Functions';
 import { actions as userAuthActions } from './_user/userAuthDucks';
 import AppRouting from './AppRouting';
 
 class ConnectedApp extends Component {
   render() {
-    console.log(this.props);
+    logger(() => console.log(this.props));
     return (
       <AppRouting {...this.props} />
     );

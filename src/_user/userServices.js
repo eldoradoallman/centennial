@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 import API from '../_api';
-import { setAuthHeader } from '../Functions';
+import { setAuthHeader, logger } from '../Functions';
 
 const userServices = {
   login: async (cancelToken, payload, callback, callbackalt) => {
@@ -15,7 +15,7 @@ const userServices = {
       const { data } = await axios.post(`${API.USERS}/login`, payloadData, config);
       // login successful if there's a jwt token in the response
       if (data.token) {
-        console.log(data);
+        logger(() => console.log(data));
         let smallAvatar = encodeURI(data.avatar.small);
         let mediumAvatar = encodeURI(data.avatar.medium);
         data.avatar.small = smallAvatar;
@@ -58,12 +58,12 @@ const userServices = {
     const data = user;
     const config = { headers: { ...setAuthHeader(), 'Content-Type': 'application/json' } };
     
-    return axios.put(`${API.USERS}/update`, data, config).catch(error => console.log(error));
+    return axios.put(`${API.USERS}/update`, data, config).catch(error => logger(() => console.log(error)));
   },
   delete: (id) => {
     const config = { headers: setAuthHeader() };
   
-    return axios.delete(`${API.USERS}/delete`, config).catch(error => console.log(error));
+    return axios.delete(`${API.USERS}/delete`, config).catch(error => logger(() => console.log(error)));
   }
 };
 

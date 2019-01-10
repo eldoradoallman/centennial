@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 
 import API from '../_api';
+import { logger } from '../Functions';
 import { actions as sidebarMenuActions } from '../sidebarmenu/SidebarMenuDucks';
 import { actions as userAuthActions } from '../_user/userAuthDucks';
 import { actions as bookmarksActions } from './BookmarksDucks';
@@ -40,7 +41,7 @@ class ConnectedBookmarks extends Component {
 
   render() {
     const { getArticlesFulfilled, getArticlesRejected, bookmarksList, has_more } = this.props;
-    console.log(bookmarksList);
+    logger(() => console.log(bookmarksList));
 
     return (
       <div id="search" className="page-content-mid-wrapper">
