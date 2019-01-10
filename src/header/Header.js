@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import Headroom from 'react-headroom';
 
-import Functions from '../Functions';
+import { replaceWhiteSpaces } from '../Functions';
 import { actions as userAuthActions } from '../_user/userAuthDucks';
 import { actions as sidebarMenuActions } from '../sidebarmenu/SidebarMenuDucks';
 import SidebarMenuComponent from '../sidebarmenu/SidebarMenuComponent';
@@ -41,7 +41,7 @@ class ConnectedHeader extends Component {
   }
 
   submitSearch() {
-    const searchResult = Functions.replaceWhiteSpaces(this.state.searchQuery);
+    const searchResult = replaceWhiteSpaces(this.state.searchQuery);
     if (searchResult) {
       this.props.history.push({
         pathname: '/search',
@@ -71,7 +71,7 @@ class ConnectedHeader extends Component {
             logout={logout}
             openRegisterPopup={openRegisterPopup}
             openLoginPopup={openLoginPopup}
-            Functions={Functions}
+            replaceWhiteSpaces={replaceWhiteSpaces}
             isUserSettingsOpen={isUserSettingsOpen}
             toggleUserSettings={this.toggleUserSettings.bind(this)}
             isSearchbarOpen={isSearchbarOpen}

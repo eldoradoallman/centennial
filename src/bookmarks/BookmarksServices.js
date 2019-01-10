@@ -1,12 +1,12 @@
 import axios from 'axios';
 
 import API from '../_api';
-import Functions from '../Functions';
+import { setAuthHeader } from '../Functions';
 
 const BookmarksServices = {
   getBookmarksList: async (api_url, cancelToken) => {
     const config = {
-      headers: { ...Functions.setAuthHeader(), 'Content-Type': 'application/json' },
+      headers: { ...setAuthHeader(), 'Content-Type': 'application/json' },
       cancelToken: cancelToken
     };
 
@@ -19,7 +19,7 @@ const BookmarksServices = {
   },
   addArticle: async (payload, cancelToken) => {
     const config = {
-      headers: { ...Functions.setAuthHeader(), 'Content-Type': 'application/json' },
+      headers: { ...setAuthHeader(), 'Content-Type': 'application/json' },
       data: payload,
       cancelToken: cancelToken
     };
@@ -33,7 +33,7 @@ const BookmarksServices = {
   },
   removeArticle: async (payload, cancelToken) => {
     const config = {
-      headers: { ...Functions.setAuthHeader(), 'Content-Type': 'application/json' },
+      headers: { ...setAuthHeader(), 'Content-Type': 'application/json' },
       data: payload,
       cancelToken: cancelToken
     };

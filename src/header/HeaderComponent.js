@@ -11,7 +11,7 @@ const HeaderComponent = ({
     logout,
     openRegisterPopup,
     openLoginPopup,
-    Functions,
+    replaceWhiteSpaces,
     isUserSettingsOpen,
     toggleUserSettings,
     isSearchbarOpen,
@@ -81,7 +81,7 @@ const HeaderComponent = ({
             onChange={onInputChange}
             onKeyPress={(evt) => {
               if (evt.key === 'Enter') {
-                const searchResult = Functions.replaceWhiteSpaces(searchQuery);
+                const searchResult = replaceWhiteSpaces(searchQuery);
                 if (searchResult) {
                   toggleSearchbar();
                 }

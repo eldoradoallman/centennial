@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import Functions from '../Functions';
+import { logger } from '../Functions';
 
 const BookmarksComponent = ({
     removeArticlePending,
@@ -33,7 +33,7 @@ const BookmarksComponent = ({
                 !removeArticlePending ?
                   removeArticle
                 :
-                  () => Functions.logger(() => console.log('Pending Remove Bookmarks'))
+                  () => logger(() => console.log('Pending Remove Bookmarks'))
               }
               cancelToken={cancelToken}
               text={'Hapus dari Bookmarks'}

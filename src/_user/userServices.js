@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 import API from '../_api';
-import Functions from '../Functions';
+import { setAuthHeader } from '../Functions';
 
 const userServices = {
   login: async (cancelToken, payload, callback, callbackalt) => {
@@ -56,12 +56,12 @@ const userServices = {
   },
   update: (user) => {
     const data = user;
-    const config = { headers: { ...Functions.setAuthHeader(), 'Content-Type': 'application/json' } };
+    const config = { headers: { ...setAuthHeader(), 'Content-Type': 'application/json' } };
     
     return axios.put(`${API.USERS}/update`, data, config).catch(error => console.log(error));
   },
   delete: (id) => {
-    const config = { headers: Functions.setAuthHeader() };
+    const config = { headers: setAuthHeader() };
   
     return axios.delete(`${API.USERS}/delete`, config).catch(error => console.log(error));
   }

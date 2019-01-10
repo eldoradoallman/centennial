@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 
-import Functions from '../Functions';
+import { replaceWhiteSpaces } from '../Functions';
 import { actions as sidebarMenuActions } from '../sidebarmenu/SidebarMenuDucks';
 import SearchComponent from './SearchComponent';
 
@@ -44,7 +44,7 @@ class ConnectedSearch extends Component {
   async submitSearch() {
     const { history } = this.props;
     const { searchQuery } = this.state;
-    const searchResult = Functions.replaceWhiteSpaces(searchQuery);
+    const searchResult = replaceWhiteSpaces(searchQuery);
     const historyObject = {
       pathname: '/search',
       search: `?q=${searchResult}`,
