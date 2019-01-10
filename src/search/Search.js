@@ -10,13 +10,53 @@ import SearchComponent from './SearchComponent';
 import './Search.css';
 
 class ConnectedSearch extends Component {
-  state = {
-    searchParams: this.props.history.location.search,
-    title: this.props.history.location.state.searchQuery,
-    inputClassName: 'search-title',
-    searchQuery: ''
-  };
-  
+  constructor(props) {
+    super(props);
+    this.state = {
+      searchParams: props.history.location.search,
+      title: this.resolveTitle(),
+      inputClassName: 'search-title',
+      searchQuery: ''
+    };
+  }
+
+  resolveTitle() {
+    const historyStateObject = this.props.history.location.state;
+    
+    if (historyStateObject) {
+      return historyStateObject.searchQuery;
+    }
+    return decodeURIComponent(this.props.history.location.search.substring(3));
+  }
+
+  async inputOnMouseOver() {
+    await this.setState({ inputClassName: 'search-title active' });
+  }
+
+  async inputOnMouseLeave() {
+    await this.setState({ inputClassName: 'search-title' });
+  }
+
+  async onInputChange(evt) {
+    await this.setState({ searchQuery: evt.target.value });
+  }
+
+  async submitSearch() {
+    const { history } = this.props;
+    const { searchQuery } = this.state;
+    const searchResult = Functions.replaceWhiteSpaces(searchQuery);
+    const historyObject = {
+      pathname: '/search',
+      search: `?q=${searchResult}`,
+      state: { searchQuery: searchQuery }
+    };
+
+    if (searchResult) {
+      history.push(historyObject);
+      await this.setState({ searchQuery: '' });
+    }
+  }
+
   componentWillUnmount() {
     const { isSidebarOpen, closeSidebarMenu } = this.props;
 
@@ -25,46 +65,19 @@ class ConnectedSearch extends Component {
     }
   }
 
-  componentDidUpdate(prevProps) {
+  async componentDidUpdate(prevProps) {
     const { match, location, history } = this.props;
 
     if (
       match.url === prevProps.match.url &&
       location.search !== prevProps.location.search
     ) {
-      this.setState({
+      await this.setState({
         searchParams: history.location.search,
         title: history.location.state.searchQuery,
         inputClassName: 'search-title',
         searchQuery: ''
       });
-    }
-  }
-
-  inputOnMouseOver() {
-    this.setState({ inputClassName: 'search-title active' });
-  }
-
-  inputOnMouseLeave() {
-    this.setState({ inputClassName: 'search-title' });
-  }
-
-  onInputChange(evt) {
-    this.setState({ searchQuery: evt.target.value });
-  }
-
-  submitSearch() {
-    const { history } = this.props;
-    const { searchQuery } = this.state;
-    const searchResult = Functions.replaceWhiteSpaces(searchQuery);
-
-    if (searchResult) {
-      history.push({
-        pathname: '/search',
-        search: `?q=${searchResult}`,
-        state: { searchQuery: searchQuery }
-      });
-      this.setState({ searchQuery: '' });
     }
   }
 

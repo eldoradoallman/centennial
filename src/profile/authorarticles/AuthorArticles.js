@@ -10,17 +10,20 @@ import AuthorArticlesComponent from './AuthorArticlesComponent';
 import './AuthorArticles.css';
 
 class AuthorArticles extends Component {
-  state = {
-    fetching: false,
-    fetched: false,
-    error: null,
-    content: [],
-    per: 10,
-    page: 1,
-    has_more: true,
-    topic: ''
-  };
-  
+  constructor(props) {
+    super(props);
+    this.state = {
+      fetching: false,
+      fetched: false,
+      error: null,
+      content: [],
+      per: 10,
+      page: 1,
+      has_more: true,
+      topic: ''
+    };
+  }
+
   signal = axios.CancelToken.source();
 
   resolveApiUrl(topic, authorId, per, page) {
@@ -33,38 +36,35 @@ class AuthorArticles extends Component {
         `${API.PROFILE}/${authorId}/articles?per=${per}&page=${page}`;
   }
 
-  loadLatestContents = async () => {
+  async loadLatestContents() {
     const { match, authorId } = this.props;
     const { per, page, content } = this.state;
     const topic = match.params.topicId;
     const apiUrl = this.resolveApiUrl(topic, authorId, per, page);
 
     try {
-      this.setState({
-        fetching: true,
-        topic
-      });
+      await this.setState({ fetching: true, topic });
       const data = await Services.fetchContent(apiUrl, this.signal.token);
-      console.log(data.message);
-      this.setState({
+      await this.setState({
         fetching: false,
         fetched: true,
         content: [ ...content, ...data.content.articles ],
         page: page + 1,
         has_more: data.content.has_more
       });
+      console.log(data.message);
     } catch (error) {
       if (axios.isCancel(error)) {
         console.log('Error: ', error.message);
       } else {
-        this.setState({
+        await this.setState({
           fetching: false,
           fetched: false,
           error
         });
       }
     }
-  };
+  }
 
   resolveTitle(topic) {
     return topic ?
@@ -98,7 +98,7 @@ class AuthorArticles extends Component {
   }
 
   render() {
-    const { fetching, fetched, error, content, has_more, topic } = this.state;
+    const { content, has_more, topic } = this.state;
     const titleTab = this.resolveTitle(topic);
 
     return (

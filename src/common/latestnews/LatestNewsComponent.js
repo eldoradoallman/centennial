@@ -7,7 +7,7 @@ import LatestNewsTitleComponent from './LatestNewsTitleComponent';
 import './LatestNews.css';
 
 const LatestNewsComponent = (props) => {
-  if (props.page === 'home') {
+  if (props.pageDomain === 'home') {
     if (!props.article.id) {
       return props.article.editorial_picks.map((article_pick, index) => (
         <LatestNewsHomeComponent

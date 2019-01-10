@@ -6,8 +6,12 @@ const LatestNewsItemComponent = ({
     user,
     article,
     addArticle,
+    addArticlePending,
     removeArticle,
-    cancelToken
+    removeArticlePending,
+    cancelToken,
+    removeBookmarkedArticle,
+    addBookmarkedArticle
   }) => (
   article.image ?
     <div className="col-100 col-featured-news">
@@ -27,9 +31,18 @@ const LatestNewsItemComponent = ({
             <ButtonBookmarks
               user={user}
               article={article}
-              action={article.isBookmarked ? removeArticle : addArticle}
+              action={async (payload, cancelToken) => {
+                if (article.isBookmarked && !removeArticlePending) {
+                  await removeArticle(payload, cancelToken);
+                  removeBookmarkedArticle(article.id);
+                } else if (!article.isBookmarked && !addArticlePending) {
+                  await addArticle(payload, cancelToken);
+                  addBookmarkedArticle(article.id);
+                }
+              }}
+              classNameResolver={article.isBookmarked ? 'main-button bookmarked' : 'main-button'}
+              text={article.isBookmarked ? 'Artikel Tersimpan' : 'Simpan Artikel'}
               cancelToken={cancelToken}
-              text={article.isBookmarked ? "Artikel Tersimpan" : "Simpan Artikel"}
             />
           }
         </div>
@@ -42,10 +55,11 @@ const ButtonBookmarks = ({
     user,
     article,
     action,
-    cancelToken,
-    text
+    classNameResolver,
+    text,
+    cancelToken
   }) => (
-  <div className="main-button"
+  <div className={classNameResolver}
     onClick={() => {
       const payload = {
         userID: user.id,

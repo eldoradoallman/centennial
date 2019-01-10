@@ -6,12 +6,7 @@ import API from '../_api';
 import LatestNews from '../common/latestnews/LatestNews';
 import PopularNews from '../common/popularnews/PopularNews';
 
-const HomeComponent = ({
-  fetching,
-  fetched,
-  error,
-  news
-}) => (
+const HomeComponent = ({ news }) => (
   <div className="page-content">
     <div id="featured-news-wrapper">
       {
@@ -75,7 +70,7 @@ const HomeComponent = ({
     </div>
     <div id="all-topics-news-wrapper">
       <div className="latest-news-wrapper">
-        <LatestNews url={`${API.HOME}/latest_news`} page="home" />
+        <LatestNews url={`${API.HOME}/latest_news`} pageDomain="home" />
       </div>
       <div id="popular-news-wrapper">
         <Sticky topOffset={-85}>

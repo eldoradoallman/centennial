@@ -28,53 +28,70 @@ class ConnectedLatestNews extends Component {
 
   signal = axios.CancelToken.source();
 
-  loadLatestNews = async () => {
+  async loadLatestNews() {
     const { searchParams } = this.props;
     const { url, per, page, latest_news } = this.state;
     const apiUrl = `${url}${searchParams ? searchParams + '&' : '?'}per=${per}&page=${page}`;
 
     try {
-      this.setState({ fetching: true });
+      await this.setState({ fetching: true });
       const data = await Services.fetchContent(apiUrl, this.signal.token);
-      console.log(data.message);
-      this.setState({
+      await this.setState({
         fetching: false,
         fetched: true,
         latest_news: [ ...latest_news, ...data.content.latest_news ],
         page: page + 1,
         has_more: data.content.has_more
       });
+      console.log(data.message);
     } catch (error) {
       if (axios.isCancel(error)) {
         console.log('Error: ', error.message);
       } else {
-        this.setState({
+        await this.setState({
           fetching: false,
           fetched: false,
           error
         });
       }
     }
-  };
+  }
+
+  updateBookmarkedArticle(articleID, boolean) {
+    this.state.latest_news.map(async (article, index) => {
+      if (article.id === articleID) {
+        const latest_news = [ ...this.state.latest_news ];
+        latest_news[index] = { ...latest_news[index], isBookmarked: boolean };
+        await this.setState({ latest_news });
+      }
+    });
+  }
+
+  removeBookmarkedArticle(articleID) {
+    this.updateBookmarkedArticle(articleID, false);
+  }
+
+  addBookmarkedArticle(articleID) {
+    this.updateBookmarkedArticle(articleID, true);
+  }
 
   componentDidMount() {
     const { fetching, latest_news } = this.state;
 
-    setTimeout(() => !fetching && latest_news.length === 0 && this.loadLatestNews(), 100);
+    if (!fetching && latest_news.length === 0) {
+      this.loadLatestNews();
+    }
   }
 
   componentWillUnmount() {
     this.signal.cancel('Latest News Api is being canceled');
   }
-  
-  componentDidUpdate(prevProps) {
-    const { urlLocation, searchParams, url } = this.props;
 
-    if (
-      urlLocation !== prevProps.urlLocation ||
-      searchParams !== prevProps.searchParams
-    ) {
-      this.setState({
+  async componentDidUpdate(prevProps) {
+    const { searchParams, url } = this.props;
+
+    if (searchParams !== prevProps.searchParams) {
+      await this.setState({
         fetching: false,
         fetched: false,
         error: null,
@@ -84,12 +101,12 @@ class ConnectedLatestNews extends Component {
         page: 1,
         has_more: true
       });
-      setTimeout(() => !this.state.fetching && this.state.latest_news.length === 0 && this.loadLatestNews(), 100);
+      this.loadLatestNews();
     }
   }
 
   render() {
-    const { user, page } = this.props;
+    const { user, pageDomain } = this.props;
     const { latest_news, has_more } = this.state;
     console.log(latest_news);
 
@@ -109,8 +126,10 @@ class ConnectedLatestNews extends Component {
               user={user}
               article={article}
               index={index}
-              page={page}
+              pageDomain={pageDomain}
               cancelToken={this.signal.token}
+              removeBookmarkedArticle={this.removeBookmarkedArticle.bind(this)}
+              addBookmarkedArticle={this.addBookmarkedArticle.bind(this)}
             />
           ))  
         }
