@@ -15,6 +15,9 @@ const Functions = {
       return {};
     }
   },
+  logger: (callback) => {
+    process.env.NODE_ENV === 'development' && callback();
+  },
   replaceWhiteSpaces: (str) => {
     const result = encodeURIComponent(str.trim());
     return result;
