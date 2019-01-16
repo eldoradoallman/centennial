@@ -19,7 +19,8 @@ class ConnectedHome extends Component {
     fetching: false,
     fetched: false,
     error: null,
-    news: []
+    news: [],
+    isWindowBelow1200Px: false
   };
   
   signal = axios.CancelToken.source();
@@ -49,7 +50,16 @@ class ConnectedHome extends Component {
     }
   }
 
+  resolveWindowWidth() {
+    if (window.innerWidth < 1201) {
+      this.setState({ isWindowBelow1200Px: true });
+    } else {
+      this.setState({ isWindowBelow1200Px: false });
+    }
+  }
+
   componentDidMount() {
+    this.resolveWindowWidth();
     this.loadContent();
   }
 

@@ -14,11 +14,15 @@ const HeaderComponent = ({
     replaceWhiteSpaces,
     isUserSettingsOpen,
     toggleUserSettings,
+    closeUserSettings,
+    userSettingsOnHover,
+    userSettingsNotOnHover,
     isSearchbarOpen,
     toggleSearchbar,
     onInputChange,
     submitSearch,
-    searchQuery
+    searchQuery,
+    isWindowBelow1000Px
   }) => (
   <div id="header">
     <div id="header-wrapper" className="clear">
@@ -35,12 +39,12 @@ const HeaderComponent = ({
           </div>
         :
           <div id="user-info">
-            <div id="user-avatar" onClick={toggleUserSettings}>
+            <div id="user-avatar" onClick={toggleUserSettings} onMouseLeave={closeUserSettings}>
               <img src={user.avatar ? user.avatar.small : ''} alt="" />
             </div>
             {
               isUserSettingsOpen &&
-              <div id="user-settings-wrapper">
+              <div id="user-settings-wrapper" onMouseEnter={userSettingsOnHover} onMouseLeave={userSettingsNotOnHover}>
                 <Link to="/author/5/kevin-dharmawangsa" onClick={toggleUserSettings}>Profile</Link>
                 <Link to="/bookmarks" onClick={toggleUserSettings}>Bookmarks</Link>
                 <button onClick={logout}>Logout</button>
@@ -50,28 +54,31 @@ const HeaderComponent = ({
       }
       <div id="header-bottom">
         <div id="toggle-sidebar-menu" className={isSidebarOpen ? 'open' : ''} onClick={toggleSidebarMenu}></div>
-        <div id="desktop-menu-wrapper">
-          <ul>
-            <li className="desktop-menu">
-              <NavLink to="/" exact activeClassName="selected">HOME</NavLink>
-            </li>
-            <li className="desktop-menu">
-              <NavLink to="/category/entertainment" activeClassName="selected">ENTERTAINMENT</NavLink>
-            </li>
-            <li className="desktop-menu">
-              <NavLink to="/category/livestyle" activeClassName="selected">LIVE STYLE</NavLink>
-            </li>
-            <li className="desktop-menu">
-              <NavLink to="/category/techno" activeClassName="selected">TECHNO</NavLink>
-            </li>
-            <li className="desktop-menu">
-              <NavLink to="/category/about-you" activeClassName="selected">ABOUT YOU</NavLink>
-            </li>
-            <li className="desktop-menu">
-              <NavLink to="/category/ideas" activeClassName="selected">IDEAS</NavLink>
-            </li>
-          </ul>
-        </div>
+        {
+          !isWindowBelow1000Px &&
+          <div id="desktop-menu-wrapper">
+            <ul>
+              <li className="desktop-menu">
+                <NavLink to="/" exact activeClassName="selected">HOME</NavLink>
+              </li>
+              <li className="desktop-menu">
+                <NavLink to="/category/entertainment" activeClassName="selected">ENTERTAINMENT</NavLink>
+              </li>
+              <li className="desktop-menu">
+                <NavLink to="/category/livestyle" activeClassName="selected">LIVE STYLE</NavLink>
+              </li>
+              <li className="desktop-menu">
+                <NavLink to="/category/techno" activeClassName="selected">TECHNO</NavLink>
+              </li>
+              <li className="desktop-menu">
+                <NavLink to="/category/about-you" activeClassName="selected">ABOUT YOU</NavLink>
+              </li>
+              <li className="desktop-menu">
+                <NavLink to="/category/ideas" activeClassName="selected">IDEAS</NavLink>
+              </li>
+            </ul>
+          </div>
+        }
         <div id="search-wrapper" className={isSearchbarOpen ? 'searchbar active' : 'searchbar'}>
           <input
             id="search-input"

@@ -31,7 +31,7 @@
 #user-info {
   position: absolute;
   top: 20px;
-  right: 30px;
+  right: 40px;
 }
 
 #user-info .main-button {
@@ -54,7 +54,6 @@
 
 #user-avatar {
   width: 35px;
-  margin-right: 10px;
   border-radius: 100%;
   overflow: hidden;
   cursor: pointer;
@@ -196,4 +195,11 @@
   background-color: #fff;
   transform: rotateZ(90deg);
   cursor: pointer;
+}
+
+@media screen and (max-width: 1200px) {
+  .desktop-menu a {
+    padding-bottom: 15px;
+    font-size: 15px;
+  }
 }

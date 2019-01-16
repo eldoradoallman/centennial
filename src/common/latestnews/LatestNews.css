@@ -129,3 +129,40 @@
 .latest-info-writer-box p a:hover {
   text-decoration: underline;
 }
+
+@media screen and (max-width: 1200px) {
+  .latest-news-image {
+    width: 120px;
+  }
+  .title-latest-news {
+    font-size: 22px;
+  }
+  .title-featured-news.alt-title {
+    max-width: 75%;
+  }
+  .latest-news-wrapper {
+    padding-right: 0px;
+  }
+  #featured-news-wrapper .col-50.main-col-featured-news {
+    width: 100%;
+  }
+  .col-50.main-col-featured-news {
+    width: 50%;
+  }
+  .category-news {
+    font-size: 30px;
+  }
+  .latest-news-box {
+    min-height: 200px;
+  }
+  .latest-news-image {
+    width: 200px;
+  }
+  .latest-info-writer-box.common p,
+  .latest-info-writer-box.common p a {
+    font-size: 18px;
+  }
+  .latest-news-summary {
+    padding-left: 230px;
+  }
+}

@@ -11,6 +11,7 @@ const CategoryOptionComponent = ({
   fetched,
   error,
   editorial_picks,
+  isBgImageOn,
   category,
   subcategory,
   url
@@ -19,38 +20,64 @@ const CategoryOptionComponent = ({
     <div id="featured-news-wrapper">
       {
         fetched &&
-        editorial_picks.map((article, index) => (
-          <React.Fragment key={article.id}>
-            <div className={
-              index === 0 ? 'col-100 main-col-featured-news' : 'col-25 col-featured-news'
-            }>
-              <div className="featured-news-box category-box clear">
-                <div id={
-                  index === 0 ? 'category-image-wrapper' : ''
-                } className="category-image">
-                  <Link to={article.url} className="featured-news-image" title={article.title}>
-                    <img src={article.image.size.medium} alt={article.image.caption} />
-                  </Link>
-                </div>
-                <div className={
-                  index === 0 ? 'main-summary category-news-summary' : 'category-items-summary'
-                }>
-                  <Link to={article.url} className="title-category-news" title={article.title}>
-                    <span>{article.title}</span>
-                  </Link>
-                  <div className="info-writer-box">
-                    {
-                      index === 0 ?
-                      <p className="summary">{article.summary.substring(0,250) + '...'}</p> : ''
+        editorial_picks.map((article, index) => {
+          const style = {
+            backgroundImage: `url('${article.image.size.medium}')`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center center'
+          };
+
+          return (
+            <React.Fragment key={article.id}>
+              <div className={
+                index === 0 ? 'col-100 main-col-featured-news' : 'col-25 col-featured-news'
+              }>
+                <div className="featured-news-box category-box clear">
+                  <div
+                    id={
+                      index === 0 ? 'category-image-wrapper' : ''
                     }
-                    <p className="writer">Ditulis oleh <Link to={article.writer.url}>{article.writer.name}</Link></p>
-                    <p className="date">{article.date}</p>
+                    className={
+                      isBgImageOn ?
+                        'category-image bg-image'
+                      :
+                        'category-image'
+                    }
+                    style={index === 0 && isBgImageOn ? style : {}}
+                  >
+                    <Link
+                      to={article.url}
+                      className="featured-news-image"
+                      title={article.title}
+                    >
+                      {
+                        ((index === 0 && !isBgImageOn) || (index !== 0)) &&
+                        <img src={article.image.size.medium} alt={article.image.caption} />
+                      }
+                    </Link>
+                  </div>
+                  <div className={
+                    index === 0 ? 'main-summary category-news-summary' : 'category-items-summary'
+                  }>
+                    <Link to={article.url} className="title-category-news" title={article.title}>
+                      <span>{article.title}</span>
+                    </Link>
+                    <div className="info-writer-box">
+                      {
+                        index === 0 ?
+                          <p className="summary">{article.summary.substring(0,250) + '...'}</p>
+                        :
+                          ''
+                      }
+                      <p className="writer">Ditulis oleh <Link to={article.writer.url}>{article.writer.name}</Link></p>
+                      <p className="date">{article.date}</p>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </React.Fragment>
-        ))
+            </React.Fragment>
+          )
+        })
       }
       {
         fetched &&

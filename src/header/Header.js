@@ -20,16 +20,48 @@ import searchIcon from '../assets/img/search-icon.svg';
 class ConnectedHeader extends Component {
   state = {
     isUserSettingsOpen: false,
+    isUserSettingsOnHover: false,
     isSearchbarOpen: false,
-    searchQuery: ''
+    searchQuery: '',
+    isWindowBelow1000Px: false
   };
 
   toggleSidebarMenu() {
     this.props.toggleSidebarMenu();
   }
 
+  resolveWindowWidth() {
+    if (window.innerWidth < 1001) {
+      this.setState({ isWindowBelow1000Px: true });
+    } else {
+      this.setState({ isWindowBelow1000Px: false });
+    }
+  }
+
   toggleUserSettings() {
     this.setState({ isUserSettingsOpen: !this.state.isUserSettingsOpen });
+  }
+
+  closeUserSettings() {
+    setTimeout(() => {
+      const { isUserSettingsOpen, isUserSettingsOnHover } = this.state;
+      if (isUserSettingsOpen && !isUserSettingsOnHover) {
+        this.setState({ isUserSettingsOpen: false });
+      }
+    }, 500);
+  }
+
+  userSettingsOnHover() {
+    this.setState({ isUserSettingsOnHover: true });
+  }
+
+  userSettingsNotOnHover() {
+    setTimeout(() => {
+      this.setState({
+        isUserSettingsOnHover: false,
+        isUserSettingsOpen: false
+      });
+    }, 500);
   }
 
   toggleSearchbar() {
@@ -51,10 +83,14 @@ class ConnectedHeader extends Component {
       this.setState({ searchQuery: '' });
     }
   }
+
+  componentDidMount() {
+    this.resolveWindowWidth();
+  }
   
   render() {
     const { user, isSidebarOpen, loggedIn, login, register, logout, openRegisterPopup, openLoginPopup } = this.props;
-    const { isUserSettingsOpen, isSearchbarOpen, searchQuery } = this.state;
+    const { isUserSettingsOpen, isSearchbarOpen, searchQuery, isWindowBelow1000Px } = this.state;
 
     return (
       <React.Fragment>
@@ -74,11 +110,15 @@ class ConnectedHeader extends Component {
             replaceWhiteSpaces={replaceWhiteSpaces}
             isUserSettingsOpen={isUserSettingsOpen}
             toggleUserSettings={this.toggleUserSettings.bind(this)}
+            closeUserSettings={this.closeUserSettings.bind(this)}
+            userSettingsOnHover={this.userSettingsOnHover.bind(this)}
+            userSettingsNotOnHover={this.userSettingsNotOnHover.bind(this)}
             isSearchbarOpen={isSearchbarOpen}
             toggleSearchbar={this.toggleSearchbar.bind(this)}
             onInputChange={this.onInputChange.bind(this)}
             submitSearch={this.submitSearch.bind(this)}
             searchQuery={searchQuery}
+            isWindowBelow1000Px={isWindowBelow1000Px}
           />
           <SidebarMenuComponent isSidebarOpen={isSidebarOpen} />
         </Headroom>

@@ -78,3 +78,13 @@
 .news-detail-content * {
   color: #000;
 }
+
+@media screen and (max-width: 1200px) {
+  .breadcrumb {
+    font-size: 17px;
+  }
+  #news-main-image {
+    margin-right: -20px;
+    margin-left: -20px;
+  }
+}

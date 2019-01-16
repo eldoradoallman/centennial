@@ -17,11 +17,20 @@ class ConnectedCategoryOption extends Component {
     fetching: false,
     fetched: false,
     error: null,
-    editorial_picks: []
+    editorial_picks: [],
+    isBgImageOn: false
   }
-  
+
   signal = axios.CancelToken.source();
-  
+
+  resolveBgImage() {
+    if (window.innerWidth < 1201) {
+      this.setState({ isBgImageOn: true });
+    } else {
+      this.setState({ isBgImageOn: false });
+    }
+  }
+
   loadContent = async () => {
     const { category, subcategory } = this.props.match.params;
     const apiUrl = `${API.CATEGORY}/${category}${subcategory ? '/' + subcategory : '' }/content`;
@@ -49,6 +58,7 @@ class ConnectedCategoryOption extends Component {
   }
 
   componentDidMount() {
+    this.resolveBgImage();
     this.loadContent();
   }
 
@@ -68,6 +78,7 @@ class ConnectedCategoryOption extends Component {
       if (isSidebarOpen) {
         closeSidebarMenu();
       }
+      this.resolveBgImage();
       this.loadContent();
     }
   }
